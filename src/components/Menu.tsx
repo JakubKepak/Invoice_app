@@ -5,7 +5,8 @@ import themeIconLight from "../assets/icon-sun.svg";
 import profilePicture from "../assets/image-avatar.jpg";
 
 const MainContainer = styled.div`
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   width: 100px;
   background-color: ${({ theme }) => theme.colors.menuBackground};
   border-radius: 0 15px 15px 0;
@@ -13,6 +14,8 @@ const MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  z-index: 1000;
+  /* position: fixed; */
 
   @media (max-width: 600px) {
     height: 100px;

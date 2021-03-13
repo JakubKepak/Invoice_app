@@ -38,9 +38,13 @@ const AddContainer = styled.div`
   }
 `;
 
-export default function PrimaryButtonAdd({ children }: any) {
+export default function PrimaryButtonAdd({ children, setEditActive }: any) {
   return (
-    <MainContainer>
+    <MainContainer
+      onClick={() => {
+        setEditActive(true);
+      }}
+    >
       <AddContainer>
         <span>+</span>
       </AddContainer>

@@ -44,14 +44,13 @@ a:visited {
   
   body {
     font-family: 'Spartan', sans-serif;
-    background-color: ${({ theme }) => theme.colors.mainBackground}
+    background-color: ${({ theme }) => theme.colors.mainBackground};
+
   }
 
   #root{
     display: flex;
     flex-direction: row;
-    width: 100vw;
-    min-height: 100vh;
 
     @media (max-width: 600px) {
       flex-direction: column;
@@ -66,7 +65,7 @@ a:visited {
 
 const ContentContainer = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   justify-content: center;
   margin-top: 3rem;

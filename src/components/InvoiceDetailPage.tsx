@@ -4,6 +4,8 @@ import { useParams, Link } from "react-router-dom";
 
 import { fromatDate, addCommaSeparator } from "../helpers/helpers";
 
+import EditInvoice from "./EditInvoice/EditInvoice";
+
 import InvoiceStatusIcon from "./UI/InvoiceStatusIcon";
 import Button from "./UI/Button";
 
@@ -186,6 +188,7 @@ const TotalAmount = styled.span`
 export default function InvoiceDetailPage({ data }: any) {
   const [currentInvoice, setCurrentInvoice] = useState<any>({});
   const [loading, setLoading] = useState<boolean>(true);
+  const [editActive, setEditActive] = useState<boolean>(false);
 
   const { id } = useParams<Record<string, string | undefined>>();
 
@@ -218,7 +221,9 @@ export default function InvoiceDetailPage({ data }: any) {
               {currentInvoice.status}
             </InvoiceStatusIcon>
             <ButtonsContainer>
-              <Button variant="secondary">Edit</Button>
+              <Button variant="secondary" setEditActive={setEditActive}>
+                Edit
+              </Button>
               <Button variant="warn">Delete</Button>
               <Button variant="primary">Mark as Paid</Button>
             </ButtonsContainer>
@@ -291,6 +296,27 @@ export default function InvoiceDetailPage({ data }: any) {
             </InvoiceItemsContainer>
           </ContentContainer>
         </MainContainer>
+      )}
+      {editActive && (
+        <EditInvoice
+          setEditActive={setEditActive}
+          variant="edit"
+          invoiceId={currentInvoice.id}
+          providerStreetAddress={currentInvoice.senderAddress.street}
+          providerCity={currentInvoice.senderAddress.city}
+          providerPostalCode={currentInvoice.senderAddress.postCode}
+          providerCountry={currentInvoice.senderAddress.country}
+          clientsName={currentInvoice.clientName}
+          clientsEmail={currentInvoice.clientEmail}
+          clientsStreetAddress={currentInvoice.clientAddress.street}
+          clientCity={currentInvoice.clientAddress.city}
+          clientPostalCode={currentInvoice.clientAddress.postCode}
+          clientCountry={currentInvoice.clientAddress.country}
+          invoiceDate={currentInvoice.createdAt}
+          paymentTerms={currentInvoice.paymentTerms}
+          description={currentInvoice.description}
+          invoiceItems={currentInvoice.items}
+        />
       )}
     </>
   );

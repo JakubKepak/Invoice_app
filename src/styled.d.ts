@@ -10,6 +10,7 @@ declare module "styled-components" {
       menuBackground: string;
       invoiceItemBackground: string;
       backgroundColorLight: string;
+      borderColorLight: string;
       mainFontColor: string;
       textColorLight: string;
       textColorLight2: string;
