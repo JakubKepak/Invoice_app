@@ -45,11 +45,22 @@ const MainContainer = styled.button<{ variant?: string }>`
     background-color: ${props.theme.colors.secondaryButtonHover};
   }
   `};
+
+  ${(props) =>
+    props.variant === "dark" &&
+    `
+    background-color: ${props.theme.colors.mainFontColor};
+    color: ${props.theme.colors.textColorLight};
+
+    &:hover {
+    background-color: ${props.theme.colors.secondaryButtonHover};
+  }
+  `};
 `;
 
 interface Props {
-  variant: "primary" | "secondary" | "warn";
-  children?: string;
+  variant: "primary" | "secondary" | "warn" | "dark";
+  children?: any;
   setEditActive?: any;
 }
 

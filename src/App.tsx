@@ -61,6 +61,14 @@ a:visited {
     font-weight: 700;
     color: ${({ theme }) => theme.colors.mainFontColor}
   }
+
+  button {
+    border: none;
+    background-color: inherit;
+    font-family: inherit;
+    color: inherit;
+    cursor: inherit;
+  }
 `;
 
 const ContentContainer = styled.div`

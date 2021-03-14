@@ -3,6 +3,8 @@ import { useFormik, Formik, Form, Field, FieldArray, useField } from "formik";
 import { addCommaSeparator } from "../../helpers/helpers";
 import * as S from "./Styles";
 
+import Button from "../UI/Button";
+
 import deleteIcon from "../../assets/icon-delete.svg";
 
 const CustomTextField = ({ label, ...props }: any) => {
@@ -181,7 +183,7 @@ export default function EditInvoice({
                 />
               </S.FormSectionBillTo>
 
-              {/* <S.FormSectionInvoiceInfo>
+              <S.FormSectionInvoiceInfo>
                 <CustomTextField
                   id="invoiceDate"
                   name="invoiceDate"
@@ -203,9 +205,10 @@ export default function EditInvoice({
                   label="Project Description"
                   value={props.values.description}
                 />
-              </S.FormSectionInvoiceInfo> */}
+              </S.FormSectionInvoiceInfo>
 
               <S.FormSectionInvoiceItems>
+                <S.SectionItemListName>Item List</S.SectionItemListName>
                 <FieldArray name="invoiceItems">
                   {(arrayHelpers) => (
                     <>
@@ -267,7 +270,17 @@ export default function EditInvoice({
                 </FieldArray>
               </S.FormSectionInvoiceItems>
 
-              <button type="submit">Submit</button>
+              <S.ButtonsContainer>
+                <Button variant="secondary">
+                  <button type="button">Discard</button>
+                </Button>
+                <Button variant="dark">
+                  <button type="button">Save as Draft</button>
+                </Button>
+                <Button variant="primary">
+                  <button type="submit">Save & Send</button>
+                </Button>
+              </S.ButtonsContainer>
             </Form>
           )}
         </Formik>

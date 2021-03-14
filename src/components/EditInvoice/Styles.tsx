@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const MainContainer = styled.div`
   position: absolute;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   top: 0;
   left: 0;
@@ -11,13 +11,13 @@ export const MainContainer = styled.div`
 `;
 
 export const InvisibleContainer = styled.div`
-  height: 100%;
+  min-height: 100%;
   width: 50%;
 `;
 
 export const InputAreaContainer = styled.div`
   width: 50%;
-  height: 100%;
+  min-height: 100%;
   background-color: white;
   border-radius: 0 15px 15px 0;
   padding: 2rem 2rem 2rem 8rem;
@@ -53,6 +53,13 @@ export const SectionName = styled.p`
   font-weight: 700;
   font-size: var(--fontSizeSmall);
 `;
+export const SectionItemListName = styled.p`
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: ${({ theme }) => theme.colors.textColorLight};
+  font-weight: 700;
+  font-size: var(--fontSizeLarge);
+`;
 
 export const FormSectionBillFrom = styled.div`
   display: grid;
@@ -77,6 +84,7 @@ export const FormSectionBillTo = styled.div`
 `;
 
 export const FormSectionInvoiceInfo = styled.div`
+  margin-top: 2rem;
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(2, 1fr);
@@ -120,4 +128,29 @@ export const DeleteInvoiceItemIcon = styled.img`
   }
 `;
 
-export const AddNewInvoiceItemButton = styled.button``;
+export const AddNewInvoiceItemButton = styled.button`
+  border: none;
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 30px;
+  margin: 0.5rem 0;
+  background: ${({ theme }) => theme.colors.secondaryButtonBackground};
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const ButtonsContainer = styled.div`
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+
+  & button:nth-of-type(2) {
+    margin-left: auto;
+  }
+
+  & button:nth-of-type(3) {
+    margin-left: 0.5rem;
+  }
+`;
