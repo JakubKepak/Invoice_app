@@ -271,14 +271,14 @@ export default function EditInvoice({
               </S.FormSectionInvoiceItems>
 
               <S.ButtonsContainer>
-                <Button variant="secondary">
-                  <button type="button">Discard</button>
+                <Button type="button" variant="secondary">
+                  Discard
                 </Button>
-                <Button variant="dark">
-                  <button type="button">Save as Draft</button>
+                <Button type="button" variant="dark">
+                  Save as Draft
                 </Button>
-                <Button variant="primary">
-                  <button type="submit">Save & Send</button>
+                <Button type="submit" variant="primary">
+                  Save & Send
                 </Button>
               </S.ButtonsContainer>
             </Form>

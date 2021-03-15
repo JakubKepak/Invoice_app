@@ -221,7 +221,7 @@ export default function InvoiceDetailPage({ data }: any) {
               {currentInvoice.status}
             </InvoiceStatusIcon>
             <ButtonsContainer>
-              <Button variant="secondary" setEditActive={setEditActive}>
+              <Button variant="secondary" onClick={() => setEditActive(true)}>
                 Edit
               </Button>
               <Button variant="warn">Delete</Button>
