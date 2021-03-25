@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useFormik, Formik, Form, Field, FieldArray, useField } from "formik";
+import * as Yup from "yup";
 import { addCommaSeparator } from "../../helpers/helpers";
 import * as S from "./Styles";
 
@@ -7,13 +8,66 @@ import Button from "../UI/Button";
 
 import deleteIcon from "../../assets/icon-delete.svg";
 
+const EditSchema = Yup.object().shape({
+  providerStreetAddress: Yup.string().required("Required"),
+  providerCity: Yup.string().required("Required"),
+  providerPostalCode: Yup.string().required("Required"),
+  providerCountry: Yup.string().required("Required"),
+  clientsName: Yup.string().required("Required").min(2, "Too Short!"),
+  clientsEmail: Yup.string().required("Required"),
+  clientsStreetAddress: Yup.string().required("Required"),
+  clientCity: Yup.string().required("Required"),
+  clientPostalCode: Yup.string().required("Required"),
+  clientCountry: Yup.string().required("Required"),
+  invoiceDate: Yup.string().required("Required"),
+  paymentTerms: Yup.string().required("Required"),
+  description: Yup.string().required("Required"),
+  invoiceItems: Yup.string().required("Required"),
+});
+
 const CustomTextField = ({ label, ...props }: any) => {
   const [field, meta] = useField(props);
 
   return (
     <S.InputFieldContainer>
       <S.InputLabel htmlFor={props.id || props.name}>{label}</S.InputLabel>
-      <S.InputField {...field} {...props} />
+      <S.InputField error={meta.error} {...field} {...props} />
+      {meta.touched && meta.error ? (
+        <S.FormErrorMessage>{meta.error}</S.FormErrorMessage>
+      ) : null}
+    </S.InputFieldContainer>
+  );
+};
+
+const CustomFropDownField = ({ label, ...props }: any) => {
+  const [field, meta] = useField(props);
+
+  return (
+    <S.InputFieldContainer>
+      <S.InputLabel htmlFor={props.id || props.name}>{label}</S.InputLabel>
+      <S.DropdownField error={meta.error} {...field} {...props}>
+        <option value={1}>Net 1 Day</option>
+        <option value={7}>Net 7 Days</option>
+        <option value={14}>Net 14 Days</option>
+        <option value={30}>Net 30 Days</option>
+      </S.DropdownField>
+      {meta.touched && meta.error ? (
+        <S.FormErrorMessage>{meta.error}</S.FormErrorMessage>
+      ) : null}
+    </S.InputFieldContainer>
+  );
+};
+
+const CustomDatePickerField = ({ label, ...props }: any) => {
+  const [field, meta] = useField(props);
+
+  return (
+    <S.InputFieldContainer>
+      <S.InputLabel htmlFor={props.id || props.name}>{label}</S.InputLabel>
+      <S.InputField error={meta.error} {...field} {...props} />
+      {meta.touched && meta.error ? (
+        <S.FormErrorMessage>{meta.error}</S.FormErrorMessage>
+      ) : null}
     </S.InputFieldContainer>
   );
 };
@@ -88,6 +142,7 @@ export default function EditInvoice({
             description: description,
             invoiceItems: invoiceItems,
           }}
+          validationSchema={EditSchema}
           onSubmit={(values, actions) => {
             if (variant === "new") {
               setTimeout(() => {
@@ -184,17 +239,17 @@ export default function EditInvoice({
               </S.FormSectionBillTo>
 
               <S.FormSectionInvoiceInfo>
-                <CustomTextField
+                <CustomDatePickerField
                   id="invoiceDate"
                   name="invoiceDate"
-                  type="text"
+                  type="date"
                   label="Invoice Date"
                   value={props.values.invoiceDate}
                 />
-                <CustomTextField
+                <CustomFropDownField
                   id="paymentTerms"
                   name="paymentTerms"
-                  type="text"
+                  type="select"
                   label="Payment Terms"
                   value={props.values.paymentTerms}
                 />
@@ -236,11 +291,11 @@ export default function EditInvoice({
                             <CustomTextField
                               id={`invoiceItems.${index}.price`}
                               name={`invoiceItems.${index}.price`}
-                              type="text"
-                              value={addCommaSeparator(item.price)}
+                              type="number"
+                              value={item.price}
                             />
                             <S.InvoiceItemTotalContainer>
-                              {addCommaSeparator(item.total)}
+                              {addCommaSeparator(item.quantity * item.price)}
                             </S.InvoiceItemTotalContainer>
                             <S.DeleteInvoiceItemContainer>
                               <S.DeleteInvoiceItemIcon

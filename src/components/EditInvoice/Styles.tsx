@@ -28,7 +28,7 @@ export const InputFieldContainer = styled.div`
   flex-direction: column;
 `;
 
-export const InputField = styled.input`
+export const InputField = styled.input<{ error?: boolean }>`
   padding: 0.8rem;
   border: 1px solid ${({ theme }) => theme.colors.borderColorLight};
   border-radius: 5px;
@@ -38,6 +38,42 @@ export const InputField = styled.input`
   color: ${({ theme }) => theme.colors.mainFontColor};
   font-weight: 700;
   font-size: var(--fontSizeSmall);
+
+  &:focus {
+    border: 1px solid ${({ theme }) => theme.colors.darkPurple};
+  }
+
+  ${(props) =>
+    props.error &&
+    `
+    border: 1px solid ${props.theme.colors.warnButton};
+
+  }
+  `};
+`;
+
+export const DropdownField = styled.select<{ error?: boolean }>`
+  padding: 0.8rem;
+  border: 1px solid ${({ theme }) => theme.colors.borderColorLight};
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  color: ${({ theme }) => theme.colors.mainFontColor};
+  font-weight: 700;
+  font-size: var(--fontSizeSmall);
+
+  &:focus {
+    border: 1px solid ${({ theme }) => theme.colors.darkPurple};
+  }
+
+  ${(props) =>
+    props.error &&
+    `
+    border: 1px solid ${props.theme.colors.warnButton};
+
+  }
+  `};
 `;
 
 export const InputLabel = styled.label`
@@ -153,4 +189,9 @@ export const ButtonsContainer = styled.div`
   & button:nth-of-type(3) {
     margin-left: 0.5rem;
   }
+`;
+
+export const FormErrorMessage = styled.div`
+  font-size: var(--fontSizeSmall);
+  color: ${({ theme }) => theme.colors.warnButton};
 `;

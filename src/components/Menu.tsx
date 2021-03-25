@@ -22,6 +22,7 @@ const MainContainer = styled.div`
     width: 100vw;
     border-radius: 0;
     flex-direction: row;
+    min-height: 0;
   }
 `;
 

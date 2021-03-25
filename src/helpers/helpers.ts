@@ -20,7 +20,11 @@ export function fromatDate(date: string) {
   })} ${months[formatedDate.getMonth()]} ${formatedDate.getFullYear()}`;
 }
 
-export function addCommaSeparator(number: number) {
+export function addCommaSeparator(number: number | string) {
+  if (typeof number === "string") {
+    number = parseInt(number);
+  }
+
   return number
     .toFixed(2)
     .toString()
