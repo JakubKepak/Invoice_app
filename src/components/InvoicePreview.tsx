@@ -11,6 +11,7 @@ import { fromatDate, addCommaSeparator } from "../helpers/helpers";
 import iconRight from "../assets/icon-arrow-right.svg";
 
 const MainContainer = styled.div`
+  border: 1px solid transparent;
   display: flex;
   align-items: center;
   padding: 0.7rem 1rem 0.7rem 2rem;
