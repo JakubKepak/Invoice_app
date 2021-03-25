@@ -19,7 +19,8 @@ const MainContainer = styled.div`
 
   @media (max-width: 600px) {
     height: 100px;
-    width: 100vw;
+    min-width: 100vw;
+    width: 100%;
     border-radius: 0;
     flex-direction: row;
     min-height: 0;
