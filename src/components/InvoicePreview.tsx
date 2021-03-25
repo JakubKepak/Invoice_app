@@ -20,6 +20,7 @@ const MainContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.invoiceItemBackground};
   width: 100%;
   height: 100%;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     border: 1px solid ${({ theme }) => theme.colors.darkPurple};
