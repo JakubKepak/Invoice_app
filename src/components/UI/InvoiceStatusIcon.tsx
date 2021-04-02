@@ -4,11 +4,9 @@ const StatusContainer = styled.div<{ status: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* height: 100%;
-  min-height: 2.5rem; */
   height: 2.5rem;
   width: 6rem;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   font-weight: 700;
   border-radius: 5px;
   color: ${({ theme }) => theme.colors.textColorLight};
@@ -23,7 +21,7 @@ const StatusContainer = styled.div<{ status: string }>`
   }
 
   ${(props) =>
-    props.status === "paid" &&
+    props.status.toLowerCase() === "paid" &&
     `
     background-color: ${props.theme.colors.statusPaidBackground};
     color: ${props.theme.colors.statusPaid};
@@ -33,7 +31,7 @@ const StatusContainer = styled.div<{ status: string }>`
   }
   `};
   ${(props) =>
-    props.status === "pending" &&
+    props.status.toLowerCase() === "pending" &&
     `
     background-color: ${props.theme.colors.statusPendingBackground};
     color: ${props.theme.colors.statusPending};
@@ -43,7 +41,7 @@ const StatusContainer = styled.div<{ status: string }>`
   }
   `};
   ${(props) =>
-    props.status === "draft" &&
+    props.status.toLowerCase() === "draft" &&
     `
     background-color: ${props.theme.colors.statusDraftBackground};
     color: ${props.theme.colors.statusDraft};

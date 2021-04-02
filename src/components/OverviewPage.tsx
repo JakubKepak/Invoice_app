@@ -88,11 +88,10 @@ const GetStartedContainer = styled.div`
 `;
 
 interface Props {
-  isLoading: boolean;
   data: any;
 }
 
-export default function OverviewPage({ isLoading, data }: Props) {
+export default function OverviewPage({ data }: Props) {
   const [editActive, setEditActive] = useState<boolean>(false);
 
   return (
@@ -102,7 +101,7 @@ export default function OverviewPage({ isLoading, data }: Props) {
           <PageTitleContainer>
             <h1>Invoices</h1>
             <span>
-              {!isLoading
+              {data.length > 0
                 ? `There are ${data.length} total invoices`
                 : "No Invoices"}
             </span>
@@ -120,10 +119,11 @@ export default function OverviewPage({ isLoading, data }: Props) {
 
         <ContentContainer>
           {/* TODO: make more strict type for invoice */}
-          {!isLoading && data.length > 0 ? (
+          {data.length > 0 ? (
             data.map((invoice: any) => {
               return (
                 <InvoicePreview
+                  invoice={invoice}
                   key={invoice.id}
                   id={invoice.id}
                   paymentDue={invoice.paymentDue}

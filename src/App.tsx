@@ -1,7 +1,9 @@
 import React from "react";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useQuery } from "react-query";
+import { useQuery } from "@apollo/client";
+
+import { INVOICES } from "./queries/queries";
 
 import { LightTheme, DarkTheme } from "./themes";
 
@@ -80,12 +82,7 @@ const ContentContainer = styled.div`
 `;
 
 function App() {
-  const fetchInvoices = async () => {
-    const request = await fetch("http://localhost:3004/data");
-    return request.json();
-  };
-
-  const { isLoading, data, error } = useQuery("invoices", fetchInvoices);
+  const { loading, error, data } = useQuery(INVOICES);
 
   return (
     <Router>
@@ -93,18 +90,16 @@ function App() {
         <GlobalStyle />
         <Menu />
         <ContentContainer>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => <OverviewPage isLoading={isLoading} data={data} />}
-            />
-            <Route
-              exact
-              path="/:id"
-              render={() => <InvoiceDetailPage data={data} />}
-            />
-          </Switch>
+          {!loading && (
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => <OverviewPage data={data.data} />}
+              />
+              <Route exact path="/:id" render={() => <InvoiceDetailPage />} />
+            </Switch>
+          )}
         </ContentContainer>
       </ThemeProvider>
     </Router>

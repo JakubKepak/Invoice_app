@@ -69,6 +69,7 @@ const ArrowIconRight = styled.img`
 `;
 
 interface Props {
+  invoice: any;
   id: string;
   paymentDue: string;
   clientName: string;
@@ -77,6 +78,7 @@ interface Props {
 }
 
 export default function InvoicePreview({
+  invoice,
   id,
   paymentDue,
   clientName,
@@ -84,7 +86,7 @@ export default function InvoicePreview({
   status,
 }: Props) {
   return (
-    <Link to={`/${id}`}>
+    <Link to={{ pathname: `/${id}`, state: invoice }} key={id}>
       <MainContainer>
         <IdContainer>
           <span>#</span>

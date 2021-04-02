@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { useParams, Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { fromatDate, addCommaSeparator } from "../helpers/helpers";
 
@@ -185,137 +185,121 @@ const TotalAmount = styled.span`
   color: ${({ theme }) => theme.colors.invoiceItemBackground};
 `;
 
-export default function InvoiceDetailPage({ data }: any) {
-  const [currentInvoice, setCurrentInvoice] = useState<any>({});
-  const [loading, setLoading] = useState<boolean>(true);
+export default function InvoiceDetailPage() {
   const [editActive, setEditActive] = useState<boolean>(false);
 
-  const { id } = useParams<Record<string, string | undefined>>();
+  const location = useLocation();
+  const invoice: any = location.state;
 
-  useEffect(() => {
-    if (data !== undefined) {
-      setCurrentInvoice(() => {
-        setLoading(false);
-        return data.filter((item: any) => item.id === id)[0];
-      });
-    }
-
-    console.log(currentInvoice);
-  });
+  console.log(invoice);
 
   return (
     <>
-      {!loading && (
-        <MainContainer>
-          <GoBackContainer>
-            <Link to="/">
-              <span>
-                <LeftArrowIcon src={leftArrowIcon} />
-                Go Back
-              </span>
-            </Link>
-          </GoBackContainer>
-          <HeaderContainer>
-            <span>Status</span>
-            <InvoiceStatusIcon status={`${currentInvoice.status}`}>
-              {currentInvoice.status}
-            </InvoiceStatusIcon>
-            <ButtonsContainer>
-              <Button variant="secondary" onClick={() => setEditActive(true)}>
-                Edit
-              </Button>
-              <Button variant="warn">Delete</Button>
-              <Button variant="primary">Mark as Paid</Button>
-            </ButtonsContainer>
-          </HeaderContainer>
-          <ContentContainer>
-            <InvoiceHeaderContainer>
-              <IdContainer>
-                <p>
-                  <span>#</span>
-                  {currentInvoice.id}
-                </p>
-                <p>{currentInvoice.description}</p>
-              </IdContainer>
-              <AddressContainer>
-                <p>{currentInvoice.senderAddress.street}</p>
-                <p>{currentInvoice.senderAddress.city}</p>
-                <p>{currentInvoice.senderAddress.postCode}</p>
-                <p>{currentInvoice.senderAddress.country}</p>
-              </AddressContainer>
-            </InvoiceHeaderContainer>
-            <InvoiceDetailsContainer>
-              <DatesContainer>
-                <ItemLabel>Invoice Date</ItemLabel>
-                <ItemImportant>
-                  {fromatDate(currentInvoice.createdAt)}
-                </ItemImportant>
-                <ItemLabel>Payment Due</ItemLabel>
-                <ItemImportant>
-                  {fromatDate(currentInvoice.paymentDue)}
-                </ItemImportant>
-              </DatesContainer>
-              <BillToContainer>
-                <ItemLabel>Bill To</ItemLabel>
-                <ItemImportant>{currentInvoice.clientName}</ItemImportant>
-                <p>{currentInvoice.clientAddress.street}</p>
-                <p>{currentInvoice.clientAddress.city}</p>
-                <p>{currentInvoice.clientAddress.postCode}</p>
-                <p>{currentInvoice.clientAddress.country}</p>
-              </BillToContainer>
-              <SentToContainer>
-                <ItemLabel>Sent To</ItemLabel>
-                <ItemImportant>{currentInvoice.clientEmail}</ItemImportant>
-              </SentToContainer>
-            </InvoiceDetailsContainer>
-            <InvoiceItemsContainer>
-              <ItemsListContainer>
-                <ItemContainerHeader>
-                  <span>Item Name</span>
-                  <span>QTY.</span>
-                  <span>Price</span>
-                  <span>Total</span>
-                </ItemContainerHeader>
-                {currentInvoice.items.map((item: any) => {
-                  return (
-                    <ItemContainer>
-                      <span>{item.name}</span>
-                      <span>{item.quantity}</span>
-                      <span>{`£ ${addCommaSeparator(item.price)}`}</span>
-                      <span>{`£ ${addCommaSeparator(item.total)}`}</span>
-                    </ItemContainer>
-                  );
-                })}
-              </ItemsListContainer>
-              <TotalAmountContainer>
-                <ItemLabel>Amount Due</ItemLabel>
-                <TotalAmount>
-                  {`£ ${addCommaSeparator(currentInvoice.total)}`}
-                </TotalAmount>
-              </TotalAmountContainer>
-            </InvoiceItemsContainer>
-          </ContentContainer>
-        </MainContainer>
-      )}
+      <MainContainer>
+        <GoBackContainer>
+          <Link to="/">
+            <span>
+              <LeftArrowIcon src={leftArrowIcon} />
+              Go Back
+            </span>
+          </Link>
+        </GoBackContainer>
+        <HeaderContainer>
+          <span>Status</span>
+          <InvoiceStatusIcon status={`${invoice.status}`}>
+            {invoice.status}
+          </InvoiceStatusIcon>
+          <ButtonsContainer>
+            <Button variant="secondary" onClick={() => setEditActive(true)}>
+              Edit
+            </Button>
+            <Button variant="warn">Delete</Button>
+            <Button variant="primary">Mark as Paid</Button>
+          </ButtonsContainer>
+        </HeaderContainer>
+        <ContentContainer>
+          <InvoiceHeaderContainer>
+            <IdContainer>
+              <p>
+                <span>#</span>
+                {invoice.id}
+              </p>
+              <p>{invoice.description}</p>
+            </IdContainer>
+            <AddressContainer>
+              <p>{invoice.senderAddress.street}</p>
+              <p>{invoice.senderAddress.city}</p>
+              <p>{invoice.senderAddress.postCode}</p>
+              <p>{invoice.senderAddress.country}</p>
+            </AddressContainer>
+          </InvoiceHeaderContainer>
+          <InvoiceDetailsContainer>
+            <DatesContainer>
+              <ItemLabel>Invoice Date</ItemLabel>
+              <ItemImportant>{fromatDate(invoice.createdAt)}</ItemImportant>
+              <ItemLabel>Payment Due</ItemLabel>
+              <ItemImportant>{fromatDate(invoice.paymentDue)}</ItemImportant>
+            </DatesContainer>
+            <BillToContainer>
+              <ItemLabel>Bill To</ItemLabel>
+              <ItemImportant>{invoice.clientName}</ItemImportant>
+              <p>{invoice.clientAddress.street}</p>
+              <p>{invoice.clientAddress.city}</p>
+              <p>{invoice.clientAddress.postCode}</p>
+              <p>{invoice.clientAddress.country}</p>
+            </BillToContainer>
+            <SentToContainer>
+              <ItemLabel>Sent To</ItemLabel>
+              <ItemImportant>{invoice.clientEmail}</ItemImportant>
+            </SentToContainer>
+          </InvoiceDetailsContainer>
+          <InvoiceItemsContainer>
+            <ItemsListContainer>
+              <ItemContainerHeader>
+                <span>Item Name</span>
+                <span>QTY.</span>
+                <span>Price</span>
+                <span>Total</span>
+              </ItemContainerHeader>
+              {invoice.items.map((item: any) => {
+                return (
+                  <ItemContainer>
+                    <span>{item.name}</span>
+                    <span>{item.quantity}</span>
+                    <span>{`£ ${addCommaSeparator(item.price)}`}</span>
+                    <span>{`£ ${addCommaSeparator(item.total)}`}</span>
+                  </ItemContainer>
+                );
+              })}
+            </ItemsListContainer>
+            <TotalAmountContainer>
+              <ItemLabel>Amount Due</ItemLabel>
+              <TotalAmount>
+                {`£ ${addCommaSeparator(invoice.total)}`}
+              </TotalAmount>
+            </TotalAmountContainer>
+          </InvoiceItemsContainer>
+        </ContentContainer>
+      </MainContainer>
       {editActive && (
         <EditInvoice
           setEditActive={setEditActive}
           variant="edit"
-          invoiceId={currentInvoice.id}
-          providerStreetAddress={currentInvoice.senderAddress.street}
-          providerCity={currentInvoice.senderAddress.city}
-          providerPostalCode={currentInvoice.senderAddress.postCode}
-          providerCountry={currentInvoice.senderAddress.country}
-          clientsName={currentInvoice.clientName}
-          clientsEmail={currentInvoice.clientEmail}
-          clientsStreetAddress={currentInvoice.clientAddress.street}
-          clientCity={currentInvoice.clientAddress.city}
-          clientPostalCode={currentInvoice.clientAddress.postCode}
-          clientCountry={currentInvoice.clientAddress.country}
-          invoiceDate={currentInvoice.createdAt}
-          paymentTerms={currentInvoice.paymentTerms}
-          description={currentInvoice.description}
-          invoiceItems={currentInvoice.items}
+          invoiceId={invoice.id}
+          providerStreetAddress={invoice.senderAddress.street}
+          providerCity={invoice.senderAddress.city}
+          providerPostalCode={invoice.senderAddress.postCode}
+          providerCountry={invoice.senderAddress.country}
+          clientsName={invoice.clientName}
+          clientsEmail={invoice.clientEmail}
+          clientsStreetAddress={invoice.clientAddress.street}
+          clientCity={invoice.clientAddress.city}
+          clientPostalCode={invoice.clientAddress.postCode}
+          clientCountry={invoice.clientAddress.country}
+          invoiceDate={invoice.createdAt}
+          paymentTerms={invoice.paymentTerms}
+          description={invoice.description}
+          invoiceItems={invoice.items}
         />
       )}
     </>

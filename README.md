@@ -5,6 +5,7 @@
 - [React Query](https://react-query.tanstack.com/)
 - [Styled Components](https://styled-components.com/)
 - [Formik](https://formik.org/) + [Yup](https://www.npmjs.com/package/yup)
+- [Apollo](https://www.apollographql.com/)
 
 ## Want to run the project locally?
 
