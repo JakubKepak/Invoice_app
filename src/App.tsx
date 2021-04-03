@@ -10,7 +10,7 @@ import { LightTheme, DarkTheme } from "./themes";
 // components
 import Menu from "./components/Menu";
 import OverviewPage from "./components/OverviewPage";
-import InvoiceDetailPage from "./components/InvoiceDetailPage";
+import InvoiceDetailPage from "./components/InvoiceDetailPage/InvoiceDetailPage";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -90,7 +90,9 @@ function App() {
         <GlobalStyle />
         <Menu />
         <ContentContainer>
-          {!loading && (
+          {loading && <div>Loading...</div>}
+          {error && <div>Oh man, something went wrong</div>}
+          {!loading && !error && (
             <Switch>
               <Route
                 exact
