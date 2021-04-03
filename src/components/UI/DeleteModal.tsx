@@ -53,7 +53,6 @@ export default function DeleteModal({ closeModal, children }: Props) {
         onClick={(e) => e.stopPropagation()}
         initial={{ scale: 0.5 }}
         animate={{ scale: 1 }}
-        transition={{ type: "spring", stiffness: 500 }}
       >
         <Header>Confirm Deletion</Header>
         <ContentContainer>{children}</ContentContainer>
