@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export const MainContainer = styled.div`
   position: absolute;
@@ -10,7 +11,7 @@ export const MainContainer = styled.div`
   display: flex;
 `;
 
-export const InputAreaContainer = styled.div`
+export const InputAreaContainer = styled(motion.div)`
   width: 50%;
   min-height: 100%;
   background-color: white;

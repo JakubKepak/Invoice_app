@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useFormik, Formik, Form, Field, FieldArray, useField } from "formik";
+import { Formik, Form, FieldArray, useField } from "formik";
 import * as Yup from "yup";
 import { addCommaSeparator } from "../../helpers/helpers";
 import * as S from "./Styles";
@@ -119,7 +118,13 @@ export default function EditInvoice({
 }: Props) {
   return (
     <S.MainContainer onClick={() => setEditActive(false)}>
-      <S.InputAreaContainer onClick={(e) => e.stopPropagation()}>
+      <S.InputAreaContainer
+        key={"editModal"}
+        onClick={(e) => e.stopPropagation()}
+        initial={{ x: -300 }}
+        animate={{ x: 0 }}
+        exit={{ x: -500 }}
+      >
         <p>
           {variant === "new" ? <p>New Invoice</p> : <p>Edit #{invoiceId}</p>}
         </p>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as S from "./Styles";
 import { Link, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
 import { fromatDate, addCommaSeparator } from "../../helpers/helpers";
 
@@ -114,35 +115,37 @@ export default function InvoiceDetailPage() {
           </S.InvoiceItemsContainer>
         </S.ContentContainer>
       </S.MainContainer>
-      {editActive && (
-        <EditInvoice
-          setEditActive={setEditActive}
-          variant="edit"
-          invoiceId={invoice.id}
-          providerStreetAddress={invoice.senderAddress.street}
-          providerCity={invoice.senderAddress.city}
-          providerPostalCode={invoice.senderAddress.postCode}
-          providerCountry={invoice.senderAddress.country}
-          clientsName={invoice.clientName}
-          clientsEmail={invoice.clientEmail}
-          clientsStreetAddress={invoice.clientAddress.street}
-          clientCity={invoice.clientAddress.city}
-          clientPostalCode={invoice.clientAddress.postCode}
-          clientCountry={invoice.clientAddress.country}
-          invoiceDate={invoice.createdAt}
-          paymentTerms={invoice.paymentTerms}
-          description={invoice.description}
-          invoiceItems={invoice.items}
-        />
-      )}
+      <AnimatePresence>
+        {editActive && (
+          <EditInvoice
+            setEditActive={setEditActive}
+            variant="edit"
+            invoiceId={invoice.id}
+            providerStreetAddress={invoice.senderAddress.street}
+            providerCity={invoice.senderAddress.city}
+            providerPostalCode={invoice.senderAddress.postCode}
+            providerCountry={invoice.senderAddress.country}
+            clientsName={invoice.clientName}
+            clientsEmail={invoice.clientEmail}
+            clientsStreetAddress={invoice.clientAddress.street}
+            clientCity={invoice.clientAddress.city}
+            clientPostalCode={invoice.clientAddress.postCode}
+            clientCountry={invoice.clientAddress.country}
+            invoiceDate={invoice.createdAt}
+            paymentTerms={invoice.paymentTerms}
+            description={invoice.description}
+            invoiceItems={invoice.items}
+          />
+        )}
 
-      {showModal ? (
-        <Modal>
-          <DeleteModal closeModal={() => setShowModal(false)}>
-            Delete invoice {invoice.id} ?
-          </DeleteModal>
-        </Modal>
-      ) : null}
+        {showModal ? (
+          <Modal>
+            <DeleteModal closeModal={() => setShowModal(false)}>
+              Delete invoice {invoice.id} ?
+            </DeleteModal>
+          </Modal>
+        ) : null}
+      </AnimatePresence>
     </>
   );
 }

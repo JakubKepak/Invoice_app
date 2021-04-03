@@ -50,9 +50,11 @@ export default function DeleteModal({ closeModal, children }: Props) {
   return (
     <MainContainer onClick={closeModal}>
       <ModalContainer
+        key={"deleteModal"}
         onClick={(e) => e.stopPropagation()}
         initial={{ scale: 0.5 }}
         animate={{ scale: 1 }}
+        exit={{ scale: 0 }}
       >
         <Header>Confirm Deletion</Header>
         <ContentContainer>{children}</ContentContainer>
