@@ -10,11 +10,6 @@ export const MainContainer = styled.div`
   display: flex;
 `;
 
-export const InvisibleContainer = styled.div`
-  min-height: 100%;
-  width: 50%;
-`;
-
 export const InputAreaContainer = styled.div`
   width: 50%;
   min-height: 100%;

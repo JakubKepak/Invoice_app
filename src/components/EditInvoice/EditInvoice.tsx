@@ -119,8 +119,8 @@ export default function EditInvoice({
   ],
 }: Props) {
   return (
-    <S.MainContainer>
-      <S.InputAreaContainer>
+    <S.MainContainer onClick={() => setEditActive(false)}>
+      <S.InputAreaContainer onClick={(e) => e.stopPropagation()}>
         <p>
           {variant === "new" ? <p>New Invoice</p> : <p>Edit #{invoiceId}</p>}
         </p>
@@ -336,9 +336,6 @@ export default function EditInvoice({
           )}
         </Formik>
       </S.InputAreaContainer>
-      <S.InvisibleContainer
-        onClick={() => setEditActive(false)}
-      ></S.InvisibleContainer>
     </S.MainContainer>
   );
 }
