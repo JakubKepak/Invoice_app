@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
+import Button from "../UI/Button";
 
 const MainContainer = styled.div`
   display: flex;
@@ -10,12 +13,57 @@ const MainContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
 `;
 
-const ModalContainer = styled.div``;
+const ModalContainer = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  padding: 2rem;
+  background-color: ${({ theme }) => theme.colors.invoiceItemBackground};
+  border-radius: var(--borderRadius);
+  color: ${({ theme }) => theme.colors.mainFontColor};
+`;
 
-export default function DeleteModal({ closeModal, children }: any) {
+const Header = styled.h1`
+  font-size: 1.5rem;
+`;
+
+const ContentContainer = styled.div`
+  margin: 1rem 0;
+  color: ${({ theme }) => theme.colors.textColorLight};
+`;
+
+const ButtonsContainer = styled.div`
+  margin-left: auto;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 0.5rem;
+`;
+
+interface Props {
+  closeModal: any;
+  children: any;
+}
+
+export default function DeleteModal({ closeModal, children }: Props) {
+  useEffect(() => {});
+
   return (
-    <MainContainer>
-      <ModalContainer>{children}</ModalContainer>
+    <MainContainer onClick={closeModal}>
+      <ModalContainer
+        onClick={(e) => e.stopPropagation()}
+        initial={{ scale: 0.5 }}
+        animate={{ scale: 1 }}
+        transition={{ type: "spring", stiffness: 500 }}
+      >
+        <Header>Confirm Deletion</Header>
+        <ContentContainer>{children}</ContentContainer>
+        <ButtonsContainer>
+          <Button variant="secondary" onClick={closeModal}>
+            Cancel
+          </Button>
+          <Button variant="warn">Delete</Button>
+        </ButtonsContainer>
+      </ModalContainer>
     </MainContainer>
   );
 }

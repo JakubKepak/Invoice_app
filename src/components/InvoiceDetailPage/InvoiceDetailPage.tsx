@@ -42,7 +42,9 @@ export default function InvoiceDetailPage() {
             <Button variant="secondary" onClick={() => setEditActive(true)}>
               Edit
             </Button>
-            <Button variant="warn">Delete</Button>
+            <Button variant="warn" onClick={() => setShowModal(true)}>
+              Delete
+            </Button>
             <Button variant="primary">Mark as Paid</Button>
           </S.ButtonsContainer>
         </S.HeaderContainer>

@@ -2,10 +2,10 @@
 
 ## Build with
 - [Create React App](https://create-react-app.dev/)
-- [React Query](https://react-query.tanstack.com/)
 - [Styled Components](https://styled-components.com/)
 - [Formik](https://formik.org/) + [Yup](https://www.npmjs.com/package/yup)
 - [Apollo](https://www.apollographql.com/)
+- [Framer Motion](https://www.framer.com/motion/)
 
 ## Want to run the project locally?
 
@@ -23,5 +23,5 @@ npm start
 ```
 
 
-## Designed by [Frontendmentor](https://www.frontendmentor.io/). Built by Me.
+## Designed by [Frontendmentor](https://www.frontendmentor.io/). Coded by Me.
 
