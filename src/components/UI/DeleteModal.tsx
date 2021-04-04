@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Button from "../UI/Button";
+import {useMutation} from "@apollo/client"
+
 
 const MainContainer = styled.div`
   display: flex;
@@ -45,7 +47,7 @@ interface Props {
 }
 
 export default function DeleteModal({ closeModal, children }: Props) {
-  useEffect(() => {});
+
 
   return (
     <MainContainer onClick={closeModal}>

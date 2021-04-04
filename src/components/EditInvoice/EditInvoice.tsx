@@ -2,25 +2,27 @@ import { Formik, Form, FieldArray, useField } from "formik";
 import * as Yup from "yup";
 import { addCommaSeparator } from "../../helpers/helpers";
 import * as S from "./Styles";
+import { ADD_INVOICE, REMOVE_INVOICE } from "../../queries/queries";
+import { useMutation } from "@apollo/client";
 
 import Button from "../UI/Button";
 
 import deleteIcon from "../../assets/icon-delete.svg";
 
 const EditSchema = Yup.object().shape({
-  providerStreetAddress: Yup.string().required("Required"),
-  providerCity: Yup.string().required("Required"),
-  providerPostalCode: Yup.string().required("Required"),
-  providerCountry: Yup.string().required("Required"),
-  clientsName: Yup.string().required("Required").min(2, "Too Short!"),
-  clientsEmail: Yup.string().required("Required"),
-  clientsStreetAddress: Yup.string().required("Required"),
-  clientCity: Yup.string().required("Required"),
-  clientPostalCode: Yup.string().required("Required"),
-  clientCountry: Yup.string().required("Required"),
-  invoiceDate: Yup.string().required("Required"),
-  paymentTerms: Yup.string().required("Required"),
-  description: Yup.string().required("Required"),
+  // providerStreetAddress: Yup.string().required("Required"),
+  // providerCity: Yup.string().required("Required"),
+  // providerPostalCode: Yup.string().required("Required"),
+  // providerCountry: Yup.string().required("Required"),
+  // clientsName: Yup.string().required("Required").min(2, "Too Short!"),
+  // clientsEmail: Yup.string().required("Required"),
+  // clientsStreetAddress: Yup.string().required("Required"),
+  // clientCity: Yup.string().required("Required"),
+  // clientPostalCode: Yup.string().required("Required"),
+  // clientCountry: Yup.string().required("Required"),
+  // invoiceDate: Yup.string().required("Required"),
+  // paymentTerms: Yup.string().required("Required"),
+  // description: Yup.string().required("Required"),
 });
 
 const CustomTextField = ({ label, ...props }: any) => {
@@ -116,6 +118,10 @@ export default function EditInvoice({
     },
   ],
 }: Props) {
+  const QUERY = variant === "new" ? ADD_INVOICE : REMOVE_INVOICE;
+
+  const [editInvoice, { error, data }] = useMutation(QUERY);
+
   return (
     <S.MainContainer onClick={() => setEditActive(false)}>
       <S.InputAreaContainer
@@ -150,6 +156,48 @@ export default function EditInvoice({
           onSubmit={(values, actions) => {
             if (variant === "new") {
               alert(`creating - ${JSON.stringify(values, null, 2)}`);
+
+              const completeInvoiceItems = values.invoiceItems.map(
+                (item: any) => {
+                  return {
+                    ...item,
+                    total: item.price * item.quantity,
+                  };
+                }
+              );
+              editInvoice({
+                variables: {
+                  invoice: {
+                    id: `TEST-${Math.floor(Math.random() * 10000)}`,
+                    createdAt: values.invoiceDate,
+                    // paymentDue:
+                    paymentTerms: Number(values.paymentTerms),
+                    clientName: values.clientsName,
+                    clientEmail: values.clientsEmail,
+                    description: values.description,
+                    status: "PENDING",
+                    senderAddress: {
+                      street: values.providerStreetAddress,
+                      city: values.providerStreetAddress,
+                      postCode: values.providerPostalCode,
+                      country: values.providerCity,
+                    },
+                    clientAddress: {
+                      street: values.clientsStreetAddress,
+                      city: values.clientCity,
+                      postCode: values.clientPostalCode,
+                      country: values.clientCountry,
+                    },
+                    items: completeInvoiceItems,
+                    total: completeInvoiceItems.reduce(
+                      (accumulator: any, currentValue: any) => {
+                        return accumulator + currentValue.total;
+                      },
+                      0
+                    ),
+                  },
+                },
+              });
               actions.setSubmitting(false);
             }
             if (variant === "edit") {
@@ -285,7 +333,7 @@ export default function EditInvoice({
                             <CustomTextField
                               id={`invoiceItems.${index}.quantity`}
                               name={`invoiceItems.${index}.quantity`}
-                              type="text"
+                              type="number"
                               value={item.quantity}
                             />
                             <CustomTextField

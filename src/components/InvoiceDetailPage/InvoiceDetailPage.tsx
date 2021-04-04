@@ -46,7 +46,7 @@ export default function InvoiceDetailPage() {
             <Button variant="warn" onClick={() => setShowModal(true)}>
               Delete
             </Button>
-            <Button variant="primary">Mark as Paid</Button>
+            <Button  variant="primary">Mark as Paid</Button>
           </S.ButtonsContainer>
         </S.HeaderContainer>
         <S.ContentContainer>
