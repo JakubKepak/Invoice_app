@@ -115,6 +115,7 @@ export default function InvoiceDetailPage() {
           </S.InvoiceItemsContainer>
         </S.ContentContainer>
       </S.MainContainer>
+
       <AnimatePresence>
         {editActive && (
           <EditInvoice

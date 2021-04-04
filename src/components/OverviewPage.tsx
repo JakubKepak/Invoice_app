@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { AnimatePresence } from "framer-motion";
 
 import PrimaryButtonAdd from "./UI/PrimaryButtonAdd";
 
@@ -147,9 +148,11 @@ export default function OverviewPage({ data }: Props) {
           )}
         </ContentContainer>
       </MainContainer>
-      {editActive && (
-        <EditInvoice variant="new" setEditActive={setEditActive} />
-      )}
+      <AnimatePresence>
+        {editActive && (
+          <EditInvoice variant="new" setEditActive={setEditActive} />
+        )}
+      </AnimatePresence>
     </>
   );
 }
