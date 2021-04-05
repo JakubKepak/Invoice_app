@@ -1,7 +1,9 @@
 import { useState } from "react";
 import * as S from "./Styles";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import { REMOVE_INVOICE } from "../../queries/queries";
+import { useMutation } from "@apollo/client";
 
 import { fromatDate, addCommaSeparator } from "../../helpers/helpers";
 
@@ -17,9 +19,16 @@ import leftArrowIcon from "../../assets/icon-arrow-left.svg";
 export default function InvoiceDetailPage() {
   const [editActive, setEditActive] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [deleteInvoice, { error }] = useMutation(REMOVE_INVOICE);
 
   const location = useLocation();
+  const history = useHistory();
   const invoice: any = location.state;
+
+  const deleteInvoiceHandler = () => {
+    deleteInvoice({ variables: { id: invoice.id } });
+    history.push("/");
+  };
 
   console.log(invoice);
 
@@ -46,7 +55,7 @@ export default function InvoiceDetailPage() {
             <Button variant="warn" onClick={() => setShowModal(true)}>
               Delete
             </Button>
-            <Button  variant="primary">Mark as Paid</Button>
+            <Button variant="primary">Mark as Paid</Button>
           </S.ButtonsContainer>
         </S.HeaderContainer>
         <S.ContentContainer>
@@ -141,7 +150,10 @@ export default function InvoiceDetailPage() {
 
         {showModal ? (
           <Modal>
-            <DeleteModal closeModal={() => setShowModal(false)}>
+            <DeleteModal
+              onClick={deleteInvoiceHandler}
+              closeModal={() => setShowModal(false)}
+            >
               Delete invoice {invoice.id} ?
             </DeleteModal>
           </Modal>

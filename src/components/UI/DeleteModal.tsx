@@ -1,9 +1,6 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Button from "../UI/Button";
-import {useMutation} from "@apollo/client"
-
 
 const MainContainer = styled.div`
   display: flex;
@@ -42,13 +39,12 @@ const ButtonsContainer = styled.div`
 `;
 
 interface Props {
+  onClick?: any;
   closeModal: any;
   children: any;
 }
 
-export default function DeleteModal({ closeModal, children }: Props) {
-
-
+export default function DeleteModal({ onClick, closeModal, children }: Props) {
   return (
     <MainContainer onClick={closeModal}>
       <ModalContainer
@@ -64,7 +60,9 @@ export default function DeleteModal({ closeModal, children }: Props) {
           <Button variant="secondary" onClick={closeModal}>
             Cancel
           </Button>
-          <Button variant="warn">Delete</Button>
+          <Button onClick={onClick} variant="warn">
+            Delete
+          </Button>
         </ButtonsContainer>
       </ModalContainer>
     </MainContainer>
