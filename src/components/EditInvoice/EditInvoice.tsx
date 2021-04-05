@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Formik, Form, FieldArray, useField } from "formik";
 import * as Yup from "yup";
 import { addCommaSeparator } from "../../helpers/helpers";
@@ -106,7 +107,7 @@ export default function EditInvoice({
   clientCity = "",
   clientPostalCode = "",
   clientCountry = "",
-  invoiceDate = "",
+  invoiceDate = new Date(Date.now()).toLocaleDateString("en-CA"),
   paymentTerms = 1,
   description = "",
   invoiceItems = [
@@ -120,6 +121,7 @@ export default function EditInvoice({
 }: Props) {
   const QUERY = variant === "new" ? ADD_INVOICE : REMOVE_INVOICE;
 
+  const [invoiceStatus, setInvoiceStatus] = useState("PENDING");
   const [editInvoice, { error, data }] = useMutation(QUERY);
 
   return (
@@ -175,7 +177,7 @@ export default function EditInvoice({
                     clientName: values.clientsName,
                     clientEmail: values.clientsEmail,
                     description: values.description,
-                    status: "PENDING",
+                    status: invoiceStatus,
                     senderAddress: {
                       street: values.providerStreetAddress,
                       city: values.providerStreetAddress,
@@ -204,6 +206,7 @@ export default function EditInvoice({
               alert(`editing - ${JSON.stringify(values, null, 2)}`);
               actions.setSubmitting(false);
             }
+            setEditActive(false);
           }}
         >
           {(props) => (
@@ -374,10 +377,18 @@ export default function EditInvoice({
               </S.FormSectionInvoiceItems>
 
               <S.ButtonsContainer>
-                <Button type="button" variant="secondary">
+                <Button
+                  onClick={() => setEditActive(false)}
+                  type="button"
+                  variant="secondary"
+                >
                   Discard
                 </Button>
-                <Button type="button" variant="dark">
+                <Button
+                  onClick={() => setInvoiceStatus("DRAFT")}
+                  type="submit"
+                  variant="dark"
+                >
                   Save as Draft
                 </Button>
                 <Button type="submit" variant="primary">
