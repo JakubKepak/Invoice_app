@@ -51,3 +51,11 @@ export const ADD_INVOICE = gql`
     }
   }
 `;
+
+export const UPDATE_INVOICE = gql`
+  mutation UpdateInvoice($invoice: NewInvoiceInput) {
+    data: updateInvoice(input: $invoice) {
+      id
+    }
+  }
+`;

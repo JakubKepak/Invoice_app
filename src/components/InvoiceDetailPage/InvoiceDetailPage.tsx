@@ -2,7 +2,7 @@ import { useState } from "react";
 import * as S from "./Styles";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { REMOVE_INVOICE } from "../../queries/queries";
+import { REMOVE_INVOICE, UPDATE_INVOICE } from "../../queries/queries";
 import { useMutation } from "@apollo/client";
 
 import { fromatDate, addCommaSeparator } from "../../helpers/helpers";
@@ -19,7 +19,8 @@ import leftArrowIcon from "../../assets/icon-arrow-left.svg";
 export default function InvoiceDetailPage() {
   const [editActive, setEditActive] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [deleteInvoice, { error }] = useMutation(REMOVE_INVOICE);
+  const [deleteInvoice] = useMutation(REMOVE_INVOICE);
+  const [updateInvoice] = useMutation(UPDATE_INVOICE);
 
   const location = useLocation();
   const history = useHistory();
@@ -28,6 +29,12 @@ export default function InvoiceDetailPage() {
   const deleteInvoiceHandler = () => {
     deleteInvoice({ variables: { id: invoice.id } });
     history.push("/");
+  };
+
+  const updateInvoiceHandler = () => {
+    updateInvoice({
+      variables: { invoice: { id: invoice.id, status: "PAID" } },
+    });
   };
 
   console.log(invoice);
@@ -55,7 +62,9 @@ export default function InvoiceDetailPage() {
             <Button variant="warn" onClick={() => setShowModal(true)}>
               Delete
             </Button>
-            <Button variant="primary">Mark as Paid</Button>
+            <Button onClick={updateInvoiceHandler} variant="primary">
+              Mark as Paid
+            </Button>
           </S.ButtonsContainer>
         </S.HeaderContainer>
         <S.ContentContainer>

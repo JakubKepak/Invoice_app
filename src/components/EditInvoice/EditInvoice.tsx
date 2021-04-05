@@ -157,8 +157,6 @@ export default function EditInvoice({
           validationSchema={EditSchema}
           onSubmit={(values, actions) => {
             if (variant === "new") {
-              alert(`creating - ${JSON.stringify(values, null, 2)}`);
-
               const completeInvoiceItems = values.invoiceItems.map(
                 (item: any) => {
                   return {
