@@ -3,7 +3,7 @@ import { Formik, Form, FieldArray, useField } from "formik";
 import * as Yup from "yup";
 import { addCommaSeparator } from "../../helpers/helpers";
 import * as S from "./Styles";
-import { ADD_INVOICE, REMOVE_INVOICE } from "../../queries/queries";
+import { ADD_INVOICE, UPDATE_INVOICE } from "../../queries/queries";
 import { useMutation } from "@apollo/client";
 
 import Button from "../UI/Button";
@@ -119,10 +119,10 @@ export default function EditInvoice({
     },
   ],
 }: Props) {
-  const QUERY = variant === "new" ? ADD_INVOICE : REMOVE_INVOICE;
+  const QUERY = variant === "new" ? ADD_INVOICE : UPDATE_INVOICE;
 
   const [invoiceStatus, setInvoiceStatus] = useState("PENDING");
-  const [editInvoice, { error, data }] = useMutation(QUERY);
+  const [editInvoice] = useMutation(QUERY);
 
   return (
     <S.MainContainer onClick={() => setEditActive(false)}>
@@ -156,54 +156,58 @@ export default function EditInvoice({
           }}
           validationSchema={EditSchema}
           onSubmit={(values, actions) => {
-            if (variant === "new") {
-              const completeInvoiceItems = values.invoiceItems.map(
-                (item: any) => {
-                  return {
-                    ...item,
-                    total: item.price * item.quantity,
-                  };
-                }
-              );
-              editInvoice({
-                variables: {
-                  invoice: {
-                    id: `TEST-${Math.floor(Math.random() * 10000)}`,
-                    createdAt: values.invoiceDate,
-                    // paymentDue:
-                    paymentTerms: Number(values.paymentTerms),
-                    clientName: values.clientsName,
-                    clientEmail: values.clientsEmail,
-                    description: values.description,
-                    status: invoiceStatus,
-                    senderAddress: {
-                      street: values.providerStreetAddress,
-                      city: values.providerStreetAddress,
-                      postCode: values.providerPostalCode,
-                      country: values.providerCity,
-                    },
-                    clientAddress: {
-                      street: values.clientsStreetAddress,
-                      city: values.clientCity,
-                      postCode: values.clientPostalCode,
-                      country: values.clientCountry,
-                    },
-                    items: completeInvoiceItems,
-                    total: completeInvoiceItems.reduce(
-                      (accumulator: any, currentValue: any) => {
-                        return accumulator + currentValue.total;
-                      },
-                      0
-                    ),
+            const completeInvoiceItems = values.invoiceItems.map(
+              (item: any) => {
+                return {
+                  ...item,
+                  total: item.price * item.quantity,
+                };
+              }
+            );
+
+            editInvoice({
+              variables: {
+                invoice: {
+                  id:
+                    invoiceId !== ""
+                      ? invoiceId
+                      : `TEST-${Math.floor(Math.random() * 10000)}`,
+                  createdAt: values.invoiceDate,
+                  // paymentDue:
+                  paymentTerms: Number(values.paymentTerms),
+                  clientName: values.clientsName,
+                  clientEmail: values.clientsEmail,
+                  description: values.description,
+                  status: invoiceStatus,
+                  senderAddress: {
+                    street: values.providerStreetAddress,
+                    city: values.providerStreetAddress,
+                    postCode: values.providerPostalCode,
+                    country: values.providerCity,
                   },
+                  clientAddress: {
+                    street: values.clientsStreetAddress,
+                    city: values.clientCity,
+                    postCode: values.clientPostalCode,
+                    country: values.clientCountry,
+                  },
+                  items: completeInvoiceItems,
+                  total: completeInvoiceItems.reduce(
+                    (accumulator: any, currentValue: any) => {
+                      return accumulator + currentValue.total;
+                    },
+                    0
+                  ),
                 },
-              });
-              actions.setSubmitting(false);
-            }
-            if (variant === "edit") {
-              alert(`editing - ${JSON.stringify(values, null, 2)}`);
-              actions.setSubmitting(false);
-            }
+              },
+            });
+
+            actions.setSubmitting(false);
+
+            // if (variant === "edit") {
+            //   alert(`editing - ${JSON.stringify(values, null, 2)}`);
+            //   actions.setSubmitting(false);
+            // }
             setEditActive(false);
           }}
         >
