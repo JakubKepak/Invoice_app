@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 // Queries
 export const INVOICES = gql`
-  {
+  query AllInvoices {
     data: getInvoices {
       id
       createdAt
@@ -48,6 +48,32 @@ export const ADD_INVOICE = gql`
   mutation AddInvoice($invoice: NewInvoiceInput) {
     data: createInvoice(input: $invoice) {
       id
+      createdAt
+      paymentDue
+      description
+      paymentTerms
+      clientName
+      clientEmail
+      status
+      senderAddress {
+        street
+        city
+        postCode
+        country
+      }
+      clientAddress {
+        street
+        city
+        postCode
+        country
+      }
+      items {
+        name
+        quantity
+        price
+        total
+      }
+      total
     }
   }
 `;
@@ -56,6 +82,32 @@ export const UPDATE_INVOICE = gql`
   mutation UpdateInvoice($invoice: NewInvoiceInput) {
     data: updateInvoice(input: $invoice) {
       id
+      createdAt
+      paymentDue
+      description
+      paymentTerms
+      clientName
+      clientEmail
+      status
+      senderAddress {
+        street
+        city
+        postCode
+        country
+      }
+      clientAddress {
+        street
+        city
+        postCode
+        country
+      }
+      items {
+        name
+        quantity
+        price
+        total
+      }
+      total
     }
   }
 `;

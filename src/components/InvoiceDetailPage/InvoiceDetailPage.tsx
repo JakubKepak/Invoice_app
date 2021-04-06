@@ -2,7 +2,11 @@ import { useState } from "react";
 import * as S from "./Styles";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { REMOVE_INVOICE, UPDATE_INVOICE } from "../../queries/queries";
+import {
+  REMOVE_INVOICE,
+  UPDATE_INVOICE,
+  INVOICES,
+} from "../../queries/queries";
 import { useMutation } from "@apollo/client";
 
 import { fromatDate, addCommaSeparator } from "../../helpers/helpers";
@@ -27,13 +31,17 @@ export default function InvoiceDetailPage() {
   const invoice: any = location.state;
 
   const deleteInvoiceHandler = () => {
-    deleteInvoice({ variables: { id: invoice.id } });
+    deleteInvoice({
+      variables: { id: invoice.id },
+      refetchQueries: [{ query: INVOICES }],
+    });
     history.push("/");
   };
 
   const updateInvoiceHandler = () => {
     updateInvoice({
       variables: { invoice: { id: invoice.id, status: "PAID" } },
+      refetchQueries: [{ query: INVOICES }],
     });
   };
 

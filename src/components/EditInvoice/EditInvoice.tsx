@@ -3,7 +3,7 @@ import { Formik, Form, FieldArray, useField } from "formik";
 import * as Yup from "yup";
 import { addCommaSeparator } from "../../helpers/helpers";
 import * as S from "./Styles";
-import { ADD_INVOICE, UPDATE_INVOICE } from "../../queries/queries";
+import { ADD_INVOICE, UPDATE_INVOICE, INVOICES } from "../../queries/queries";
 import { useMutation } from "@apollo/client";
 
 import Button from "../UI/Button";
@@ -119,10 +119,17 @@ export default function EditInvoice({
     },
   ],
 }: Props) {
-  const QUERY = variant === "new" ? ADD_INVOICE : UPDATE_INVOICE;
-
   const [invoiceStatus, setInvoiceStatus] = useState("PENDING");
-  const [editInvoice] = useMutation(QUERY);
+  const [addInvoice] = useMutation(ADD_INVOICE, {
+    update(cache, { data: { data } }) {
+      const AllInvoices: any = cache.readQuery({ query: INVOICES });
+      cache.writeQuery({
+        query: INVOICES,
+        data: { data: [data, ...AllInvoices.data] },
+      });
+    },
+  });
+  const [editInvoice] = useMutation(UPDATE_INVOICE);
 
   return (
     <S.MainContainer onClick={() => setEditActive(false)}>
@@ -156,6 +163,7 @@ export default function EditInvoice({
           }}
           validationSchema={EditSchema}
           onSubmit={(values, actions) => {
+            // Calculate total for each item
             const completeInvoiceItems = values.invoiceItems.map(
               (item: any) => {
                 return {
@@ -165,7 +173,8 @@ export default function EditInvoice({
               }
             );
 
-            editInvoice({
+            // set variables for mutations
+            const payload = {
               variables: {
                 invoice: {
                   id:
@@ -200,14 +209,17 @@ export default function EditInvoice({
                   ),
                 },
               },
-            });
+            };
+
+            if (variant === "new") {
+              addInvoice(payload);
+            }
+
+            if (variant === "edit") {
+              editInvoice(payload);
+            }
 
             actions.setSubmitting(false);
-
-            // if (variant === "edit") {
-            //   alert(`editing - ${JSON.stringify(values, null, 2)}`);
-            //   actions.setSubmitting(false);
-            // }
             setEditActive(false);
           }}
         >
