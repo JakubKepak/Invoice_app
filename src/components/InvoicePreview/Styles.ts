@@ -22,8 +22,9 @@ export const MainContainer = styled.div`
   }
 
   @media ${device.xs} {
+    padding: 1rem;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: 2rem 1rem 1rem;
     grid-row-gap: 0.5rem;
     grid-template-areas:
       "id name"
@@ -43,6 +44,7 @@ export const IdContainer = styled.span`
 
   @media ${device.xs} {
     grid-area: id;
+    padding-bottom: 1.5rem;
   }
 `;
 
@@ -62,6 +64,7 @@ export const ClientNameContainer = styled.span`
   @media ${device.xs} {
     grid-area: name;
     justify-self: right;
+    padding-bottom: 1.5rem;
   }
 `;
 
