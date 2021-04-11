@@ -3,7 +3,12 @@ import { Formik, Form, FieldArray, useField } from "formik";
 import * as Yup from "yup";
 import { addCommaSeparator } from "../../helpers/helpers";
 import * as S from "./Styles";
-import { ADD_INVOICE, UPDATE_INVOICE, INVOICES } from "../../queries/queries";
+import {
+  ADD_INVOICE,
+  UPDATE_INVOICE,
+  INVOICES,
+  GET_INVOICE,
+} from "../../queries/queries";
 import { useMutation } from "@apollo/client";
 
 import Button from "../UI/Button";
@@ -175,48 +180,51 @@ export default function EditInvoice({
 
             // set variables for mutations
             const payload = {
-              variables: {
-                invoice: {
-                  id:
-                    invoiceId !== ""
-                      ? invoiceId
-                      : `TEST-${Math.floor(Math.random() * 10000)}`,
-                  createdAt: values.invoiceDate,
-                  // paymentDue:
-                  paymentTerms: Number(values.paymentTerms),
-                  clientName: values.clientsName,
-                  clientEmail: values.clientsEmail,
-                  description: values.description,
-                  status: invoiceStatus,
-                  senderAddress: {
-                    street: values.providerStreetAddress,
-                    city: values.providerStreetAddress,
-                    postCode: values.providerPostalCode,
-                    country: values.providerCity,
-                  },
-                  clientAddress: {
-                    street: values.clientsStreetAddress,
-                    city: values.clientCity,
-                    postCode: values.clientPostalCode,
-                    country: values.clientCountry,
-                  },
-                  items: completeInvoiceItems,
-                  total: completeInvoiceItems.reduce(
-                    (accumulator: any, currentValue: any) => {
-                      return accumulator + currentValue.total;
-                    },
-                    0
-                  ),
+              invoice: {
+                id:
+                  invoiceId !== ""
+                    ? invoiceId
+                    : `TEST-${Math.floor(Math.random() * 10000)}`,
+                createdAt: values.invoiceDate,
+                // paymentDue:
+                paymentTerms: Number(values.paymentTerms),
+                clientName: values.clientsName,
+                clientEmail: values.clientsEmail,
+                description: values.description,
+                status: invoiceStatus,
+                senderAddress: {
+                  street: values.providerStreetAddress,
+                  city: values.providerStreetAddress,
+                  postCode: values.providerPostalCode,
+                  country: values.providerCity,
                 },
+                clientAddress: {
+                  street: values.clientsStreetAddress,
+                  city: values.clientCity,
+                  postCode: values.clientPostalCode,
+                  country: values.clientCountry,
+                },
+                items: completeInvoiceItems,
+                total: completeInvoiceItems.reduce(
+                  (accumulator: any, currentValue: any) => {
+                    return accumulator + currentValue.total;
+                  },
+                  0
+                ),
               },
             };
 
             if (variant === "new") {
-              addInvoice(payload);
+              addInvoice({ variables: payload });
             }
 
             if (variant === "edit") {
-              editInvoice(payload);
+              editInvoice({
+                variables: payload,
+                refetchQueries: [
+                  { query: GET_INVOICE, variables: { id: invoiceId } },
+                ],
+              });
             }
 
             actions.setSubmitting(false);

@@ -1,18 +1,24 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
+import { device } from "breakpoints";
 
-import PrimaryButtonAdd from "./UI/PrimaryButtonAdd";
+import PrimaryButtonAdd from "components/UI/PrimaryButtonAdd";
 
-import arrowDown from "../assets/icon-arrow-down.svg";
-import illustrationEmpty from "../assets/illustration-empty.svg";
+import arrowDown from "assets/icon-arrow-down.svg";
+import illustrationEmpty from "assets/illustration-empty.svg";
 
 // components
-import InvoicePreview from "./InvoicePreview";
-import EditInvoice from "./EditInvoice/EditInvoice";
+import InvoicePreview from "components/InvoicePreview/InvoicePreview";
+import EditInvoice from "components/EditInvoice/EditInvoice";
 
 const MainContainer = styled.div`
   width: 70%;
+
+  @media ${device.xs} {
+    width: 95%;
+    margin-top: 5rem;
+  }
 `;
 
 const HeaderContainer = styled.div`
@@ -102,18 +108,16 @@ export default function OverviewPage({ data }: Props) {
           <PageTitleContainer>
             <h1>Invoices</h1>
             <span>
-              {data.length > 0
-                ? `There are ${data.length} total invoices`
-                : "No Invoices"}
+              {data.length > 0 ? `${data.length} invoices` : "No Invoices"}
             </span>
           </PageTitleContainer>
           <OptionItemsContainer>
             <FilterContainer>
-              <span>Filter by status</span>
+              <span>Filter</span>
               <ArrowImage src={arrowDown} />
             </FilterContainer>
             <PrimaryButtonAdd setEditActive={setEditActive}>
-              New Invoice
+              New
             </PrimaryButtonAdd>
           </OptionItemsContainer>
         </HeaderContainer>

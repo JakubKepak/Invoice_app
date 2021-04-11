@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { device } from "breakpoints";
 import { useQuery } from "@apollo/client";
 
 import { INVOICES } from "./queries/queries";
@@ -61,7 +62,11 @@ a:visited {
 
   h1 {
     font-weight: 700;
-    color: ${({ theme }) => theme.colors.mainFontColor}
+    color: ${({ theme }) => theme.colors.mainFontColor};
+
+    @media ${device.xs} {
+      font-size: 1.5rem;
+    }
   }
 
   button {

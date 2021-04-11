@@ -35,6 +35,40 @@ export const INVOICES = gql`
   }
 `;
 
+export const GET_INVOICE = gql`
+  query GetInvoice($id: ID!) {
+    data: getInvoice(input: { id: $id }) {
+      id
+      createdAt
+      paymentDue
+      description
+      paymentTerms
+      clientName
+      clientEmail
+      status
+      senderAddress {
+        street
+        city
+        postCode
+        country
+      }
+      clientAddress {
+        street
+        city
+        postCode
+        country
+      }
+      items {
+        name
+        quantity
+        price
+        total
+      }
+      total
+    }
+  }
+`;
+
 // Mutations
 export const REMOVE_INVOICE = gql`
   mutation RemoveInvoice($id: ID!) {

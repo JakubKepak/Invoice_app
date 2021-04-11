@@ -1,13 +1,14 @@
 import { useState } from "react";
 import * as S from "./Styles";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import {
+  GET_INVOICE,
   REMOVE_INVOICE,
   UPDATE_INVOICE,
   INVOICES,
 } from "../../queries/queries";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 
 import { fromatDate, addCommaSeparator } from "../../helpers/helpers";
 
@@ -21,18 +22,21 @@ import DeleteModal from "../UI/DeleteModal";
 import leftArrowIcon from "../../assets/icon-arrow-left.svg";
 
 export default function InvoiceDetailPage() {
+  const { id } = useParams<any>();
+
   const [editActive, setEditActive] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [deleteInvoice] = useMutation(REMOVE_INVOICE);
   const [updateInvoice] = useMutation(UPDATE_INVOICE);
+  const { data: invoice, error, loading } = useQuery(GET_INVOICE, {
+    variables: { id: id },
+  });
 
-  const location = useLocation();
   const history = useHistory();
-  const invoice: any = location.state;
 
   const deleteInvoiceHandler = () => {
     deleteInvoice({
-      variables: { id: invoice.id },
+      variables: { id: invoice.data.id },
       refetchQueries: [{ query: INVOICES }],
     });
     history.push("/");
@@ -40,8 +44,11 @@ export default function InvoiceDetailPage() {
 
   const updateInvoiceHandler = () => {
     updateInvoice({
-      variables: { invoice: { id: invoice.id, status: "PAID" } },
-      refetchQueries: [{ query: INVOICES }],
+      variables: { invoice: { id: invoice.data.id, status: "PAID" } },
+      refetchQueries: [
+        { query: INVOICES },
+        { query: GET_INVOICE, variables: { id: id } },
+      ],
     });
   };
 
@@ -49,119 +56,125 @@ export default function InvoiceDetailPage() {
 
   return (
     <>
-      <S.MainContainer>
-        <S.GoBackContainer>
-          <Link to="/">
-            <span>
-              <S.LeftArrowIcon src={leftArrowIcon} />
-              Go Back
-            </span>
-          </Link>
-        </S.GoBackContainer>
-        <S.HeaderContainer>
-          <span>Status</span>
-          <InvoiceStatusIcon status={`${invoice.status}`}>
-            {invoice.status}
-          </InvoiceStatusIcon>
-          <S.ButtonsContainer>
-            <Button variant="secondary" onClick={() => setEditActive(true)}>
-              Edit
-            </Button>
-            <Button variant="warn" onClick={() => setShowModal(true)}>
-              Delete
-            </Button>
-            <Button onClick={updateInvoiceHandler} variant="primary">
-              Mark as Paid
-            </Button>
-          </S.ButtonsContainer>
-        </S.HeaderContainer>
-        <S.ContentContainer>
-          <S.InvoiceHeaderContainer>
-            <S.IdContainer>
-              <p>
-                <span>#</span>
-                {invoice.id}
-              </p>
-              <p>{invoice.description}</p>
-            </S.IdContainer>
-            <S.AddressContainer>
-              <p>{invoice.senderAddress.street}</p>
-              <p>{invoice.senderAddress.city}</p>
-              <p>{invoice.senderAddress.postCode}</p>
-              <p>{invoice.senderAddress.country}</p>
-            </S.AddressContainer>
-          </S.InvoiceHeaderContainer>
-          <S.InvoiceDetailsContainer>
-            <S.DatesContainer>
-              <S.ItemLabel>Invoice Date</S.ItemLabel>
-              <S.ItemImportant>{fromatDate(invoice.createdAt)}</S.ItemImportant>
-              <S.ItemLabel>Payment Due</S.ItemLabel>
-              <S.ItemImportant>
-                {fromatDate(invoice.paymentDue)}
-              </S.ItemImportant>
-            </S.DatesContainer>
-            <S.BillToContainer>
-              <S.ItemLabel>Bill To</S.ItemLabel>
-              <S.ItemImportant>{invoice.clientName}</S.ItemImportant>
-              <p>{invoice.clientAddress.street}</p>
-              <p>{invoice.clientAddress.city}</p>
-              <p>{invoice.clientAddress.postCode}</p>
-              <p>{invoice.clientAddress.country}</p>
-            </S.BillToContainer>
-            <S.SentToContainer>
-              <S.ItemLabel>Sent To</S.ItemLabel>
-              <S.ItemImportant>{invoice.clientEmail}</S.ItemImportant>
-            </S.SentToContainer>
-          </S.InvoiceDetailsContainer>
-          <S.InvoiceItemsContainer>
-            <S.ItemsListContainer>
-              <S.ItemContainerHeader>
-                <span>Item Name</span>
-                <span>QTY.</span>
-                <span>Price</span>
-                <span>Total</span>
-              </S.ItemContainerHeader>
-              {invoice.items.map((item: any) => {
-                return (
-                  <S.ItemContainer>
-                    <span>{item.name}</span>
-                    <span>{item.quantity}</span>
-                    <span>{`£ ${addCommaSeparator(item.price)}`}</span>
-                    <span>{`£ ${addCommaSeparator(item.total)}`}</span>
-                  </S.ItemContainer>
-                );
-              })}
-            </S.ItemsListContainer>
-            <S.TotalAmountContainer>
-              <S.ItemLabel>Amount Due</S.ItemLabel>
-              <S.TotalAmount>
-                {`£ ${addCommaSeparator(invoice.total)}`}
-              </S.TotalAmount>
-            </S.TotalAmountContainer>
-          </S.InvoiceItemsContainer>
-        </S.ContentContainer>
-      </S.MainContainer>
+      {!loading && invoice ? (
+        <S.MainContainer>
+          <S.GoBackContainer>
+            <Link to="/">
+              <span>
+                <S.LeftArrowIcon src={leftArrowIcon} />
+                Go Back
+              </span>
+            </Link>
+          </S.GoBackContainer>
+          <S.HeaderContainer>
+            <span>Status</span>
+            <InvoiceStatusIcon status={`${invoice.data.status}`}>
+              {invoice.data.status}
+            </InvoiceStatusIcon>
+            <S.ButtonsContainer>
+              <Button variant="secondary" onClick={() => setEditActive(true)}>
+                Edit
+              </Button>
+              <Button variant="warn" onClick={() => setShowModal(true)}>
+                Delete
+              </Button>
+              <Button onClick={updateInvoiceHandler} variant="primary">
+                Mark as Paid
+              </Button>
+            </S.ButtonsContainer>
+          </S.HeaderContainer>
+          <S.ContentContainer>
+            <S.InvoiceHeaderContainer>
+              <S.IdContainer>
+                <p>
+                  <span>#</span>
+                  {invoice.data.id}
+                </p>
+                <p>{invoice.data.description}</p>
+              </S.IdContainer>
+              <S.AddressContainer>
+                <p>{invoice.data.senderAddress.street}</p>
+                <p>{invoice.data.senderAddress.city}</p>
+                <p>{invoice.data.senderAddress.postCode}</p>
+                <p>{invoice.data.senderAddress.country}</p>
+              </S.AddressContainer>
+            </S.InvoiceHeaderContainer>
+            <S.InvoiceDetailsContainer>
+              <S.DatesContainer>
+                <S.ItemLabel>Invoice Date</S.ItemLabel>
+                <S.ItemImportant>
+                  {fromatDate(invoice.data.createdAt)}
+                </S.ItemImportant>
+                <S.ItemLabel>Payment Due</S.ItemLabel>
+                <S.ItemImportant>
+                  {fromatDate(invoice.data.paymentDue)}
+                </S.ItemImportant>
+              </S.DatesContainer>
+              <S.BillToContainer>
+                <S.ItemLabel>Bill To</S.ItemLabel>
+                <S.ItemImportant>{invoice.data.clientName}</S.ItemImportant>
+                <p>{invoice.data.clientAddress.street}</p>
+                <p>{invoice.data.clientAddress.city}</p>
+                <p>{invoice.data.clientAddress.postCode}</p>
+                <p>{invoice.data.clientAddress.country}</p>
+              </S.BillToContainer>
+              <S.SentToContainer>
+                <S.ItemLabel>Sent To</S.ItemLabel>
+                <S.ItemImportant>{invoice.data.clientEmail}</S.ItemImportant>
+              </S.SentToContainer>
+            </S.InvoiceDetailsContainer>
+            <S.InvoiceItemsContainer>
+              <S.ItemsListContainer>
+                <S.ItemContainerHeader>
+                  <span>Item Name</span>
+                  <span>QTY.</span>
+                  <span>Price</span>
+                  <span>Total</span>
+                </S.ItemContainerHeader>
+                {invoice.data.items.map((item: any) => {
+                  return (
+                    <S.ItemContainer>
+                      <span>{item.name}</span>
+                      <span>{item.quantity}</span>
+                      <span>{`£ ${addCommaSeparator(item.price)}`}</span>
+                      <span>{`£ ${addCommaSeparator(item.total)}`}</span>
+                    </S.ItemContainer>
+                  );
+                })}
+              </S.ItemsListContainer>
+              <S.TotalAmountContainer>
+                <S.ItemLabel>Amount Due</S.ItemLabel>
+                <S.TotalAmount>
+                  {`£ ${addCommaSeparator(invoice.data.total)}`}
+                </S.TotalAmount>
+              </S.TotalAmountContainer>
+            </S.InvoiceItemsContainer>
+          </S.ContentContainer>
+        </S.MainContainer>
+      ) : (
+        <div>Loading...</div>
+      )}
 
       <AnimatePresence>
         {editActive && (
           <EditInvoice
             setEditActive={setEditActive}
             variant="edit"
-            invoiceId={invoice.id}
-            providerStreetAddress={invoice.senderAddress.street}
-            providerCity={invoice.senderAddress.city}
-            providerPostalCode={invoice.senderAddress.postCode}
-            providerCountry={invoice.senderAddress.country}
-            clientsName={invoice.clientName}
-            clientsEmail={invoice.clientEmail}
-            clientsStreetAddress={invoice.clientAddress.street}
-            clientCity={invoice.clientAddress.city}
-            clientPostalCode={invoice.clientAddress.postCode}
-            clientCountry={invoice.clientAddress.country}
-            invoiceDate={invoice.createdAt}
-            paymentTerms={invoice.paymentTerms}
-            description={invoice.description}
-            invoiceItems={invoice.items}
+            invoiceId={invoice.data.id}
+            providerStreetAddress={invoice.data.senderAddress.street}
+            providerCity={invoice.data.senderAddress.city}
+            providerPostalCode={invoice.data.senderAddress.postCode}
+            providerCountry={invoice.data.senderAddress.country}
+            clientsName={invoice.data.clientName}
+            clientsEmail={invoice.data.clientEmail}
+            clientsStreetAddress={invoice.data.clientAddress.street}
+            clientCity={invoice.data.clientAddress.city}
+            clientPostalCode={invoice.data.clientAddress.postCode}
+            clientCountry={invoice.data.clientAddress.country}
+            invoiceDate={invoice.data.createdAt}
+            paymentTerms={invoice.data.paymentTerms}
+            description={invoice.data.description}
+            invoiceItems={invoice.data.items}
           />
         )}
 
