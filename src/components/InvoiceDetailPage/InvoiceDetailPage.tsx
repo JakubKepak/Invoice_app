@@ -136,6 +136,7 @@ export default function InvoiceDetailPage() {
                     <S.ItemContainer>
                       <span>{item.name}</span>
                       <span>{item.quantity}</span>
+                      <span>x</span>
                       <span>{`£ ${addCommaSeparator(item.price)}`}</span>
                       <span>{`£ ${addCommaSeparator(item.total)}`}</span>
                     </S.ItemContainer>
