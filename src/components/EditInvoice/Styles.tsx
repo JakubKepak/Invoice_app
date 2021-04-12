@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { device } from "breakpoints";
 
 export const MainContainer = styled.div`
   position: absolute;
@@ -17,6 +18,11 @@ export const InputAreaContainer = styled(motion.div)`
   background-color: white;
   border-radius: 0 15px 15px 0;
   padding: 2rem 2rem 2rem 8rem;
+
+  @media ${device.xs} {
+    width: 100%;
+    padding: 8rem 2rem 2rem 2rem;
+  }
 `;
 
 export const InputFieldContainer = styled.div`
