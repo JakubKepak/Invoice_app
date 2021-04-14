@@ -2,6 +2,9 @@ import { useState } from "react";
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
 import { device } from "breakpoints";
+import { useQuery } from "@apollo/client";
+
+import { INVOICES } from "queries/queries";
 
 import PrimaryButtonAdd from "components/UI/PrimaryButtonAdd";
 
@@ -98,65 +101,72 @@ interface Props {
   data: any;
 }
 
-export default function OverviewPage({ data }: Props) {
+export default function OverviewPage() {
   const [editActive, setEditActive] = useState<boolean>(false);
+  const { loading, error, data } = useQuery(INVOICES);
 
   return (
     <>
-      <MainContainer>
-        <HeaderContainer>
-          <PageTitleContainer>
-            <h1>Invoices</h1>
-            <span>
-              {data.length > 0 ? `${data.length} invoices` : "No Invoices"}
-            </span>
-          </PageTitleContainer>
-          <OptionItemsContainer>
-            <FilterContainer>
-              <span>Filter</span>
-              <ArrowImage src={arrowDown} />
-            </FilterContainer>
-            <PrimaryButtonAdd setEditActive={setEditActive}>
-              New
-            </PrimaryButtonAdd>
-          </OptionItemsContainer>
-        </HeaderContainer>
+      {!loading && !error && (
+        <>
+          <MainContainer>
+            <HeaderContainer>
+              <PageTitleContainer>
+                <h1>Invoices</h1>
+                <span>
+                  {data.data.length > 0
+                    ? `${data.data.length} invoices`
+                    : "No Invoices"}
+                </span>
+              </PageTitleContainer>
+              <OptionItemsContainer>
+                <FilterContainer>
+                  <span>Filter</span>
+                  <ArrowImage src={arrowDown} />
+                </FilterContainer>
+                <PrimaryButtonAdd setEditActive={setEditActive}>
+                  New
+                </PrimaryButtonAdd>
+              </OptionItemsContainer>
+            </HeaderContainer>
 
-        <ContentContainer>
-          {/* TODO: make more strict type for invoice */}
-          {data.length > 0 ? (
-            data.map((invoice: any) => {
-              return (
-                <InvoicePreview
-                  invoice={invoice}
-                  key={invoice.id}
-                  id={invoice.id}
-                  paymentDue={invoice.paymentDue}
-                  clientName={invoice.clientName}
-                  total={invoice.total}
-                  status={invoice.status}
-                />
-              );
-            })
-          ) : (
-            <EmptyContainer>
-              <EmptyImage src={illustrationEmpty} />
-              <GetStartedContainer>
-                <p>There is nothing here</p>
-                <p>Create an invoice by clicking the</p>
-                <p>
-                  <strong>New Invoice</strong> button and get started
-                </p>
-              </GetStartedContainer>
-            </EmptyContainer>
-          )}
-        </ContentContainer>
-      </MainContainer>
-      <AnimatePresence>
-        {editActive && (
-          <EditInvoice variant="new" setEditActive={setEditActive} />
-        )}
-      </AnimatePresence>
+            <ContentContainer>
+              {/* TODO: make more strict type for invoice */}
+              {data.data.length > 0 ? (
+                data.data.map((invoice: any) => {
+                  return (
+                    <InvoicePreview
+                      invoice={invoice}
+                      key={invoice.id}
+                      id={invoice.id}
+                      paymentDue={invoice.paymentDue}
+                      clientName={invoice.clientName}
+                      total={invoice.total}
+                      status={invoice.status}
+                    />
+                  );
+                })
+              ) : (
+                <EmptyContainer>
+                  <EmptyImage src={illustrationEmpty} />
+                  <GetStartedContainer>
+                    <p>There is nothing here</p>
+                    <p>Create an invoice by clicking the</p>
+                    <p>
+                      <strong>New Invoice</strong> button and get started
+                    </p>
+                  </GetStartedContainer>
+                </EmptyContainer>
+              )}
+            </ContentContainer>
+          </MainContainer>
+          <AnimatePresence>
+            {editActive && (
+              <EditInvoice variant="new" setEditActive={setEditActive} />
+            )}
+          </AnimatePresence>
+        </>
+      )}
     </>
   );
 }

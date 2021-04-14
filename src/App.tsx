@@ -12,6 +12,7 @@ import { LightTheme, DarkTheme } from "./themes";
 import Menu from "./components/Menu";
 import OverviewPage from "./components/OverviewPage";
 import InvoiceDetailPage from "./components/InvoiceDetailPage/InvoiceDetailPage";
+import LoginPage from "components/Login/LoginPage";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -24,6 +25,7 @@ const GlobalStyle = createGlobalStyle`
 
     /* misc */
     --borderRadius: 5px;
+    --boxShadow: 1px 1px 5px 1px rgba(0,0,0,0.1)
   }
 
   *,
@@ -87,7 +89,7 @@ const ContentContainer = styled.div`
 `;
 
 function App() {
-  const { loading, error, data } = useQuery(INVOICES);
+  // const { loading, error, data } = useQuery(INVOICES);
 
   return (
     <Router>
@@ -95,18 +97,15 @@ function App() {
         <GlobalStyle />
         <Menu />
         <ContentContainer>
-          {loading && <div>Loading...</div>}
+          {/* {loading && <div>Loading...</div>}
           {error && <div>Oh man, something went wrong</div>}
-          {!loading && !error && (
-            <Switch>
-              <Route
-                exact
-                path="/"
-                render={() => <OverviewPage data={data.data} />}
-              />
-              <Route exact path="/:id" render={() => <InvoiceDetailPage />} />
-            </Switch>
-          )}
+          {!loading && !error && ( */}
+          <Switch>
+            <Route exact path="/login" render={() => <LoginPage />} />
+            <Route exact path="/" render={() => <OverviewPage />} />
+            <Route exact path="/:id" render={() => <InvoiceDetailPage />} />
+          </Switch>
+          {/* )} */}
         </ContentContainer>
       </ThemeProvider>
     </Router>

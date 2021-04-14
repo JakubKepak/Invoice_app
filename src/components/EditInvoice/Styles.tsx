@@ -139,6 +139,10 @@ export const InvoiceItemContainer = styled.div`
   display: grid;
   grid-template-columns: 45% 2fr 5fr 5fr 1fr;
   grid-gap: 0.8rem;
+
+  @media ${device.xs} {
+    grid-template-columns: 45% 2fr 5fr 5fr 1fr;
+  }
 `;
 
 export const InvoiceItemLabel = styled.span`
