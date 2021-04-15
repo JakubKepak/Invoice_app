@@ -10,7 +10,7 @@ import { LightTheme, DarkTheme } from "./themes";
 
 // components
 import Menu from "./components/Menu";
-import OverviewPage from "./components/OverviewPage";
+import OverviewPage from "./components/OverviewPage/OverviewPage";
 import InvoiceDetailPage from "./components/InvoiceDetailPage/InvoiceDetailPage";
 import LoginPage from "components/Login/LoginPage";
 

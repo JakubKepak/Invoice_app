@@ -60,14 +60,26 @@ const MainContainer = styled.button<{ variant?: string }>`
 
 interface Props {
   variant: "primary" | "secondary" | "warn" | "dark";
+  disabled?: boolean;
   children?: any;
   onClick?: any;
   type?: any;
 }
 
-export default function Button({ variant, children, onClick, type }: Props) {
+export default function Button({
+  disabled,
+  variant,
+  children,
+  onClick,
+  type,
+}: Props) {
   return (
-    <MainContainer type={type} onClick={onClick} variant={variant}>
+    <MainContainer
+      type={type}
+      onClick={onClick}
+      variant={variant}
+      disabled={disabled}
+    >
       {children}
     </MainContainer>
   );

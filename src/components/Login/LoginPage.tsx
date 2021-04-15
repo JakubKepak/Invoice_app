@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Formik, Form } from "formik";
 import { useMutation } from "@apollo/client";
+import { useHistory } from "react-router-dom";
 
 import { CustomTextField } from "components/UI/CustomInputFields";
 import Button from "components/UI/Button";
@@ -35,8 +36,18 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
+const ErrorMessageContainer = styled.div`
+  font-size: var(--fontSizeSmall);
+  color: ${({ theme }) => theme.colors.warnButton};
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+`;
+
 export default function LoginPage() {
-  const [loginUser, { data }] = useMutation(LOGIN);
+  const [loginUser, { data, loading, error }] = useMutation(LOGIN);
+
+  const history = useHistory();
 
   return (
     <Modal>
@@ -47,10 +58,16 @@ export default function LoginPage() {
               username: "",
               password: "",
             }}
-            onSubmit={async (values, actions) => {
-              await loginUser({ variables: { input: values } });
-
-              console.log(data);
+            onSubmit={(values, actions) => {
+              (async () => {
+                try {
+                  const token = await loginUser({
+                    variables: { input: values },
+                  });
+                  localStorage.setItem("token", token.data?.loginUser?.token);
+                  history.push("/");
+                } catch (err) {}
+              })();
 
               actions.setSubmitting(false);
             }}
@@ -61,7 +78,7 @@ export default function LoginPage() {
                   id="username"
                   name="username"
                   type="text"
-                  label="Username"
+                  label="username"
                   value={props.values.username}
                 />
                 <CustomTextField
@@ -72,13 +89,16 @@ export default function LoginPage() {
                   value={props.values.password}
                 />
                 <ButtonContainer>
-                  <Button type="submit" variant="primary">
-                    Login
+                  <Button type="submit" variant="primary" disabled={loading}>
+                    {loading ? <span>Logging in ...</span> : <span>Login</span>}
                   </Button>
                 </ButtonContainer>
               </Form>
             )}
           </Formik>
+          {error && (
+            <ErrorMessageContainer>{error.message}</ErrorMessageContainer>
+          )}
         </ModalContainer>
       </MainContainer>
     </Modal>
