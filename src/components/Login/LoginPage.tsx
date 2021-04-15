@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { Formik, Form } from "formik";
+import { useMutation } from "@apollo/client";
 
 import { CustomTextField } from "components/UI/CustomInputFields";
+import Button from "components/UI/Button";
+import { LOGIN } from "queries/queries";
 
 import Modal from "components/Modal";
 
@@ -26,7 +29,15 @@ const ModalContainer = styled.div`
   box-shadow: var(--boxShadow);
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`;
+
 export default function LoginPage() {
+  const [loginUser, { data }] = useMutation(LOGIN);
+
   return (
     <Modal>
       <MainContainer>
@@ -36,8 +47,11 @@ export default function LoginPage() {
               username: "",
               password: "",
             }}
-            onSubmit={(values, actions) => {
-              console.log(values);
+            onSubmit={async (values, actions) => {
+              await loginUser({ variables: { input: values } });
+
+              console.log(data);
+
               actions.setSubmitting(false);
             }}
           >
@@ -57,6 +71,11 @@ export default function LoginPage() {
                   label="password"
                   value={props.values.password}
                 />
+                <ButtonContainer>
+                  <Button type="submit" variant="primary">
+                    Login
+                  </Button>
+                </ButtonContainer>
               </Form>
             )}
           </Formik>

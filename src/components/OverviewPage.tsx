@@ -107,6 +107,7 @@ export default function OverviewPage() {
 
   return (
     <>
+      {loading ? <div>Loading...</div> : null}
       {!loading && !error && (
         <>
           <MainContainer>

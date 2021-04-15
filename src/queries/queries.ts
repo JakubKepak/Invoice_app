@@ -145,3 +145,11 @@ export const UPDATE_INVOICE = gql`
     }
   }
 `;
+
+export const LOGIN = gql`
+  mutation Login($input: LoginInput) {
+    loginUser(input: $input) {
+      token
+    }
+  }
+`;
