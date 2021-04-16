@@ -96,11 +96,9 @@ function App() {
     savedTheme === "lightTheme"
       ? setSavedTheme("darkTheme")
       : setSavedTheme("lightTheme");
-    console.log("theme toggled");
   };
 
   useEffect(() => {
-    console.log(savedTheme);
     if (savedTheme === "lightTheme") setTheme(LightTheme);
     if (savedTheme === "darkTheme") setTheme(DarkTheme);
   }, [savedTheme]);
