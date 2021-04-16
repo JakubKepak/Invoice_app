@@ -5,7 +5,7 @@ export const LightTheme: DefaultTheme = {
 
   colors: {
     mainBackground: "#F2F2F2",
-    menuBackground: "#373B53",
+    menuBackground: "#1E2139",
     invoiceItemBackground: "#fff",
     backgroundColorLight: "#F9FAFE",
     borderColorLight: "#DFE3FA",
@@ -33,16 +33,16 @@ export const DarkTheme: DefaultTheme = {
   borderRadius: "5px",
 
   colors: {
-    mainBackground: "#F2F2F2",
-    menuBackground: "#373B53",
-    invoiceItemBackground: "#fff",
+    mainBackground: "#0C0E16",
+    menuBackground: "#1E2139",
+    invoiceItemBackground: "#1E2139",
     backgroundColorLight: "#979797",
     borderColorLight: "#DFE3FA",
     mainFontColor: "#FFFFFF",
     textColorLight: "#DFE3FA",
     textColorLight2: "#888EB0",
     statusPaid: "#33D69F",
-    statusPaidBackground: "rgba(51, 214, 159, 1)",
+    statusPaidBackground: "rgba(51, 214, 159, 0.1)",
     statusPending: "#FF8F00",
     statusPendingBackground: "rgba(255, 143, 0, 0.1)",
     statusDraft: "#373B53",

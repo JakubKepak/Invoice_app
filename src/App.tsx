@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { device } from "breakpoints";
 import { DefaultTheme } from "styled-components";
+import useLocalStorage from "hooks/useLocalStorage";
 
 import { LightTheme, DarkTheme } from "./themes";
 
@@ -89,11 +90,20 @@ const ContentContainer = styled.div`
 
 function App() {
   const [theme, setTheme] = useState<DefaultTheme>(LightTheme);
+  const [savedTheme, setSavedTheme] = useLocalStorage("theme", "lightTheme");
 
   const themeToggle = () => {
-    theme === LightTheme ? setTheme(DarkTheme) : setTheme(LightTheme);
+    savedTheme === "lightTheme"
+      ? setSavedTheme("darkTheme")
+      : setSavedTheme("lightTheme");
     console.log("theme toggled");
   };
+
+  useEffect(() => {
+    console.log(savedTheme);
+    if (savedTheme === "lightTheme") setTheme(LightTheme);
+    if (savedTheme === "darkTheme") setTheme(DarkTheme);
+  }, [savedTheme]);
 
   return (
     <Router>

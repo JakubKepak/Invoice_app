@@ -1,3 +1,5 @@
+// not yet used in the code
+
 type Action =
   | { type: "loading" }
   | { type: "error"; payload: any }
