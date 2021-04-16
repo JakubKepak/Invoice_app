@@ -52,9 +52,12 @@ const SignUpCTAContainer = styled.div`
   align-items: center;
   margin-top: 1rem;
   font-size: var(--fontSizeXS);
+  color: ${({ theme }) => theme.colors.textColorLight};
 
   span {
     font-weight: 700;
+    margin-left: 0.2rem;
+    color: ${({ theme }) => theme.colors.darkPurple};
   }
 `;
 
@@ -86,15 +89,21 @@ export default function LoginPage({ variant }: Props) {
             }}
             validationSchema={variant === "SIGNUP" ? SignupSchema : LoginSchema}
             onSubmit={(values, actions) => {
-              (async () => {
-                try {
-                  const token = await loginUser({
-                    variables: { input: values },
-                  });
-                  localStorage.setItem("token", token.data?.loginUser?.token);
-                  history.push("/");
-                } catch (err) {}
-              })();
+              if (variant === "LOGIN") {
+                (async () => {
+                  try {
+                    const token = await loginUser({
+                      variables: { input: values },
+                    });
+                    localStorage.setItem("token", token.data?.loginUser?.token);
+                    history.push("/");
+                  } catch (err) {}
+                })();
+              }
+
+              if (variant === "SIGNUP") {
+                console.log("sign up");
+              }
 
               actions.setSubmitting(false);
             }}
@@ -125,9 +134,24 @@ export default function LoginPage({ variant }: Props) {
                   />
                 )}
                 <ButtonContainer>
-                  <Button type="submit" variant="primary" disabled={loading}>
-                    {loading ? <span>Logging in ...</span> : <span>Login</span>}
-                  </Button>
+                  {variant === "SIGNUP" && (
+                    <Button type="submit" variant="primary" disabled={loading}>
+                      {loading ? (
+                        <span>Signing up ...</span>
+                      ) : (
+                        <span>Sign up</span>
+                      )}
+                    </Button>
+                  )}
+                  {variant === "LOGIN" && (
+                    <Button type="submit" variant="primary" disabled={loading}>
+                      {loading ? (
+                        <span>Logging in ...</span>
+                      ) : (
+                        <span>Login</span>
+                      )}
+                    </Button>
+                  )}
                 </ButtonContainer>
               </Form>
             )}
@@ -137,6 +161,14 @@ export default function LoginPage({ variant }: Props) {
               Don't have an account?
               <Link to="/signup">
                 <span>Sign up.</span>
+              </Link>
+            </SignUpCTAContainer>
+          )}
+          {variant === "SIGNUP" && (
+            <SignUpCTAContainer>
+              Already have an account?
+              <Link to="/login">
+                <span>Log in.</span>
               </Link>
             </SignUpCTAContainer>
           )}
