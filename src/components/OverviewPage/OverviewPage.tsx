@@ -15,10 +15,6 @@ import illustrationEmpty from "assets/illustration-empty.svg";
 import InvoicePreview from "components/InvoicePreview/InvoicePreview";
 import EditInvoice from "components/EditInvoice/EditInvoice";
 
-// interface Props {
-//   data: any;
-// }
-
 export default function OverviewPage() {
   const [editActive, setEditActive] = useState<boolean>(false);
   const { loading, error, data } = useQuery(INVOICES);

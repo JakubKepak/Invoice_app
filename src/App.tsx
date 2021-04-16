@@ -1,10 +1,8 @@
-import React from "react";
+import { useState } from "react";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { device } from "breakpoints";
-import { useQuery } from "@apollo/client";
-
-import { INVOICES } from "./queries/queries";
+import { DefaultTheme } from "styled-components";
 
 import { LightTheme, DarkTheme } from "./themes";
 
@@ -90,17 +88,19 @@ const ContentContainer = styled.div`
 `;
 
 function App() {
-  // const { loading, error, data } = useQuery(INVOICES);
+  const [theme, setTheme] = useState<DefaultTheme>(LightTheme);
+
+  const themeToggle = () => {
+    theme === LightTheme ? setTheme(DarkTheme) : setTheme(LightTheme);
+    console.log("theme toggled");
+  };
 
   return (
     <Router>
-      <ThemeProvider theme={LightTheme}>
+      <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Menu />
+        <Menu themeToggle={themeToggle} />
         <ContentContainer>
-          {/* {loading && <div>Loading...</div>}
-          {error && <div>Oh man, something went wrong</div>}
-          {!loading && !error && ( */}
           <Switch>
             <Route
               exact
@@ -115,7 +115,6 @@ function App() {
             <Route exact path="/" render={() => <OverviewPage />} />
             <Route exact path="/:id" render={() => <InvoiceDetailPage />} />
           </Switch>
-          {/* )} */}
         </ContentContainer>
       </ThemeProvider>
     </Router>

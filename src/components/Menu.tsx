@@ -80,7 +80,7 @@ const ProfileIcon = styled.img`
   }
 `;
 
-export default function Menu() {
+export default function Menu({ themeToggle }: any) {
   return (
     <MainContainer>
       <LogoContainer>
@@ -88,7 +88,7 @@ export default function Menu() {
         <LogoContainerShadow />
       </LogoContainer>
       <MenuSettingContainer>
-        <ThemeIcon src={themeIconLight} />
+        <ThemeIcon src={themeIconLight} onClick={themeToggle} />
         <ProfileIcon src={profilePicture} />
       </MenuSettingContainer>
     </MainContainer>
