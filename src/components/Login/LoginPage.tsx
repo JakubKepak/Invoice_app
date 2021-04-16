@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Formik, Form } from "formik";
 import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import * as Yup from "yup";
 
 import { CustomTextField } from "components/UI/CustomInputFields";
 import Button from "components/UI/Button";
@@ -44,7 +46,31 @@ const ErrorMessageContainer = styled.div`
   justify-content: center;
 `;
 
-export default function LoginPage() {
+const SignUpCTAContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  font-size: var(--fontSizeXS);
+
+  span {
+    font-weight: 700;
+  }
+`;
+
+const SignupSchema = Yup.object().shape({
+  username: Yup.string().required("required"),
+});
+
+const LoginSchema = Yup.object().shape({
+  username: Yup.string().required("login required"),
+});
+
+interface Props {
+  variant: "LOGIN" | "SIGNUP";
+}
+
+export default function LoginPage({ variant }: Props) {
   const [loginUser, { data, loading, error }] = useMutation(LOGIN);
 
   const history = useHistory();
@@ -58,6 +84,7 @@ export default function LoginPage() {
               username: "",
               password: "",
             }}
+            validationSchema={variant === "SIGNUP" ? SignupSchema : LoginSchema}
             onSubmit={(values, actions) => {
               (async () => {
                 try {
@@ -88,6 +115,15 @@ export default function LoginPage() {
                   label="password"
                   value={props.values.password}
                 />
+                {variant === "SIGNUP" && (
+                  <CustomTextField
+                    id="passwordConfirm"
+                    name="passwordConfirm"
+                    type="password"
+                    label="confirm password"
+                    value={props.values.password}
+                  />
+                )}
                 <ButtonContainer>
                   <Button type="submit" variant="primary" disabled={loading}>
                     {loading ? <span>Logging in ...</span> : <span>Login</span>}
@@ -96,6 +132,14 @@ export default function LoginPage() {
               </Form>
             )}
           </Formik>
+          {variant === "LOGIN" && (
+            <SignUpCTAContainer>
+              Don't have an account?
+              <Link to="/signup">
+                <span>Sign up.</span>
+              </Link>
+            </SignUpCTAContainer>
+          )}
           {error && (
             <ErrorMessageContainer>{error.message}</ErrorMessageContainer>
           )}

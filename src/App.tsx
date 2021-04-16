@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     /* font sizes */
+    --fontSizeXS: .6rem;
     --fontSizeSmall: .8rem;
     --fontSizeMedium: 1rem;
     --fontSizeLarge: 1.2rem;
@@ -101,7 +102,16 @@ function App() {
           {error && <div>Oh man, something went wrong</div>}
           {!loading && !error && ( */}
           <Switch>
-            <Route exact path="/login" render={() => <LoginPage />} />
+            <Route
+              exact
+              path="/login"
+              render={() => <LoginPage variant="LOGIN" />}
+            />
+            <Route
+              exact
+              path="/signup"
+              render={() => <LoginPage variant="SIGNUP" />}
+            />
             <Route exact path="/" render={() => <OverviewPage />} />
             <Route exact path="/:id" render={() => <InvoiceDetailPage />} />
           </Switch>
