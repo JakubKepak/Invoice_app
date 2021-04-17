@@ -15,9 +15,9 @@ export const MainContainer = styled.div`
 export const InputAreaContainer = styled(motion.div)`
   width: 50%;
   min-height: 100%;
-  background-color: white;
   border-radius: 0 15px 15px 0;
   padding: 2rem 2rem 2rem 8rem;
+  background-color: ${({ theme }) => theme.colors.editFormBackground};
 
   @media ${device.xs} {
     width: 100%;
@@ -38,6 +38,7 @@ export const InputField = styled.input<{ error?: boolean }>`
   margin-bottom: 0.5rem;
   font-family: inherit;
   color: ${({ theme }) => theme.colors.mainFontColor};
+  background-color: ${({ theme }) => theme.colors.inputFieldBackground};
   font-weight: 700;
   font-size: var(--fontSizeSmall);
 
@@ -62,6 +63,7 @@ export const DropdownField = styled.select<{ error?: boolean }>`
   margin-bottom: 0.5rem;
   font-family: inherit;
   color: ${({ theme }) => theme.colors.mainFontColor};
+  background-color: ${({ theme }) => theme.colors.inputFieldBackground};
   font-weight: 700;
   font-size: var(--fontSizeSmall);
 
@@ -177,6 +179,7 @@ export const AddNewInvoiceItemButton = styled.button`
   border-radius: 30px;
   margin: 0.5rem 0;
   background: ${({ theme }) => theme.colors.secondaryButtonBackground};
+  color: ${({ theme }) => theme.colors.textColorLight};
 
   &:hover {
     cursor: pointer;
