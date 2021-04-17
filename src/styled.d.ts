@@ -8,6 +8,8 @@ declare module "styled-components" {
     colors: {
       mainBackground: string;
       menuBackground: string;
+      invoiceDetailBackground: string;
+      invoiceTotalBackground: string;
       invoiceItemBackground: string;
       backgroundColorLight: string;
       borderColorLight: string;

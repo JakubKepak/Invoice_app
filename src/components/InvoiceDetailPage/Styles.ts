@@ -14,6 +14,10 @@ export const GoBackContainer = styled.div`
   margin-bottom: 2rem;
   font-weight: 700;
   font-size: var(--fontSizeSmall);
+
+  span {
+    color: ${({ theme }) => theme.colors.mainFontColor};
+  }
 `;
 
 export const LeftArrowIcon = styled.img`
@@ -24,7 +28,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.invoiceItemBackground};
+  background-color: ${({ theme }) => theme.colors.invoiceDetailBackground};
   padding: 1rem;
   border-radius: ${({ theme }) => theme.borderRadius};
 
@@ -58,7 +62,7 @@ export const ButtonsContainer = styled.div`
 export const ContentContainer = styled.div`
   margin-top: 2rem;
   border-radius: ${({ theme }) => theme.borderRadius};
-  background-color: ${({ theme }) => theme.colors.invoiceItemBackground};
+  background-color: ${({ theme }) => theme.colors.invoiceDetailBackground};
   padding: 2rem;
   display: grid;
   grid-gap: 2rem;
@@ -141,7 +145,7 @@ export const ItemImportant = styled.p`
 `;
 
 export const InvoiceItemsContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.backgroundColorLight};
+  background-color: ${({ theme }) => theme.colors.invoiceItemBackground};
   border-radius: var(--borderRadius);
 `;
 
@@ -173,6 +177,7 @@ export const ItemContainerHeader = styled.div`
 export const ItemContainer = styled.div`
   display: grid;
   grid-template-columns: 55% 15% 15% 15%;
+  color: ${({ theme }) => theme.colors.mainFontColor};
 
   @media ${device.xs} {
     grid-template-columns: 5% 5% 35% 50%;
@@ -238,7 +243,7 @@ export const TotalAmountContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.menuBackground};
+  background-color: ${({ theme }) => theme.colors.invoiceTotalBackground};
   border-radius: 0 0 5px 5px;
   /* grid-area: total; */
 `;
@@ -246,5 +251,5 @@ export const TotalAmountContainer = styled.div`
 export const TotalAmount = styled.span`
   font-size: var(--fontSizeXXL);
   font-weight: 700;
-  color: ${({ theme }) => theme.colors.invoiceItemBackground};
+  color: #fff;
 `;

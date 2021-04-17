@@ -6,7 +6,9 @@ export const LightTheme: DefaultTheme = {
   colors: {
     mainBackground: "#F2F2F2",
     menuBackground: "#1E2139",
-    invoiceItemBackground: "#fff",
+    invoiceDetailBackground: "#fff",
+    invoiceTotalBackground: "#0C0E16",
+    invoiceItemBackground: "#F9FAFE",
     backgroundColorLight: "#F9FAFE",
     borderColorLight: "#DFE3FA",
     mainFontColor: "#0C0E16",
@@ -35,7 +37,9 @@ export const DarkTheme: DefaultTheme = {
   colors: {
     mainBackground: "#0C0E16",
     menuBackground: "#1E2139",
-    invoiceItemBackground: "#1E2139",
+    invoiceDetailBackground: "#1E2139",
+    invoiceTotalBackground: "#0C0E16",
+    invoiceItemBackground: "#252945",
     backgroundColorLight: "#979797",
     borderColorLight: "#DFE3FA",
     mainFontColor: "#FFFFFF",
