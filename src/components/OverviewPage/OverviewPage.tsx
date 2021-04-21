@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useLazyQuery } from "@apollo/client";
+import useFetch from "hooks/useFetch";
 import { Redirect } from "react-router-dom";
 import * as S from "./Styles";
 
@@ -17,19 +18,10 @@ import EditInvoice from "components/EditInvoice/EditInvoice";
 
 export default function OverviewPage() {
   const [editActive, setEditActive] = useState<boolean>(false);
-  const [fetchInvoices, { data, error, loading, called }] = useLazyQuery(
-    INVOICES
-  );
-
-  useEffect(() => {
-    fetchInvoices();
-  }, [fetchInvoices]);
+  const { data, error, loading } = useFetch(INVOICES);
 
   return (
     <>
-      {called && error?.message === "not authenticated" && (
-        <Redirect to="/login" />
-      )}
       {error && <div>{error.message}</div>}
       {loading && <div>Loading...</div>}
       {!loading && !error && data && (
