@@ -11,15 +11,21 @@
 
 ## Want to run the project locally?
 
-Clone the repo   
+- Clone the repo   
 ```
 git clone https://github.com/JakubKepak/Invoice_app.git invoice-app
 ```
-go to the invoice-app folder   
+- go to the invoice-app folder   
 ```
 cd invoice-app   
 ```
-run the development mode   
+- In order to run it loccaly, you need to create a .env file in the root folder (invoice-app) and add:
+```
+REACT_APP_BACKEND_URL=http://localhost:5000/
+```
+- Before you run this app localy, you also have to run locally the backend of this app which is in [this](https://github.com/JakubKepak/Invoice_app_backend) repo.
+
+- run the development mode   
 ```
 npm start
 ```
