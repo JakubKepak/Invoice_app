@@ -108,7 +108,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Menu themeToggle={themeToggle} />
-        <ContentContainer>
+        <ContentContainer data-test="component-app">
           <Switch>
             <Route
               exact

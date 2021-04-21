@@ -2,8 +2,7 @@ import { createHttpLink, ApolloClient, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
 const httpLink = createHttpLink({
-  uri: "https://invoiceappbackend.herokuapp.com/",
-  // uri: "http://localhost:5000/",
+  uri: process.env.REACT_APP_BACKEND_URL,
 });
 
 const authLink = setContext((_, { headers }) => {
