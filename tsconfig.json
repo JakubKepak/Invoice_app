@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    // set baseUrl in order to use absolute imports
     "baseUrl": "src",
     "target": "es5",
     "lib": [

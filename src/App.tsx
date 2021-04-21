@@ -8,7 +8,7 @@ import useLocalStorage from "hooks/useLocalStorage";
 import { LightTheme, DarkTheme } from "./themes";
 
 // components
-import Menu from "./components/Menu";
+import Menu from "./components/Menu/Menu";
 import OverviewPage from "./components/OverviewPage/OverviewPage";
 import InvoiceDetailPage from "./components/InvoiceDetailPage/InvoiceDetailPage";
 import LoginPage from "components/Login/LoginPage";

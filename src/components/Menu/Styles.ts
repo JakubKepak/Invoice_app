@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-import logo from "../assets/logo.svg";
-import themeIconLight from "../assets/icon-sun.svg";
-import profilePicture from "../assets/image-avatar.jpg";
-
-const MainContainer = styled.div`
+export const MainContainer = styled.div`
   height: 100%;
   min-height: 100vh;
   width: 100px;
@@ -27,7 +23,7 @@ const MainContainer = styled.div`
   }
 `;
 
-const LogoContainer = styled.div`
+export const LogoContainer = styled.div`
   position: relative;
   width: 100px;
   height: 100px;
@@ -39,7 +35,7 @@ const LogoContainer = styled.div`
   align-items: center;
 `;
 
-const LogoContainerShadow = styled.div`
+export const LogoContainerShadow = styled.div`
   position: absolute;
   bottom: 0;
   border-radius: 15px 0 15px 0;
@@ -48,12 +44,12 @@ const LogoContainerShadow = styled.div`
   background-color: ${({ theme }) => theme.colors.lightPurple};
 `;
 
-const Logo = styled.img`
+export const Logo = styled.img`
   width: 50px;
   z-index: 1000;
 `;
 
-const MenuSettingContainer = styled.div`
+export const MenuSettingContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -64,12 +60,12 @@ const MenuSettingContainer = styled.div`
   }
 `;
 
-const ThemeIcon = styled.img`
+export const ThemeIcon = styled.img`
   width: 30px;
   height: 30px;
 `;
 
-const ProfileIcon = styled.img`
+export const ProfileIcon = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -79,18 +75,3 @@ const ProfileIcon = styled.img`
     margin: 0 2rem 0 2rem;
   }
 `;
-
-export default function Menu({ themeToggle }: any) {
-  return (
-    <MainContainer>
-      <LogoContainer>
-        <Logo src={logo} alt="logo" />
-        <LogoContainerShadow />
-      </LogoContainer>
-      <MenuSettingContainer>
-        <ThemeIcon src={themeIconLight} onClick={themeToggle} />
-        <ProfileIcon src={profilePicture} />
-      </MenuSettingContainer>
-    </MainContainer>
-  );
-}
