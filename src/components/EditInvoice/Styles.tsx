@@ -19,7 +19,7 @@ export const InputAreaContainer = styled(motion.div)`
   padding: 2rem 2rem 2rem 8rem;
   background-color: ${({ theme }) => theme.colors.editFormBackground};
 
-  @media ${device.xs} {
+  @media ${device.sm} {
     width: 100%;
     padding: 8rem 2rem 2rem 2rem;
   }
