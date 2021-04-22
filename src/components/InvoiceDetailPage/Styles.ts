@@ -4,7 +4,7 @@ import { device } from "breakpoints";
 export const MainContainer = styled.div`
   width: 70%;
 
-  @media ${device.xs} {
+  @media ${device.sm} {
     width: 95%;
     margin: 5rem 0;
   }

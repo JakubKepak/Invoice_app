@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "breakpoints";
 
 export const MainContainer = styled.div`
   height: 100%;
@@ -13,7 +14,7 @@ export const MainContainer = styled.div`
   z-index: 1000;
   position: fixed;
 
-  @media (max-width: 600px) {
+  @media ${device.sm} {
     height: 100px;
     min-width: 100vw;
     width: 100%;
@@ -55,7 +56,7 @@ export const MenuSettingContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 600px) {
+  @media ${device.sm} {
     flex-direction: row;
   }
 `;
@@ -71,7 +72,7 @@ export const ProfileIcon = styled.img`
   border-radius: 50%;
   margin: 2rem 0 2rem 0;
 
-  @media (max-width: 600px) {
+  @media ${device.sm} {
     margin: 0 2rem 0 2rem;
   }
 `;

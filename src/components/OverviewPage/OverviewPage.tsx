@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { useLazyQuery } from "@apollo/client";
 import useFetch from "hooks/useFetch";
-import { Redirect } from "react-router-dom";
 import * as S from "./Styles";
 
 import { INVOICES } from "queries/queries";

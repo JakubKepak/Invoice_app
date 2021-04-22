@@ -4,8 +4,11 @@ import { device } from "breakpoints";
 export const MainContainer = styled.div`
   width: 70%;
 
-  @media ${device.xs} {
+  @media ${device.sm} {
     width: 95%;
+  }
+
+  @media ${device.sm} {
     margin-top: 5rem;
   }
 `;
