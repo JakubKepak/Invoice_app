@@ -51,8 +51,6 @@ export default function InvoiceDetailPage() {
     });
   };
 
-  console.log(invoice);
-
   return (
     <>
       {error && <div>{error.message}</div>}

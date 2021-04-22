@@ -74,7 +74,7 @@ interface Props {
 }
 
 export default function LoginPage({ variant }: Props) {
-  const [loginUser, { data, loading, error }] = useMutation(LOGIN);
+  const [loginUser, { loading, error }] = useMutation(LOGIN);
 
   const history = useHistory();
 

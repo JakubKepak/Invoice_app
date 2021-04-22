@@ -19,7 +19,7 @@ export default function useFetch(query: any, variables = {}) {
     if (error?.message === "not authenticated") {
       history.push("/login");
     }
-  }, [error]);
+  }, [error, history]);
 
   return { data, error, loading, called };
 }
