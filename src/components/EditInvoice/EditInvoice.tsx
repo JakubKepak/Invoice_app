@@ -136,6 +136,13 @@ export default function EditInvoice({
               }
             );
 
+            const calculateDueDate = (date: string, paymentTerms: number) => {
+              let invoiceDate = new Date(date);
+              invoiceDate.setDate(invoiceDate.getDate() + Number(paymentTerms));
+
+              return invoiceDate.toLocaleDateString("en-CA");
+            };
+
             // set variables for mutations
             const payload = {
               invoice: {
@@ -144,7 +151,10 @@ export default function EditInvoice({
                     ? invoiceId
                     : `TEST-${Math.floor(Math.random() * 10000)}`,
                 createdAt: values.invoiceDate,
-                // paymentDue:
+                paymentDue: calculateDueDate(
+                  values.invoiceDate,
+                  values.paymentTerms
+                ),
                 paymentTerms: Number(values.paymentTerms),
                 clientName: values.clientsName,
                 clientEmail: values.clientsEmail,
