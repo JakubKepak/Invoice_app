@@ -136,11 +136,11 @@ export default function EditInvoice({
               }
             );
 
-            const calculateDueDate = (date: string, paymentTerms: number) => {
-              let invoiceDate = new Date(date);
-              invoiceDate.setDate(invoiceDate.getDate() + Number(paymentTerms));
+            const calculateDueDate = (date: string, daysToAdd: number) => {
+              let actualDate = new Date(date);
+              actualDate.setDate(actualDate.getDate() + Number(daysToAdd));
 
-              return invoiceDate.toLocaleDateString("en-CA");
+              return actualDate.toLocaleDateString("en-CA");
             };
 
             // set variables for mutations
