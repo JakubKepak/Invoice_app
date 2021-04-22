@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Formik, Form, FieldArray } from "formik";
 import * as Yup from "yup";
 import { addCommaSeparator } from "../../helpers/helpers";
@@ -93,6 +93,20 @@ export default function EditInvoice({
     },
   });
   const [editInvoice] = useMutation(UPDATE_INVOICE);
+
+  const closeOnEscape = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      setEditActive(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", (e) => closeOnEscape(e));
+
+    return () => {
+      window.removeEventListener("keydown", (e) => closeOnEscape(e));
+    };
+  });
 
   return (
     <S.MainContainer onClick={() => setEditActive(false)}>

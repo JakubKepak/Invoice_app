@@ -14,6 +14,7 @@ export const MainContainer = styled.div`
 
 export const InputAreaContainer = styled(motion.div)`
   width: 50%;
+  min-width: 700px;
   min-height: 100%;
   border-radius: 0 15px 15px 0;
   padding: 2rem 2rem 2rem 8rem;
@@ -22,6 +23,7 @@ export const InputAreaContainer = styled(motion.div)`
   @media ${device.sm} {
     width: 100%;
     padding: 8rem 2rem 2rem 2rem;
+    min-width: 0;
   }
 `;
 

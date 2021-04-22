@@ -20,7 +20,7 @@ import Button from "../UI/Button";
 import Modal from "../Modal";
 import DeleteModal from "../UI/DeleteModal";
 
-import leftArrowIcon from "../../assets/icon-arrow-left.svg";
+import leftArrowIcon from "assets/icon-arrow-left.svg";
 
 export default function InvoiceDetailPage() {
   const { id } = useParams<any>();
@@ -129,9 +129,9 @@ export default function InvoiceDetailPage() {
                   <span>Price</span>
                   <span>Total</span>
                 </S.ItemContainerHeader>
-                {invoice.data.items.map((item: any) => {
+                {invoice.data.items.map((item: any, index: number) => {
                   return (
-                    <S.ItemContainer>
+                    <S.ItemContainer key={index}>
                       <span>{item.name}</span>
                       <span>{item.quantity}</span>
                       <span>x</span>
