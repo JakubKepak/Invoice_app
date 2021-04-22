@@ -3,9 +3,11 @@ import logo from "assets/logo.svg";
 import themeIconLight from "assets/icon-sun.svg";
 import profilePicture from "assets/image-avatar.jpg";
 import * as S from "./Styles";
+import useLogout from "hooks/useLogout";
 
 export default function Menu({ themeToggle }: any) {
   const [userOptionActive, setUserOptionActive] = useState<boolean>(false);
+  const { logout } = useLogout();
 
   const toggleUserOptionModal = () => {
     setUserOptionActive(!userOptionActive);
@@ -20,7 +22,7 @@ export default function Menu({ themeToggle }: any) {
       <S.MenuSettingContainer>
         {userOptionActive && (
           <S.UserOptionContainer>
-            <S.UserOptionItem>Logout</S.UserOptionItem>
+            <S.UserOptionItem onClick={logout}>Logout</S.UserOptionItem>
           </S.UserOptionContainer>
         )}
         <S.ThemeIcon src={themeIconLight} onClick={themeToggle} />
