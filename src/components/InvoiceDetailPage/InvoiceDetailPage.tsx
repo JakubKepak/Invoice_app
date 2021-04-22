@@ -8,7 +8,8 @@ import {
   UPDATE_INVOICE,
   INVOICES,
 } from "../../queries/queries";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+import useFetch from "hooks/useFetch";
 
 import { fromatDate, addCommaSeparator } from "../../helpers/helpers";
 
@@ -28,9 +29,7 @@ export default function InvoiceDetailPage() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [deleteInvoice] = useMutation(REMOVE_INVOICE);
   const [updateInvoice] = useMutation(UPDATE_INVOICE);
-  const { data: invoice, error, loading } = useQuery(GET_INVOICE, {
-    variables: { id: id },
-  });
+  const { data: invoice, error, loading } = useFetch(GET_INVOICE, { id: id });
 
   const history = useHistory();
 
@@ -56,6 +55,7 @@ export default function InvoiceDetailPage() {
 
   return (
     <>
+      {error && <div>{error.message}</div>}
       {!loading && invoice ? (
         <S.MainContainer>
           <S.GoBackContainer>

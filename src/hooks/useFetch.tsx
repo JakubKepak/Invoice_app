@@ -2,8 +2,13 @@ import { useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 
-export default function useFetch(query: any) {
-  const [queryFunction, { data, error, loading, called }] = useLazyQuery(query);
+export default function useFetch(query: any, variables = {}) {
+  const [queryFunction, { data, error, loading, called }] = useLazyQuery(
+    query,
+    {
+      variables: variables,
+    }
+  );
   const history = useHistory();
 
   useEffect(() => {
