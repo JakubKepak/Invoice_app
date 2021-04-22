@@ -55,6 +55,7 @@ export const MenuSettingContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 
   @media ${device.sm} {
     flex-direction: row;
@@ -64,6 +65,10 @@ export const MenuSettingContainer = styled.div`
 export const ThemeIcon = styled.img`
   width: 30px;
   height: 30px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const ProfileIcon = styled.img`
@@ -72,7 +77,37 @@ export const ProfileIcon = styled.img`
   border-radius: 50%;
   margin: 2rem 0 2rem 0;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   @media ${device.sm} {
     margin: 0 2rem 0 2rem;
+  }
+`;
+
+export const UserOptionContainer = styled.div`
+  display: grid;
+  position: absolute;
+  right: -80px;
+  top: 70px;
+  background-color: ${({ theme }) => theme.colors.userOptionBackground};
+  border-radius: var(--borderRadius);
+  padding: 0.5rem;
+  box-shadow: var(--boxShadow);
+
+  @media ${device.sm} {
+    right: 30px;
+    top: 50px;
+  }
+`;
+
+export const UserOptionItem = styled.span`
+  font-size: var(--fontSizeSmall);
+  color: ${({ theme }) => theme.colors.mainFontColor};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.darkPurple};
+    cursor: pointer;
   }
 `;

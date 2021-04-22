@@ -11,6 +11,7 @@ declare module "styled-components" {
       invoiceDetailBackground: string;
       invoiceTotalBackground: string;
       invoiceItemBackground: string;
+      userOptionBackground: string;
       editFormBackground: string;
       inputFieldBackground: string;
       backgroundColorLight: string;
