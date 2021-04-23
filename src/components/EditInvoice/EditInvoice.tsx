@@ -342,12 +342,14 @@ export default function EditInvoice({
                               name={`invoiceItems.${index}.quantity`}
                               type="number"
                               value={item.quantity}
+                              min="0"
                             />
                             <CustomTextField
                               id={`invoiceItems.${index}.price`}
                               name={`invoiceItems.${index}.price`}
                               type="number"
                               value={item.price}
+                              min="0"
                             />
                             <S.InvoiceItemTotalContainer>
                               {addCommaSeparator(item.quantity * item.price)}

@@ -28,6 +28,16 @@ const GlobalStyle = createGlobalStyle`
     --boxShadow: 1px 1px 5px 1px rgba(0,0,0,0.1)
   }
 
+/* hide input spinners from number text field */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
   *,
   *:before, 
   *:after {
