@@ -67,6 +67,7 @@ export const EmptyContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 20vh;
+  color: ${({ theme }) => theme.colors.mainFontColor};
 `;
 
 export const EmptyImage = styled.img``;
