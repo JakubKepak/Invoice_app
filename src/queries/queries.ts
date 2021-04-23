@@ -153,3 +153,11 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const REGISTER = gql`
+  mutation Register($input: RegisterUserInput) {
+    registerUser(input: $input) {
+      token
+    }
+  }
+`;

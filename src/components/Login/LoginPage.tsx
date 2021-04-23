@@ -7,7 +7,7 @@ import * as Yup from "yup";
 
 import { CustomTextField } from "components/UI/CustomInputFields";
 import Button from "components/UI/Button";
-import { LOGIN } from "queries/queries";
+import { LOGIN, REGISTER } from "queries/queries";
 
 import Modal from "components/Modal";
 
@@ -74,7 +74,9 @@ interface Props {
 }
 
 export default function LoginPage({ variant }: Props) {
-  const [loginUser, { loading, error }] = useMutation(LOGIN);
+  const query = variant === "LOGIN" ? LOGIN : REGISTER;
+
+  const [handleUser, { loading, error }] = useMutation(query);
 
   const history = useHistory();
 
@@ -86,14 +88,20 @@ export default function LoginPage({ variant }: Props) {
             initialValues={{
               username: "",
               password: "",
+              passwordConfirm: "",
             }}
             validationSchema={variant === "SIGNUP" ? SignupSchema : LoginSchema}
             onSubmit={(values, actions) => {
               if (variant === "LOGIN") {
                 (async () => {
                   try {
-                    const token = await loginUser({
-                      variables: { input: values },
+                    const token = await handleUser({
+                      variables: {
+                        input: {
+                          username: values.username,
+                          password: values.password,
+                        },
+                      },
                     });
                     localStorage.setItem("token", token.data?.loginUser?.token);
                     history.push("/");
@@ -102,7 +110,25 @@ export default function LoginPage({ variant }: Props) {
               }
 
               if (variant === "SIGNUP") {
-                console.log("sign up");
+                (async () => {
+                  try {
+                    const token = await handleUser({
+                      variables: {
+                        input: {
+                          username: values.username,
+                          password: values.password,
+                        },
+                      },
+                    });
+                    localStorage.setItem(
+                      "token",
+                      token.data?.registerUser?.token
+                    );
+                    history.push("/");
+                  } catch (err) {
+                    console.log(err);
+                  }
+                })();
               }
 
               actions.setSubmitting(false);
@@ -130,7 +156,7 @@ export default function LoginPage({ variant }: Props) {
                     name="passwordConfirm"
                     type="password"
                     label="confirm password"
-                    value={props.values.password}
+                    value={props.values.passwordConfirm}
                   />
                 )}
                 <ButtonContainer>

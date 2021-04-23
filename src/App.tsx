@@ -109,6 +109,7 @@ function App() {
       : setSavedTheme("lightTheme");
   };
 
+  // maybe use ternary instead
   useEffect(() => {
     if (savedTheme === "lightTheme") setTheme(LightTheme);
     if (savedTheme === "darkTheme") setTheme(DarkTheme);
