@@ -62,8 +62,8 @@ const SignUpCTAContainer = styled.div`
 `;
 
 const SignupSchema = Yup.object().shape({
-  username: Yup.string().required("required"),
-  password: Yup.string().required("required"),
+  username: Yup.string().required("Username is required"),
+  password: Yup.string().required("Password is required"),
   passwordConfirm: Yup.string().test(
     "match",
     "passwords has to match",
@@ -74,7 +74,8 @@ const SignupSchema = Yup.object().shape({
 });
 
 const LoginSchema = Yup.object().shape({
-  username: Yup.string().required("login required"),
+  username: Yup.string().required("Username is required"),
+  password: Yup.string().required("Passwor is required"),
 });
 
 interface Props {
