@@ -12,6 +12,7 @@ import Menu from "./components/Menu/Menu";
 import OverviewPage from "./components/OverviewPage/OverviewPage";
 import InvoiceDetailPage from "./components/InvoiceDetailPage/InvoiceDetailPage";
 import LoginPage from "components/Login/LoginPage";
+import NotFound from "components/UI/NotFound";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -132,6 +133,7 @@ function App() {
             />
             <Route exact path="/" render={() => <OverviewPage />} />
             <Route exact path="/:id" render={() => <InvoiceDetailPage />} />
+            <Route component={NotFound} />
           </Switch>
         </ContentContainer>
       </ThemeProvider>
