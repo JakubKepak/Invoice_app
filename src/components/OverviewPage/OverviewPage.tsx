@@ -13,6 +13,7 @@ import illustrationEmpty from "assets/illustration-empty.svg";
 // components
 import InvoicePreview from "components/InvoicePreview/InvoicePreview";
 import EditInvoice from "components/EditInvoice/EditInvoice";
+import ErrorPage from "components/UI/ErrorPage";
 
 export default function OverviewPage() {
   const [editActive, setEditActive] = useState<boolean>(false);
@@ -20,7 +21,7 @@ export default function OverviewPage() {
 
   return (
     <>
-      {error && <div>{error.message}</div>}
+      {error && <ErrorPage error={error} />}
       {loading && <div>Loading...</div>}
       {!loading && !error && data && (
         <>

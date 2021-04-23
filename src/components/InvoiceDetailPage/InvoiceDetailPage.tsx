@@ -15,10 +15,11 @@ import { fromatDate, addCommaSeparator } from "../../helpers/helpers";
 
 import EditInvoice from "../EditInvoice/EditInvoice";
 
-import InvoiceStatusIcon from "../UI/InvoiceStatusIcon";
-import Button from "../UI/Button";
+import InvoiceStatusIcon from "components/UI/InvoiceStatusIcon";
+import Button from "components/UI/Button";
 import Modal from "../Modal";
-import DeleteModal from "../UI/DeleteModal";
+import DeleteModal from "components/UI/DeleteModal";
+import ErrorPage from "components/UI/ErrorPage";
 
 import leftArrowIcon from "assets/icon-arrow-left.svg";
 
@@ -53,8 +54,9 @@ export default function InvoiceDetailPage() {
 
   return (
     <>
-      {error && <div>{error.message}</div>}
-      {!loading && invoice ? (
+      {error && <ErrorPage error={error} />}
+      {loading && <div>Loading...</div>}
+      {!loading && invoice && (
         <S.MainContainer>
           <S.GoBackContainer>
             <Link to="/">
@@ -150,8 +152,6 @@ export default function InvoiceDetailPage() {
             </S.InvoiceItemsContainer>
           </S.ContentContainer>
         </S.MainContainer>
-      ) : (
-        <div>Loading...</div>
       )}
 
       <AnimatePresence>
