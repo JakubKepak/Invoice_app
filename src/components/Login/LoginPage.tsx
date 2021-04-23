@@ -63,6 +63,14 @@ const SignUpCTAContainer = styled.div`
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string().required("required"),
+  password: Yup.string().required("required"),
+  passwordConfirm: Yup.string().test(
+    "match",
+    "passwords has to match",
+    function (passwordConfirm) {
+      return passwordConfirm === this.parent.password;
+    }
+  ),
 });
 
 const LoginSchema = Yup.object().shape({
