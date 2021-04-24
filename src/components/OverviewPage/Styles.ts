@@ -43,6 +43,7 @@ export const FilterContainer = styled.div`
   display: flex;
   align-items: center;
   margin-right: 1rem;
+  color: ${({ theme }) => theme.colors.mainFontColor};
 
   & span {
     font-weight: 700;
