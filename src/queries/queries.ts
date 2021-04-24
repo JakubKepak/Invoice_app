@@ -148,7 +148,7 @@ export const UPDATE_INVOICE = gql`
 
 export const LOGIN = gql`
   mutation Login($input: LoginInput) {
-    loginUser(input: $input) {
+    data: loginUser(input: $input) {
       token
     }
   }
@@ -156,7 +156,7 @@ export const LOGIN = gql`
 
 export const REGISTER = gql`
   mutation Register($input: RegisterUserInput) {
-    registerUser(input: $input) {
+    data: registerUser(input: $input) {
       token
     }
   }
