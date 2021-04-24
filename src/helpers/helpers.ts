@@ -30,3 +30,14 @@ export function addCommaSeparator(number: number | string) {
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+export function generateInvoiceId() {
+  return `TEST-${Math.floor(Math.random() * 10000)}`;
+}
+
+export const calculateDueDate = (date: string, daysToAdd: number) => {
+  let actualDate = new Date(date);
+  actualDate.setDate(actualDate.getDate() + Number(daysToAdd));
+
+  return actualDate.toLocaleDateString("en-CA");
+};

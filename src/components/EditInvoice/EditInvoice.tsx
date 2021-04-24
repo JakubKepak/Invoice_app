@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { Formik, Form, FieldArray } from "formik";
 import * as Yup from "yup";
-import { addCommaSeparator } from "../../helpers/helpers";
+import {
+  addCommaSeparator,
+  generateInvoiceId,
+  calculateDueDate,
+} from "../../helpers/helpers";
 import * as S from "./Styles";
 import {
   ADD_INVOICE,
@@ -150,20 +154,10 @@ export default function EditInvoice({
               }
             );
 
-            const calculateDueDate = (date: string, daysToAdd: number) => {
-              let actualDate = new Date(date);
-              actualDate.setDate(actualDate.getDate() + Number(daysToAdd));
-
-              return actualDate.toLocaleDateString("en-CA");
-            };
-
             // set variables for mutations
             const payload = {
               invoice: {
-                id:
-                  invoiceId !== ""
-                    ? invoiceId
-                    : `TEST-${Math.floor(Math.random() * 10000)}`,
+                id: invoiceId !== "" ? invoiceId : generateInvoiceId(),
                 createdAt: values.invoiceDate,
                 paymentDue: calculateDueDate(
                   values.invoiceDate,
