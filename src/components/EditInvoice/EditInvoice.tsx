@@ -58,6 +58,7 @@ interface Props {
   paymentTerms?: number;
   description?: string;
   invoiceItems?: any;
+  status?: "DRAFT" | "PAID" | "PENDING";
 }
 
 export default function EditInvoice({
@@ -77,6 +78,7 @@ export default function EditInvoice({
   invoiceDate = new Date(Date.now()).toLocaleDateString("en-CA"),
   paymentTerms = 1,
   description = "",
+  status = "PENDING",
   invoiceItems = [
     {
       name: "",
@@ -86,7 +88,7 @@ export default function EditInvoice({
     },
   ],
 }: Props) {
-  const [invoiceStatus, setInvoiceStatus] = useState("PENDING");
+  const [invoiceStatus, setInvoiceStatus] = useState(status || "PENDING");
   const [addInvoice] = useMutation(ADD_INVOICE, {
     update(cache, { data: { data } }) {
       const AllInvoices: any = cache.readQuery({ query: INVOICES });

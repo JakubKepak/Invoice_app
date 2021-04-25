@@ -174,6 +174,7 @@ export default function InvoiceDetailPage() {
             paymentTerms={invoice.data.paymentTerms}
             description={invoice.data.description}
             invoiceItems={invoice.data.items}
+            status={invoice.data.status}
           />
         )}
 
