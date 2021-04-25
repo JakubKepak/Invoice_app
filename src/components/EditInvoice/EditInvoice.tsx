@@ -184,6 +184,7 @@ export default function EditInvoice({
               editInvoice({
                 variables: payload,
                 refetchQueries: [
+                  { query: INVOICES },
                   { query: GET_INVOICE, variables: { id: invoiceId } },
                 ],
               });
