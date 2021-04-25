@@ -3,30 +3,13 @@ import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import * as S from "./Styles";
-import * as Yup from "yup";
+import { SignupSchema, LoginSchema } from "helpers/FormValidationSchemas";
 
 import { CustomTextField } from "components/UI/CustomInputFields";
 import Button from "components/UI/Button";
 import { LOGIN, REGISTER } from "queries/queries";
 
 import Modal from "components/Modal";
-
-const SignupSchema = Yup.object().shape({
-  username: Yup.string().required("Username is required"),
-  password: Yup.string().required("Password is required"),
-  passwordConfirm: Yup.string().test(
-    "match",
-    "passwords has to match",
-    function (passwordConfirm) {
-      return passwordConfirm === this.parent.password;
-    }
-  ),
-});
-
-const LoginSchema = Yup.object().shape({
-  username: Yup.string().required("Username is required"),
-  password: Yup.string().required("Passwor is required"),
-});
 
 interface Props {
   variant: "LOGIN" | "SIGNUP";
