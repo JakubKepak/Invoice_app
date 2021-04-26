@@ -20,6 +20,7 @@ import Button from "components/UI/Button";
 import Modal from "../Modal";
 import DeleteModal from "components/UI/DeleteModal";
 import ErrorPage from "components/UI/ErrorPage";
+import Loader from "components/UI/Loader";
 
 import leftArrowIcon from "assets/icon-arrow-left.svg";
 
@@ -55,7 +56,7 @@ export default function InvoiceDetailPage() {
   return (
     <>
       {error && <ErrorPage error={error} />}
-      {loading && <div>Loading...</div>}
+      {loading && <Loader />}
       {!loading && invoice && (
         <S.MainContainer>
           <S.GoBackContainer>
