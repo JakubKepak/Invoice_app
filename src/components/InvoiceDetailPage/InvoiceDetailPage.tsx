@@ -1,15 +1,10 @@
 import { useState } from "react";
 import * as S from "./Styles";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import {
-  GET_INVOICE,
-  REMOVE_INVOICE,
-  UPDATE_INVOICE,
-  INVOICES,
-} from "../../queries/queries";
-import { useMutation } from "@apollo/client";
+import { GET_INVOICE } from "../../queries/queries";
 import useFetch from "hooks/useFetch";
+import useDBHandler from "hooks/useDBHandler";
 
 import { fromatDate, addCommaSeparator } from "../../helpers/helpers";
 
@@ -29,29 +24,10 @@ export default function InvoiceDetailPage() {
 
   const [editActive, setEditActive] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [deleteInvoice] = useMutation(REMOVE_INVOICE);
-  const [updateInvoice] = useMutation(UPDATE_INVOICE);
   const { data: invoice, error, loading } = useFetch(GET_INVOICE, { id: id });
-
-  const history = useHistory();
-
-  const deleteInvoiceHandler = () => {
-    deleteInvoice({
-      variables: { id: invoice.data.id },
-      refetchQueries: [{ query: INVOICES }],
-    });
-    history.push("/");
-  };
-
-  const updateInvoiceHandler = () => {
-    updateInvoice({
-      variables: { invoice: { id: invoice.data.id, status: "PAID" } },
-      refetchQueries: [
-        { query: INVOICES },
-        { query: GET_INVOICE, variables: { id: id } },
-      ],
-    });
-  };
+  const { deleteInvoiceHandler, updateInvoiceStatusHandler } = useDBHandler(
+    invoice
+  );
 
   return (
     <>
@@ -79,7 +55,7 @@ export default function InvoiceDetailPage() {
               <Button variant="warn" onClick={() => setShowModal(true)}>
                 Delete
               </Button>
-              <Button onClick={updateInvoiceHandler} variant="primary">
+              <Button onClick={updateInvoiceStatusHandler} variant="primary">
                 Mark as Paid
               </Button>
             </S.ButtonsContainer>
