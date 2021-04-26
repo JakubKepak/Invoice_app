@@ -8,13 +8,13 @@ import { INVOICES } from "queries/queries";
 import PrimaryButtonAdd from "components/UI/PrimaryButtonAdd";
 
 import arrowDown from "assets/icon-arrow-down.svg";
-import illustrationEmpty from "assets/illustration-empty.svg";
 
 // components
 import InvoicePreview from "components/InvoicePreview/InvoicePreview";
 import EditInvoice from "components/EditInvoice/EditInvoice";
 import ErrorPage from "components/UI/ErrorPage";
 import Loader from "components/UI/Loader";
+import EmptyPage from "components/UI/EmptyPage";
 
 export default function OverviewPage() {
   const [editActive, setEditActive] = useState<boolean>(false);
@@ -64,16 +64,7 @@ export default function OverviewPage() {
                   );
                 })
               ) : (
-                <S.EmptyContainer>
-                  <S.EmptyImage src={illustrationEmpty} />
-                  <S.GetStartedContainer>
-                    <p>There is nothing here</p>
-                    <p>Create an invoice by clicking the</p>
-                    <p>
-                      <strong>New Invoice</strong> button and get started
-                    </p>
-                  </S.GetStartedContainer>
-                </S.EmptyContainer>
+                <EmptyPage />
               )}
             </S.ContentContainer>
           </S.MainContainer>
