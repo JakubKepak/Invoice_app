@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "breakpoints";
 import illustrationError from "assets/error.svg";
 
 const MainContainer = styled.div`
@@ -11,7 +12,12 @@ const MainContainer = styled.div`
 `;
 
 const ErrorImage = styled.img`
-  width: 50vw;
+  width: 40vw;
+  max-width: 400px;
+
+  @media ${device.xs} {
+    width: 50vw;
+  }
 `;
 
 const MessageContainer = styled.div`

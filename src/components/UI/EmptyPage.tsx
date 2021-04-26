@@ -12,6 +12,7 @@ const MainContainer = styled.div`
 
 const EmptyImage = styled.img`
   width: 40vw;
+  max-width: 400px;
 
   @media ${device.xs} {
     width: 50vw;
