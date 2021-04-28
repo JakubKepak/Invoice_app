@@ -27,7 +27,7 @@ export default function OverviewPage() {
       {!loading && !error && data && (
         <>
           <S.MainContainer>
-            <S.HeaderContainer>
+            <S.HeaderContainer data-test="component-overviewPage-Header">
               <S.PageTitleContainer>
                 <h1>Invoices</h1>
                 <span>

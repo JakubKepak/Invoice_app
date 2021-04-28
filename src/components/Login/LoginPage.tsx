@@ -60,6 +60,7 @@ export default function LoginPage({ variant }: Props) {
                   type="text"
                   label="username"
                   value={props.values.username}
+                  data-test="component-login-username"
                 />
                 <CustomTextField
                   id="password"
@@ -67,6 +68,7 @@ export default function LoginPage({ variant }: Props) {
                   type="password"
                   label="password"
                   value={props.values.password}
+                  data-test="component-login-password"
                 />
                 {variant === "SIGNUP" && (
                   <CustomTextField
@@ -77,7 +79,7 @@ export default function LoginPage({ variant }: Props) {
                     value={props.values.passwordConfirm}
                   />
                 )}
-                <S.ButtonContainer>
+                <S.ButtonContainer data-test="component-loginButton">
                   {variant === "SIGNUP" && (
                     <Button type="submit" variant="primary" disabled={loading}>
                       {loading ? (
@@ -117,7 +119,9 @@ export default function LoginPage({ variant }: Props) {
             </S.SignUpCTAContainer>
           )}
           {error && (
-            <S.ErrorMessageContainer>{error.message}</S.ErrorMessageContainer>
+            <S.ErrorMessageContainer data-test="component-login-error-message">
+              {error.message}
+            </S.ErrorMessageContainer>
           )}
         </S.ModalContainer>
       </S.MainContainer>
