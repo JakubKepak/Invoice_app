@@ -1,3 +1,26 @@
+import UtilityPageWrapper from "components/UI/UtilityPageWrapper";
+import illustrationNotFound from "assets/not_found.svg";
+import styled, { css } from "styled-components";
+import { useHistory } from "react-router-dom";
+import Button from "components/UI/Button";
+
+const NotFoundMessage = styled.p`
+  margin: 1rem 0;
+`;
+
 export default function NotFound() {
-  return <div>404</div>;
+  const history = useHistory();
+
+  return (
+    <UtilityPageWrapper image={illustrationNotFound}>
+      <NotFoundMessage>Didn't expect that? Me niether.</NotFoundMessage>
+      <Button
+        type="button"
+        variant={"primary"}
+        onClick={() => history.push("/")}
+      >
+        Go Home
+      </Button>
+    </UtilityPageWrapper>
+  );
 }
