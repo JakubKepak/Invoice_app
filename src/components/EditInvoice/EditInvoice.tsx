@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Formik, Form, FieldArray } from "formik";
-import { EditSchema } from "helpers/FormValidationSchemas";
+import { EditSchema, DraftSchema } from "helpers/FormValidationSchemas";
 import {
   addCommaSeparator,
   generateInvoiceId,
@@ -72,7 +72,10 @@ export default function EditInvoice({
     },
   ],
 }: Props) {
-  const [invoiceStatus, setInvoiceStatus] = useState(status || "PENDING");
+  const [invoiceStatus, setInvoiceStatus] = useState(status);
+  const [formValidationSchema, setFormValidationSchema] = useState<any>(
+    EditSchema
+  );
   const [addInvoice] = useMutation(ADD_INVOICE, {
     update(cache, { data: { data } }) {
       const AllInvoices: any = cache.readQuery({ query: INVOICES });
@@ -127,8 +130,9 @@ export default function EditInvoice({
             paymentTerms: paymentTerms,
             description: description,
             invoiceItems: invoiceItems,
+            status: invoiceStatus,
           }}
-          validationSchema={EditSchema}
+          validationSchema={formValidationSchema}
           onSubmit={(values, actions) => {
             // Calculate total for each item
             const completeInvoiceItems = values.invoiceItems.map(
@@ -372,13 +376,23 @@ export default function EditInvoice({
                   Discard
                 </Button>
                 <Button
-                  onClick={() => setInvoiceStatus("DRAFT")}
+                  onClick={() => {
+                    setInvoiceStatus("DRAFT");
+                    setFormValidationSchema(DraftSchema);
+                  }}
                   type="submit"
                   variant="dark"
                 >
                   Save as Draft
                 </Button>
-                <Button type="submit" variant="primary">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  onClick={() => {
+                    setInvoiceStatus("PENDING");
+                    setFormValidationSchema(EditSchema);
+                  }}
+                >
                   Save & Send
                 </Button>
               </S.ButtonsContainer>

@@ -14,7 +14,7 @@ export default function Menu({ themeToggle }: any) {
   };
 
   return (
-    <S.MainContainer>
+    <S.MainContainer data-test="component-menu">
       <S.LogoContainer>
         <S.Logo src={logo} alt="logo" />
         <S.LogoContainerShadow />
