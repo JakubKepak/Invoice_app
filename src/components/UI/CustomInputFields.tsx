@@ -9,7 +9,9 @@ export const CustomTextField = ({ label, ...props }: any) => {
       <S.InputLabel htmlFor={props.id || props.name}>{label}</S.InputLabel>
       <S.InputField error={meta.error} {...field} {...props} />
       {meta.touched && meta.error ? (
-        <S.FormErrorMessage>{meta.error}</S.FormErrorMessage>
+        <S.FormErrorMessage data-test="form-input-filed-error-message">
+          {meta.error}
+        </S.FormErrorMessage>
       ) : null}
     </S.InputFieldContainer>
   );
