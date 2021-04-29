@@ -1,6 +1,6 @@
-import UtilityPageWrapper from "components/UI/UtilityPageWrapper";
+import UtilityPageWrapper from "components/UtilityPages/UtilityPageWrapper";
 import illustrationNotFound from "assets/not_found.svg";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import Button from "components/UI/Button";
 

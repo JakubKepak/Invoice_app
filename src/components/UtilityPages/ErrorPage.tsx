@@ -1,5 +1,5 @@
 import illustrationError from "assets/error.svg";
-import UtilityPageWrapper from "components/UI/UtilityPageWrapper";
+import UtilityPageWrapper from "components/UtilityPages/UtilityPageWrapper";
 
 export default function ErrorPage({ error }: any) {
   console.log(error);

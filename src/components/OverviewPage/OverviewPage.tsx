@@ -12,9 +12,9 @@ import arrowDown from "assets/icon-arrow-down.svg";
 // components
 import InvoicePreview from "components/InvoicePreview/InvoicePreview";
 import EditInvoice from "components/EditInvoice/EditInvoice";
-import ErrorPage from "components/UI/ErrorPage";
+import ErrorPage from "components/UtilityPages/ErrorPage";
 import Loader from "components/UI/Loader";
-import EmptyPage from "components/UI/EmptyPage";
+import EmptyPage from "components/UtilityPages/EmptyPage";
 
 export default function OverviewPage() {
   const [editActive, setEditActive] = useState<boolean>(false);

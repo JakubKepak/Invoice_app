@@ -14,7 +14,7 @@ import InvoiceStatusIcon from "components/UI/InvoiceStatusIcon";
 import Button from "components/UI/Button";
 import Modal from "../Modal";
 import DeleteModal from "components/UI/DeleteModal";
-import ErrorPage from "components/UI/ErrorPage";
+import ErrorPage from "components/UtilityPages/ErrorPage";
 import Loader from "components/UI/Loader";
 
 import leftArrowIcon from "assets/icon-arrow-left.svg";

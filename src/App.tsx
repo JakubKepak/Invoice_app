@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { device } from "breakpoints";
 import { DefaultTheme } from "styled-components";
 import useLocalStorage from "hooks/useLocalStorage";
+import { GlobalStyle } from "GlobalStyles";
 
 import { LightTheme, DarkTheme } from "./themes";
 
@@ -12,84 +12,7 @@ import Menu from "./components/Menu/Menu";
 import OverviewPage from "./components/OverviewPage/OverviewPage";
 import InvoiceDetailPage from "./components/InvoiceDetailPage/InvoiceDetailPage";
 import LoginPage from "components/Login/LoginPage";
-import NotFound from "components/UI/NotFound";
-
-const GlobalStyle = createGlobalStyle`
-
-  html {
-    /* font sizes */
-    --fontSizeXS: .6rem;
-    --fontSizeSmall: .8rem;
-    --fontSizeMedium: 1rem;
-    --fontSizeLarge: 1.2rem;
-    --fontSizeXXL: 1.5rem;
-
-    /* misc */
-    --borderRadius: 5px;
-    --boxShadow: 1px 1px 5px 1px rgba(0,0,0,0.1)
-  }
-
-/* hide input spinners from number text field */
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  input[type="number"] {
-    -moz-appearance: textfield;
-  }
-
-  *,
-  *:before, 
-  *:after {
-    margin: 0;
-    padding:0;
-    box-sizing: border-box;
-  }
-
-*:focus {
-  outline: none;
-}
-
-a, 
-a:active, 
-a:visited {
-  text-decoration: none;
-  color: inherit;
-}
-  
-  body {
-    font-family: 'Spartan', sans-serif;
-    background-color: ${({ theme }) => theme.colors.mainBackground};
-
-  }
-
-  #root{
-    display: flex;
-    flex-direction: row;
-
-    @media (max-width: 600px) {
-      flex-direction: column;
-  }
-  }
-
-  h1 {
-    font-weight: 700;
-    color: ${({ theme }) => theme.colors.mainFontColor};
-
-    @media ${device.xs} {
-      font-size: 1.5rem;
-    }
-  }
-
-  button {
-    border: none;
-    background-color: inherit;
-    font-family: inherit;
-    color: inherit;
-    cursor: inherit;
-  }
-`;
+import NotFound from "components/UtilityPages/NotFound";
 
 const ContentContainer = styled.div`
   width: 100%;
@@ -109,10 +32,8 @@ function App() {
       : setSavedTheme("lightTheme");
   };
 
-  // maybe use ternary instead
   useEffect(() => {
-    if (savedTheme === "lightTheme") setTheme(LightTheme);
-    if (savedTheme === "darkTheme") setTheme(DarkTheme);
+    savedTheme === "lightTheme" ? setTheme(LightTheme) : setTheme(DarkTheme);
   }, [savedTheme]);
 
   return (

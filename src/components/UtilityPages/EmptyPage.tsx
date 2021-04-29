@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import illustrationEmpty from "assets/empty.svg";
-import UtilityPageWrapper from "components/UI/UtilityPageWrapper";
+import UtilityPageWrapper from "components/UtilityPages/UtilityPageWrapper";
 
 const EmptyMessage = styled.div`
   & p:nth-of-type(1) {
