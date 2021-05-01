@@ -36,7 +36,7 @@ export function generateInvoiceId() {
 }
 
 export const calculateDueDate = (date: string, daysToAdd: number) => {
-  let actualDate = new Date(date);
+  const actualDate = new Date(date);
   actualDate.setDate(actualDate.getDate() + Number(daysToAdd));
 
   return actualDate.toLocaleDateString("en-CA");
