@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { useLazyQuery } from "@apollo/client";
-import { useHistory } from "react-router-dom";
+import { useEffect } from 'react';
+import { useLazyQuery } from '@apollo/client';
+import { useHistory } from 'react-router-dom';
 
 export default function useFetch(query: any, variables = {}) {
   const [queryFunction, { data, error, loading, called }] = useLazyQuery(
@@ -16,8 +16,8 @@ export default function useFetch(query: any, variables = {}) {
   }, [queryFunction]);
 
   useEffect(() => {
-    if (error?.message === "not authenticated") {
-      history.push("/login");
+    if (error?.message === 'not authenticated') {
+      history.push('/login');
     }
   }, [error, history]);
 

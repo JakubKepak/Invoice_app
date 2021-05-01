@@ -1,13 +1,13 @@
-import { useHistory } from "react-router-dom";
-import client from "client";
+import { useHistory } from 'react-router-dom';
+import client from 'client';
 
 export default function useLogout() {
   const history = useHistory();
 
   const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
     client.clearStore();
-    history.push("/login");
+    history.push('/login');
   };
 
   return { logout };
