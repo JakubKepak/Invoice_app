@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const MainContainer = styled.button<{ variant?: string }>`
   padding: 0.8rem 1.5rem;
@@ -14,7 +14,7 @@ const MainContainer = styled.button<{ variant?: string }>`
   }
 
   ${(props) =>
-    props.variant === "primary" &&
+    props.variant === 'primary' &&
     `
     background-color: ${props.theme.colors.darkPurple};
     color: ${props.theme.colors.invoiceItemBackground};
@@ -25,7 +25,7 @@ const MainContainer = styled.button<{ variant?: string }>`
   `};
 
   ${(props) =>
-    props.variant === "warn" &&
+    props.variant === 'warn' &&
     `
     background-color: ${props.theme.colors.warnButton};
     color: ${props.theme.colors.invoiceItemBackground};
@@ -36,7 +36,7 @@ const MainContainer = styled.button<{ variant?: string }>`
   `};
 
   ${(props) =>
-    props.variant === "secondary" &&
+    props.variant === 'secondary' &&
     `
     background-color: ${props.theme.colors.secondaryButtonBackground};
     color: ${props.theme.colors.secondaryButton};
@@ -47,7 +47,7 @@ const MainContainer = styled.button<{ variant?: string }>`
   `};
 
   ${(props) =>
-    props.variant === "dark" &&
+    props.variant === 'dark' &&
     `
     background-color: ${props.theme.colors.mainFontColor};
     color: ${props.theme.colors.textColorLight};
@@ -59,7 +59,7 @@ const MainContainer = styled.button<{ variant?: string }>`
 `;
 
 interface Props {
-  variant: "primary" | "secondary" | "warn" | "dark";
+  variant: 'primary' | 'secondary' | 'warn' | 'dark';
   disabled?: boolean;
   children?: any;
   onClick?: any;

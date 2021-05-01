@@ -1,5 +1,5 @@
-import { useField } from "formik";
-import * as S from "components/EditInvoice/Styles";
+import { useField } from 'formik';
+import * as S from 'components/EditInvoice/Styles';
 
 export const CustomTextField = ({ label, ...props }: any) => {
   const [field, meta] = useField(props);
@@ -9,7 +9,7 @@ export const CustomTextField = ({ label, ...props }: any) => {
       <S.InputLabel htmlFor={props.id || props.name}>{label}</S.InputLabel>
       <S.InputField error={meta.error} {...field} {...props} />
       {meta.touched && meta.error ? (
-        <S.FormErrorMessage data-test="form-input-filed-error-message">
+        <S.FormErrorMessage data-test='form-input-filed-error-message'>
           {meta.error}
         </S.FormErrorMessage>
       ) : null}

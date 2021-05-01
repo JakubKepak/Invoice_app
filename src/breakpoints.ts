@@ -1,7 +1,7 @@
 export const size = {
-  xs: "380px",
-  sm: "768px",
-  lg: "1200px",
+  xs: '380px',
+  sm: '768px',
+  lg: '1200px',
 };
 
 export const device = {

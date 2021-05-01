@@ -1,15 +1,15 @@
 // import styled from "styled-components";
-import { Link } from "react-router-dom";
-import * as S from "./Styles";
+import { Link } from 'react-router-dom';
+import * as S from './Styles';
 
 // components
-import InvoiceStatusIcon from "components/UI/InvoiceStatusIcon";
+import InvoiceStatusIcon from 'components/UI/InvoiceStatusIcon';
 
 // helpers
-import { fromatDate, addCommaSeparator } from "helpers/helpers";
+import { fromatDate, addCommaSeparator } from 'helpers/helpers';
 
 // assets
-import iconRight from "assets/icon-arrow-right.svg";
+import iconRight from 'assets/icon-arrow-right.svg';
 
 interface Props {
   invoice: any;

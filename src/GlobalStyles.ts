@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import { device } from "breakpoints";
+import { createGlobalStyle } from 'styled-components';
+import { device } from 'breakpoints';
 
 export const GlobalStyle = createGlobalStyle`
 

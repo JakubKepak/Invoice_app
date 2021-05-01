@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { device } from "breakpoints";
+import styled from 'styled-components';
+import { device } from 'breakpoints';
 
 export const MainContainer = styled.div`
   border: 1px solid transparent;
@@ -27,9 +27,9 @@ export const MainContainer = styled.div`
     grid-template-rows: 2rem 1rem 1rem;
     grid-row-gap: 0.5rem;
     grid-template-areas:
-      "id name"
-      "date status"
-      "total status";
+      'id name'
+      'date status'
+      'total status';
   }
 `;
 

@@ -1,20 +1,20 @@
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
-import useFetch from "hooks/useFetch";
-import * as S from "./Styles";
+import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import useFetch from 'hooks/useFetch';
+import * as S from './Styles';
 
-import { INVOICES } from "queries/queries";
+import { INVOICES } from 'queries/queries';
 
-import PrimaryButtonAdd from "components/UI/PrimaryButtonAdd";
+import PrimaryButtonAdd from 'components/UI/PrimaryButtonAdd';
 
-import arrowDown from "assets/icon-arrow-down.svg";
+import arrowDown from 'assets/icon-arrow-down.svg';
 
 // components
-import InvoicePreview from "components/InvoicePreview/InvoicePreview";
-import EditInvoice from "components/EditInvoice/EditInvoice";
-import ErrorPage from "components/UtilityPages/ErrorPage";
-import Loader from "components/UI/Loader";
-import EmptyPage from "components/UtilityPages/EmptyPage";
+import InvoicePreview from 'components/InvoicePreview/InvoicePreview';
+import EditInvoice from 'components/EditInvoice/EditInvoice';
+import ErrorPage from 'components/UtilityPages/ErrorPage';
+import Loader from 'components/UI/Loader';
+import EmptyPage from 'components/UtilityPages/EmptyPage';
 
 export default function OverviewPage() {
   const [editActive, setEditActive] = useState<boolean>(false);
@@ -27,13 +27,13 @@ export default function OverviewPage() {
       {!loading && !error && data && (
         <>
           <S.MainContainer>
-            <S.HeaderContainer data-test="component-overviewPage-Header">
+            <S.HeaderContainer data-test='component-overviewPage-Header'>
               <S.PageTitleContainer>
                 <h1>Invoices</h1>
                 <span>
                   {data.data.length > 0
                     ? `${data.data.length} invoices`
-                    : "No Invoices"}
+                    : 'No Invoices'}
                 </span>
               </S.PageTitleContainer>
               <S.OptionItemsContainer>
@@ -70,7 +70,7 @@ export default function OverviewPage() {
           </S.MainContainer>
           <AnimatePresence>
             {editActive && (
-              <EditInvoice variant="new" setEditActive={setEditActive} />
+              <EditInvoice variant='new' setEditActive={setEditActive} />
             )}
           </AnimatePresence>
         </>

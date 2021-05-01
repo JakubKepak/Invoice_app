@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 const MainContainer = styled.div`
   height: 100%;

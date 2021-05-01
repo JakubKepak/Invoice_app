@@ -1,17 +1,17 @@
-import { createHttpLink, ApolloClient, InMemoryCache } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
+import { createHttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_BACKEND_URL,
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("token") || null;
+  const token = localStorage.getItem('token') || null;
 
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: token ? `Bearer ${token}` : '',
     },
   };
 });

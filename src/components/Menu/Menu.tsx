@@ -1,9 +1,9 @@
-import { useState } from "react";
-import logo from "assets/logo.svg";
-import themeIconLight from "assets/icon-sun.svg";
-import profilePicture from "assets/image-avatar.jpg";
-import * as S from "./Styles";
-import useLogout from "hooks/useLogout";
+import { useState } from 'react';
+import logo from 'assets/logo.svg';
+import themeIconLight from 'assets/icon-sun.svg';
+import profilePicture from 'assets/image-avatar.jpg';
+import * as S from './Styles';
+import useLogout from 'hooks/useLogout';
 
 export default function Menu({ themeToggle }: any) {
   const [userOptionActive, setUserOptionActive] = useState<boolean>(false);
@@ -14,9 +14,9 @@ export default function Menu({ themeToggle }: any) {
   };
 
   return (
-    <S.MainContainer data-test="component-menu">
+    <S.MainContainer data-test='component-menu'>
       <S.LogoContainer>
-        <S.Logo src={logo} alt="logo" />
+        <S.Logo src={logo} alt='logo' />
         <S.LogoContainerShadow />
       </S.LogoContainer>
       <S.MenuSettingContainer>

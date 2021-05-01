@@ -1,32 +1,32 @@
-import { useState, useEffect } from "react";
-import { Formik, Form, FieldArray } from "formik";
-import { EditSchema, DraftSchema } from "helpers/FormValidationSchemas";
+import { useState, useEffect } from 'react';
+import { Formik, Form, FieldArray } from 'formik';
+import { EditSchema, DraftSchema } from 'helpers/FormValidationSchemas';
 import {
   addCommaSeparator,
   generateInvoiceId,
   calculateDueDate,
-} from "../../helpers/helpers";
-import * as S from "./Styles";
+} from '../../helpers/helpers';
+import * as S from './Styles';
 import {
   ADD_INVOICE,
   UPDATE_INVOICE,
   INVOICES,
   GET_INVOICE,
-} from "../../queries/queries";
-import { useMutation } from "@apollo/client";
+} from '../../queries/queries';
+import { useMutation } from '@apollo/client';
 
-import Button from "../UI/Button";
+import Button from '../UI/Button';
 import {
   CustomDatePickerField,
   CustomFropDownField,
   CustomTextField,
-} from "components/UI/CustomInputFields";
+} from 'components/UI/CustomInputFields';
 
-import deleteIcon from "../../assets/icon-delete.svg";
+import deleteIcon from '../../assets/icon-delete.svg';
 
 interface Props {
   setEditActive?: any;
-  variant: "new" | "edit";
+  variant: 'new' | 'edit';
   invoiceId?: string;
   providerStreetAddress?: string;
   providerCity?: string;
@@ -42,30 +42,30 @@ interface Props {
   paymentTerms?: number;
   description?: string;
   invoiceItems?: any;
-  status?: "DRAFT" | "PAID" | "PENDING";
+  status?: 'DRAFT' | 'PAID' | 'PENDING';
 }
 
 export default function EditInvoice({
   setEditActive,
   variant,
-  invoiceId = "",
-  providerStreetAddress = "",
-  providerCity = "",
-  providerPostalCode = "",
-  providerCountry = "",
-  clientsName = "",
-  clientsEmail = "",
-  clientsStreetAddress = "",
-  clientCity = "",
-  clientPostalCode = "",
-  clientCountry = "",
-  invoiceDate = new Date(Date.now()).toLocaleDateString("en-CA"),
+  invoiceId = '',
+  providerStreetAddress = '',
+  providerCity = '',
+  providerPostalCode = '',
+  providerCountry = '',
+  clientsName = '',
+  clientsEmail = '',
+  clientsStreetAddress = '',
+  clientCity = '',
+  clientPostalCode = '',
+  clientCountry = '',
+  invoiceDate = new Date(Date.now()).toLocaleDateString('en-CA'),
   paymentTerms = 1,
-  description = "",
-  status = "PENDING",
+  description = '',
+  status = 'PENDING',
   invoiceItems = [
     {
-      name: "",
+      name: '',
       quantity: 1,
       price: 0,
       total: 0,
@@ -88,30 +88,30 @@ export default function EditInvoice({
   const [editInvoice] = useMutation(UPDATE_INVOICE);
 
   const closeOnEscape = (e: KeyboardEvent) => {
-    if (e.key === "Escape") {
+    if (e.key === 'Escape') {
       setEditActive(false);
     }
   };
 
   useEffect(() => {
-    window.addEventListener("keydown", (e) => closeOnEscape(e));
+    window.addEventListener('keydown', (e) => closeOnEscape(e));
 
     return () => {
-      window.removeEventListener("keydown", (e) => closeOnEscape(e));
+      window.removeEventListener('keydown', (e) => closeOnEscape(e));
     };
   });
 
   return (
     <S.MainContainer onClick={() => setEditActive(false)}>
       <S.InputAreaContainer
-        key={"editModal"}
+        key={'editModal'}
         onClick={(e) => e.stopPropagation()}
         initial={{ x: -300 }}
         animate={{ x: 0 }}
         exit={{ x: -500 }}
       >
         <p>
-          {variant === "new" ? <p>New Invoice</p> : <p>Edit #{invoiceId}</p>}
+          {variant === 'new' ? <p>New Invoice</p> : <p>Edit #{invoiceId}</p>}
         </p>
 
         <Formik
@@ -120,7 +120,7 @@ export default function EditInvoice({
             providerCity: providerCity,
             providerPostalCode: providerPostalCode,
             providerCountry: providerCountry,
-            clientsName: clientsName || "",
+            clientsName: clientsName || '',
             clientsEmail: clientsEmail,
             clientsStreetAddress: clientsStreetAddress,
             clientCity: clientCity,
@@ -147,7 +147,7 @@ export default function EditInvoice({
             // set variables for mutations
             const payload = {
               invoice: {
-                id: invoiceId !== "" ? invoiceId : generateInvoiceId(),
+                id: invoiceId !== '' ? invoiceId : generateInvoiceId(),
                 createdAt: values.invoiceDate,
                 paymentDue: calculateDueDate(
                   values.invoiceDate,
@@ -180,11 +180,11 @@ export default function EditInvoice({
               },
             };
 
-            if (variant === "new") {
+            if (variant === 'new') {
               addInvoice({ variables: payload });
             }
 
-            if (variant === "edit") {
+            if (variant === 'edit') {
               editInvoice({
                 variables: payload,
                 refetchQueries: [
@@ -203,31 +203,31 @@ export default function EditInvoice({
               <S.SectionName>Bill From</S.SectionName>
               <S.FormSectionBillFrom>
                 <CustomTextField
-                  id="providerStreetAddress"
-                  name="providerStreetAddress"
-                  type="text"
-                  label="Street Address"
+                  id='providerStreetAddress'
+                  name='providerStreetAddress'
+                  type='text'
+                  label='Street Address'
                   value={props.values.providerStreetAddress}
                 />
                 <CustomTextField
-                  id="providerCity"
-                  name="providerCity"
-                  type="text"
-                  label="City"
+                  id='providerCity'
+                  name='providerCity'
+                  type='text'
+                  label='City'
                   value={props.values.providerCity}
                 />
                 <CustomTextField
-                  id="providerPostalCode"
-                  name="providerPostalCode"
-                  type="text"
-                  label="Post Code"
+                  id='providerPostalCode'
+                  name='providerPostalCode'
+                  type='text'
+                  label='Post Code'
                   value={props.values.providerPostalCode}
                 />
                 <CustomTextField
-                  id="providerCountry"
-                  name="providerCountry"
-                  type="text"
-                  label="Country"
+                  id='providerCountry'
+                  name='providerCountry'
+                  type='text'
+                  label='Country'
                   value={props.values.providerCountry}
                 />
               </S.FormSectionBillFrom>
@@ -235,76 +235,76 @@ export default function EditInvoice({
               <S.SectionName>Bill To</S.SectionName>
               <S.FormSectionBillTo>
                 <CustomTextField
-                  id="clientsName"
-                  name="clientsName"
-                  type="text"
+                  id='clientsName'
+                  name='clientsName'
+                  type='text'
                   label="Client's name"
                   value={props.values.clientsName}
                 />
                 <CustomTextField
-                  id="clientsEmail"
-                  name="clientsEmail"
-                  type="text"
+                  id='clientsEmail'
+                  name='clientsEmail'
+                  type='text'
                   label="Client's Email"
                   value={props.values.clientsEmail}
                 />
                 <CustomTextField
-                  id="clientsStreetAddress"
-                  name="clientsStreetAddress"
-                  type="text"
-                  label="Stret Address"
+                  id='clientsStreetAddress'
+                  name='clientsStreetAddress'
+                  type='text'
+                  label='Stret Address'
                   value={props.values.clientsStreetAddress}
                 />
                 <CustomTextField
-                  id="clientCity"
-                  name="clientCity"
-                  type="text"
-                  label="City"
+                  id='clientCity'
+                  name='clientCity'
+                  type='text'
+                  label='City'
                   value={props.values.clientCity}
                 />
                 <CustomTextField
-                  id="clientPostalCode"
-                  name="clientPostalCode"
-                  type="text"
-                  label="Post Code"
+                  id='clientPostalCode'
+                  name='clientPostalCode'
+                  type='text'
+                  label='Post Code'
                   value={props.values.clientPostalCode}
                 />
                 <CustomTextField
-                  id="clientCountry"
-                  name="clientCountry"
-                  type="text"
-                  label="Country"
+                  id='clientCountry'
+                  name='clientCountry'
+                  type='text'
+                  label='Country'
                   value={props.values.clientCountry}
                 />
               </S.FormSectionBillTo>
 
               <S.FormSectionInvoiceInfo>
                 <CustomDatePickerField
-                  id="invoiceDate"
-                  name="invoiceDate"
-                  type="date"
-                  label="Invoice Date"
+                  id='invoiceDate'
+                  name='invoiceDate'
+                  type='date'
+                  label='Invoice Date'
                   value={props.values.invoiceDate}
                 />
                 <CustomFropDownField
-                  id="paymentTerms"
-                  name="paymentTerms"
-                  type="select"
-                  label="Payment Terms"
+                  id='paymentTerms'
+                  name='paymentTerms'
+                  type='select'
+                  label='Payment Terms'
                   value={props.values.paymentTerms}
                 />
                 <CustomTextField
-                  id="description"
-                  name="description"
-                  type="text"
-                  label="Project Description"
+                  id='description'
+                  name='description'
+                  type='text'
+                  label='Project Description'
                   value={props.values.description}
                 />
               </S.FormSectionInvoiceInfo>
 
               <S.FormSectionInvoiceItems>
                 <S.SectionItemListName>Item List</S.SectionItemListName>
-                <FieldArray name="invoiceItems">
+                <FieldArray name='invoiceItems'>
                   {(arrayHelpers) => (
                     <>
                       <S.InvoiceItemContainer>
@@ -319,22 +319,22 @@ export default function EditInvoice({
                             <CustomTextField
                               id={`invoiceItems.${index}.name`}
                               name={`invoiceItems.${index}.name`}
-                              type="text"
+                              type='text'
                               value={item.name}
                             />
                             <CustomTextField
                               id={`invoiceItems.${index}.quantity`}
                               name={`invoiceItems.${index}.quantity`}
-                              type="number"
+                              type='number'
                               value={item.quantity}
-                              min="0"
+                              min='0'
                             />
                             <CustomTextField
                               id={`invoiceItems.${index}.price`}
                               name={`invoiceItems.${index}.price`}
-                              type="number"
+                              type='number'
                               value={item.price}
-                              min="0"
+                              min='0'
                             />
                             <S.InvoiceItemTotalContainer>
                               {addCommaSeparator(item.quantity * item.price)}
@@ -342,7 +342,7 @@ export default function EditInvoice({
                             <S.DeleteInvoiceItemContainer>
                               <S.DeleteInvoiceItemIcon
                                 src={deleteIcon}
-                                alt="delete invoice item"
+                                alt='delete invoice item'
                                 onClick={() => arrayHelpers.remove(index)}
                               />
                             </S.DeleteInvoiceItemContainer>
@@ -350,10 +350,10 @@ export default function EditInvoice({
                         )
                       )}
                       <S.AddNewInvoiceItemButton
-                        type="button"
+                        type='button'
                         onClick={() =>
                           arrayHelpers.push({
-                            name: "",
+                            name: '',
                             quantity: 1,
                             price: 0,
                             total: 0,
@@ -370,26 +370,26 @@ export default function EditInvoice({
               <S.ButtonsContainer>
                 <Button
                   onClick={() => setEditActive(false)}
-                  type="button"
-                  variant="secondary"
+                  type='button'
+                  variant='secondary'
                 >
                   Discard
                 </Button>
                 <Button
                   onClick={() => {
-                    setInvoiceStatus("DRAFT");
+                    setInvoiceStatus('DRAFT');
                     setFormValidationSchema(DraftSchema);
                   }}
-                  type="submit"
-                  variant="dark"
+                  type='submit'
+                  variant='dark'
                 >
                   Save as Draft
                 </Button>
                 <Button
-                  type="submit"
-                  variant="primary"
+                  type='submit'
+                  variant='primary'
                   onClick={() => {
-                    setInvoiceStatus("PENDING");
+                    setInvoiceStatus('PENDING');
                     setFormValidationSchema(EditSchema);
                   }}
                 >

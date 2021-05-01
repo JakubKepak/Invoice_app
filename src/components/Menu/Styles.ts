@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { device } from "breakpoints";
+import styled from 'styled-components';
+import { device } from 'breakpoints';
 
 export const MainContainer = styled.div`
   height: 100%;

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { device } from "breakpoints";
+import styled from 'styled-components';
+import { device } from 'breakpoints';
 
 export const MainContainer = styled.div`
   width: 70%;
@@ -184,8 +184,8 @@ export const ItemContainer = styled.div`
     grid-template-rows: repeat(2 1fr);
     grid-row-gap: 0.5rem;
     grid-template-areas:
-      "name name name total"
-      "qty multiplier price total";
+      'name name name total'
+      'qty multiplier price total';
   }
 
   & span:nth-of-type(1) {

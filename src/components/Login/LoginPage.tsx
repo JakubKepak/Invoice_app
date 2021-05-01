@@ -1,22 +1,22 @@
-import { Formik, Form } from "formik";
-import { useMutation } from "@apollo/client";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
-import * as S from "./Styles";
-import { SignupSchema, LoginSchema } from "helpers/FormValidationSchemas";
+import { Formik, Form } from 'formik';
+import { useMutation } from '@apollo/client';
+import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import * as S from './Styles';
+import { SignupSchema, LoginSchema } from 'helpers/FormValidationSchemas';
 
-import { CustomTextField } from "components/UI/CustomInputFields";
-import Button from "components/UI/Button";
-import { LOGIN, REGISTER } from "queries/queries";
+import { CustomTextField } from 'components/UI/CustomInputFields';
+import Button from 'components/UI/Button';
+import { LOGIN, REGISTER } from 'queries/queries';
 
-import Modal from "components/Modal";
+import Modal from 'components/Modal';
 
 interface Props {
-  variant: "LOGIN" | "SIGNUP";
+  variant: 'LOGIN' | 'SIGNUP';
 }
 
 export default function LoginPage({ variant }: Props) {
-  const query = variant === "LOGIN" ? LOGIN : REGISTER;
+  const query = variant === 'LOGIN' ? LOGIN : REGISTER;
 
   const [handleUser, { loading, error }] = useMutation(query);
 
@@ -28,11 +28,11 @@ export default function LoginPage({ variant }: Props) {
         <S.ModalContainer>
           <Formik
             initialValues={{
-              username: "",
-              password: "",
-              passwordConfirm: "",
+              username: '',
+              password: '',
+              passwordConfirm: '',
             }}
-            validationSchema={variant === "SIGNUP" ? SignupSchema : LoginSchema}
+            validationSchema={variant === 'SIGNUP' ? SignupSchema : LoginSchema}
             onSubmit={(values, actions) => {
               (async () => {
                 try {
@@ -44,8 +44,8 @@ export default function LoginPage({ variant }: Props) {
                       },
                     },
                   });
-                  localStorage.setItem("token", token.data?.data?.token);
-                  history.push("/");
+                  localStorage.setItem('token', token.data?.data?.token);
+                  history.push('/');
                 } catch (err) {}
               })();
 
@@ -55,33 +55,33 @@ export default function LoginPage({ variant }: Props) {
             {(props) => (
               <Form>
                 <CustomTextField
-                  id="username"
-                  name="username"
-                  type="text"
-                  label="username"
+                  id='username'
+                  name='username'
+                  type='text'
+                  label='username'
                   value={props.values.username}
-                  data-test="component-login-username"
+                  data-test='component-login-username'
                 />
                 <CustomTextField
-                  id="password"
-                  name="password"
-                  type="password"
-                  label="password"
+                  id='password'
+                  name='password'
+                  type='password'
+                  label='password'
                   value={props.values.password}
-                  data-test="component-login-password"
+                  data-test='component-login-password'
                 />
-                {variant === "SIGNUP" && (
+                {variant === 'SIGNUP' && (
                   <CustomTextField
-                    id="passwordConfirm"
-                    name="passwordConfirm"
-                    type="password"
-                    label="confirm password"
+                    id='passwordConfirm'
+                    name='passwordConfirm'
+                    type='password'
+                    label='confirm password'
                     value={props.values.passwordConfirm}
                   />
                 )}
-                <S.ButtonContainer data-test="component-loginButton">
-                  {variant === "SIGNUP" && (
-                    <Button type="submit" variant="primary" disabled={loading}>
+                <S.ButtonContainer data-test='component-loginButton'>
+                  {variant === 'SIGNUP' && (
+                    <Button type='submit' variant='primary' disabled={loading}>
                       {loading ? (
                         <span>Signing up ...</span>
                       ) : (
@@ -89,8 +89,8 @@ export default function LoginPage({ variant }: Props) {
                       )}
                     </Button>
                   )}
-                  {variant === "LOGIN" && (
-                    <Button type="submit" variant="primary" disabled={loading}>
+                  {variant === 'LOGIN' && (
+                    <Button type='submit' variant='primary' disabled={loading}>
                       {loading ? (
                         <span>Logging in ...</span>
                       ) : (
@@ -102,24 +102,24 @@ export default function LoginPage({ variant }: Props) {
               </Form>
             )}
           </Formik>
-          {variant === "LOGIN" && (
+          {variant === 'LOGIN' && (
             <S.SignUpCTAContainer>
               Don't have an account?
-              <Link to="/signup">
+              <Link to='/signup'>
                 <span>Sign up.</span>
               </Link>
             </S.SignUpCTAContainer>
           )}
-          {variant === "SIGNUP" && (
+          {variant === 'SIGNUP' && (
             <S.SignUpCTAContainer>
               Already have an account?
-              <Link to="/login">
+              <Link to='/login'>
                 <span>Log in.</span>
               </Link>
             </S.SignUpCTAContainer>
           )}
           {error && (
-            <S.ErrorMessageContainer data-test="component-login-error-message">
+            <S.ErrorMessageContainer data-test='component-login-error-message'>
               {error.message}
             </S.ErrorMessageContainer>
           )}

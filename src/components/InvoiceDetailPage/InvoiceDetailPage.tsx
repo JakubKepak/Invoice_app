@@ -1,23 +1,23 @@
-import { useState } from "react";
-import * as S from "./Styles";
-import { Link, useParams } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
-import { GET_INVOICE } from "../../queries/queries";
-import useFetch from "hooks/useFetch";
-import useDBHandler from "hooks/useDBHandler";
+import { useState } from 'react';
+import * as S from './Styles';
+import { Link, useParams } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import { GET_INVOICE } from '../../queries/queries';
+import useFetch from 'hooks/useFetch';
+import useDBHandler from 'hooks/useDBHandler';
 
-import { fromatDate, addCommaSeparator } from "../../helpers/helpers";
+import { fromatDate, addCommaSeparator } from '../../helpers/helpers';
 
-import EditInvoice from "../EditInvoice/EditInvoice";
+import EditInvoice from '../EditInvoice/EditInvoice';
 
-import InvoiceStatusIcon from "components/UI/InvoiceStatusIcon";
-import Button from "components/UI/Button";
-import Modal from "../Modal";
-import DeleteModal from "components/UI/DeleteModal";
-import ErrorPage from "components/UtilityPages/ErrorPage";
-import Loader from "components/UI/Loader";
+import InvoiceStatusIcon from 'components/UI/InvoiceStatusIcon';
+import Button from 'components/UI/Button';
+import Modal from '../Modal';
+import DeleteModal from 'components/UI/DeleteModal';
+import ErrorPage from 'components/UtilityPages/ErrorPage';
+import Loader from 'components/UI/Loader';
 
-import leftArrowIcon from "assets/icon-arrow-left.svg";
+import leftArrowIcon from 'assets/icon-arrow-left.svg';
 
 export default function InvoiceDetailPage() {
   const { id } = useParams<any>();
@@ -36,7 +36,7 @@ export default function InvoiceDetailPage() {
       {!loading && invoice && (
         <S.MainContainer>
           <S.GoBackContainer>
-            <Link to="/">
+            <Link to='/'>
               <span>
                 <S.LeftArrowIcon src={leftArrowIcon} />
                 Go Back
@@ -49,13 +49,13 @@ export default function InvoiceDetailPage() {
               {invoice.data.status}
             </InvoiceStatusIcon>
             <S.ButtonsContainer>
-              <Button variant="secondary" onClick={() => setEditActive(true)}>
+              <Button variant='secondary' onClick={() => setEditActive(true)}>
                 Edit
               </Button>
-              <Button variant="warn" onClick={() => setShowModal(true)}>
+              <Button variant='warn' onClick={() => setShowModal(true)}>
                 Delete
               </Button>
-              <Button onClick={updateInvoiceStatusHandler} variant="primary">
+              <Button onClick={updateInvoiceStatusHandler} variant='primary'>
                 Mark as Paid
               </Button>
             </S.ButtonsContainer>
@@ -135,7 +135,7 @@ export default function InvoiceDetailPage() {
         {editActive && (
           <EditInvoice
             setEditActive={setEditActive}
-            variant="edit"
+            variant='edit'
             invoiceId={invoice.data.id}
             providerStreetAddress={invoice.data.senderAddress.street}
             providerCity={invoice.data.senderAddress.city}

@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import { device } from "breakpoints";
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { device } from 'breakpoints';
 
 export const MainContainer = styled.div`
   position: absolute;

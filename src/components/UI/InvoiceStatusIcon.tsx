@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StatusContainer = styled.div<{ status: string }>`
   display: flex;
@@ -21,7 +21,7 @@ const StatusContainer = styled.div<{ status: string }>`
   }
 
   ${(props) =>
-    props.status.toLowerCase() === "paid" &&
+    props.status.toLowerCase() === 'paid' &&
     `
     background-color: ${props.theme.colors.statusPaidBackground};
     color: ${props.theme.colors.statusPaid};
@@ -31,7 +31,7 @@ const StatusContainer = styled.div<{ status: string }>`
   }
   `};
   ${(props) =>
-    props.status.toLowerCase() === "pending" &&
+    props.status.toLowerCase() === 'pending' &&
     `
     background-color: ${props.theme.colors.statusPendingBackground};
     color: ${props.theme.colors.statusPending};
@@ -41,7 +41,7 @@ const StatusContainer = styled.div<{ status: string }>`
   }
   `};
   ${(props) =>
-    props.status.toLowerCase() === "draft" &&
+    props.status.toLowerCase() === 'draft' &&
     `
     background-color: ${props.theme.colors.statusDraftBackground};
     color: ${props.theme.colors.statusDraft};

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const MainContainer = styled.button`
   /* padding: 0.8rem 1.5rem; */

@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import Button from "../UI/Button";
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import Button from '../UI/Button';
 
 const MainContainer = styled.div`
   display: flex;
@@ -48,7 +48,7 @@ export default function DeleteModal({ onClick, closeModal, children }: Props) {
   return (
     <MainContainer onClick={closeModal}>
       <ModalContainer
-        key={"deleteModal"}
+        key={'deleteModal'}
         onClick={(e) => e.stopPropagation()}
         initial={{ scale: 0.5 }}
         animate={{ scale: 1 }}
@@ -57,10 +57,10 @@ export default function DeleteModal({ onClick, closeModal, children }: Props) {
         <Header>Confirm Deletion</Header>
         <ContentContainer>{children}</ContentContainer>
         <ButtonsContainer>
-          <Button variant="secondary" onClick={closeModal}>
+          <Button variant='secondary' onClick={closeModal}>
             Cancel
           </Button>
-          <Button onClick={onClick} variant="warn">
+          <Button onClick={onClick} variant='warn'>
             Delete
           </Button>
         </ButtonsContainer>
