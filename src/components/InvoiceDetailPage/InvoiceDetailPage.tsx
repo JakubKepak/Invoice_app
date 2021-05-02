@@ -19,7 +19,7 @@ import Loader from 'components/UI/Loader';
 
 import leftArrowIcon from 'assets/icon-arrow-left.svg';
 
-export default function InvoiceDetailPage() {
+export default function InvoiceDetailPage(): React.ReactElement {
   const { id } = useParams<any>();
 
   const [editActive, setEditActive] = useState<boolean>(false);

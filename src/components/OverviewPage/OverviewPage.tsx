@@ -16,7 +16,7 @@ import ErrorPage from 'components/UtilityPages/ErrorPage';
 import Loader from 'components/UI/Loader';
 import EmptyPage from 'components/UtilityPages/EmptyPage';
 
-export default function OverviewPage() {
+export default function OverviewPage(): React.ReactElement {
   const [editActive, setEditActive] = useState<boolean>(false);
   const { data, error, loading } = useFetch(INVOICES);
 

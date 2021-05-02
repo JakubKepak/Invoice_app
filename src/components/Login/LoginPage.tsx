@@ -15,7 +15,7 @@ interface Props {
   variant: 'LOGIN' | 'SIGNUP';
 }
 
-export default function LoginPage({ variant }: Props) {
+export default function LoginPage({ variant }: Props): React.ReactElement {
   const query = variant === 'LOGIN' ? LOGIN : REGISTER;
 
   const [handleUser, { loading, error }] = useMutation(query);

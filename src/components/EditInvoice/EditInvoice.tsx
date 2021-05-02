@@ -71,7 +71,7 @@ export default function EditInvoice({
       total: 0,
     },
   ],
-}: Props) {
+}: Props): React.ReactElement {
   const [invoiceStatus, setInvoiceStatus] = useState(status);
   const [formValidationSchema, setFormValidationSchema] = useState<any>(
     EditSchema
