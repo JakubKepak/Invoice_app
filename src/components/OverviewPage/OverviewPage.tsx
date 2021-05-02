@@ -15,6 +15,7 @@ import EditInvoice from 'components/EditInvoice/EditInvoice';
 import ErrorPage from 'components/UtilityPages/ErrorPage';
 import Loader from 'components/UI/Loader';
 import EmptyPage from 'components/UtilityPages/EmptyPage';
+import Filter from 'components/OverviewPage/Subcomponents/Filter';
 
 export default function OverviewPage(): React.ReactElement {
   const [editActive, setEditActive] = useState<boolean>(false);
@@ -37,10 +38,7 @@ export default function OverviewPage(): React.ReactElement {
                 </span>
               </S.PageTitleContainer>
               <S.OptionItemsContainer>
-                <S.FilterContainer>
-                  <span>Filter</span>
-                  <S.ArrowImage src={arrowDown} />
-                </S.FilterContainer>
+                <Filter />
                 <PrimaryButtonAdd setEditActive={setEditActive}>
                   New
                 </PrimaryButtonAdd>
