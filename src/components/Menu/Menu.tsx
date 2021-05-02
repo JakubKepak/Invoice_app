@@ -5,7 +5,7 @@ import profilePicture from 'assets/image-avatar.jpg';
 import * as S from './Styles';
 import useLogout from 'hooks/useLogout';
 
-export default function Menu({ themeToggle }: any) {
+export default function Menu({ themeToggle }: any): React.ReactElement {
   const [userOptionActive, setUserOptionActive] = useState<boolean>(false);
   const { logout } = useLogout();
 

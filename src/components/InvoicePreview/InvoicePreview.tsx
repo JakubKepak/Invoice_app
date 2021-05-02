@@ -26,7 +26,7 @@ export default function InvoicePreview({
   clientName,
   total,
   status,
-}: Props) {
+}: Props): React.ReactElement {
   return (
     <Link to={`/${id}`} key={id}>
       <S.MainContainer>
