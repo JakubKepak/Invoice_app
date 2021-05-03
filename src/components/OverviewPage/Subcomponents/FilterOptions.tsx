@@ -1,14 +1,8 @@
-import { useRef } from 'react';
 import * as S from './FilterOptionsStyles';
 
-import useOutsideClose from 'hooks/useOutsideClose';
-
-export default function FilterOptions({ setClose }: any): React.ReactElement {
-  const wrappedRef = useRef(null);
-  useOutsideClose(wrappedRef, setClose);
-
+export default function FilterOptions(): React.ReactElement {
   return (
-    <S.FilterOptionContainer ref={wrappedRef}>
+    <S.FilterOptionContainer>
       <S.FilterOptionItem>
         <S.FilterCheckboxLabel>
           <S.FilterCheckbox type='checkbox' />
