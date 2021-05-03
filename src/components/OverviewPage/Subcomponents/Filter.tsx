@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import * as S from './FilterStyles';
 import arrowDown from 'assets/icon-arrow-down.svg';
+import FilterOptions from './FilterOptions';
 
 export default function Filter(): React.ReactElement {
   const [showFilter, setShowFilter] = useState<boolean>(false);
@@ -15,33 +16,7 @@ export default function Filter(): React.ReactElement {
         <span>Filter</span>
         <S.ArrowImage src={arrowDown} showFilter={showFilter} />
       </S.FilterButton>
-      {showFilter && (
-        <S.FilterOptionContainer>
-          <S.FilterOptionItem>
-            <S.FilterCheckboxLabel>
-              <S.FilterCheckbox type='checkbox' />
-              <S.FilterCheckboxCheckmark></S.FilterCheckboxCheckmark>
-              Draft
-            </S.FilterCheckboxLabel>
-          </S.FilterOptionItem>
-
-          <S.FilterOptionItem>
-            <S.FilterCheckboxLabel>
-              <S.FilterCheckbox type='checkbox' />
-              <S.FilterCheckboxCheckmark></S.FilterCheckboxCheckmark>
-              Pending
-            </S.FilterCheckboxLabel>
-          </S.FilterOptionItem>
-
-          <S.FilterOptionItem>
-            <S.FilterCheckboxLabel>
-              <S.FilterCheckbox type='checkbox' />
-              <S.FilterCheckboxCheckmark></S.FilterCheckboxCheckmark>
-              Paid
-            </S.FilterCheckboxLabel>
-          </S.FilterOptionItem>
-        </S.FilterOptionContainer>
-      )}
+      {showFilter && <FilterOptions setClose={setShowFilter} />}
     </S.FilterContainer>
   );
 }
