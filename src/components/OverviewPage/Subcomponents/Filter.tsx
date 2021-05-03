@@ -18,21 +18,26 @@ export default function Filter(): React.ReactElement {
       {showFilter && (
         <S.FilterOptionContainer>
           <S.FilterOptionItem>
-            <S.FilterCheckbox id='filter-paid' type='checkbox' />
-            <S.FilterCheckboxLabel htmlFor='filter-paid'>
-              Paid
+            <S.FilterCheckboxLabel>
+              <S.FilterCheckbox type='checkbox' />
+              <S.FilterCheckboxCheckmark></S.FilterCheckboxCheckmark>
+              Draft
             </S.FilterCheckboxLabel>
           </S.FilterOptionItem>
+
           <S.FilterOptionItem>
-            <S.FilterCheckbox id='filter-pending' type='checkbox' />
-            <S.FilterCheckboxLabel htmlFor='filter-pending'>
+            <S.FilterCheckboxLabel>
+              <S.FilterCheckbox type='checkbox' />
+              <S.FilterCheckboxCheckmark></S.FilterCheckboxCheckmark>
               Pending
             </S.FilterCheckboxLabel>
           </S.FilterOptionItem>
+
           <S.FilterOptionItem>
-            <S.FilterCheckbox id='filter-draft' type='checkbox' />
-            <S.FilterCheckboxLabel htmlFor='filter-draft'>
-              Draft
+            <S.FilterCheckboxLabel>
+              <S.FilterCheckbox type='checkbox' />
+              <S.FilterCheckboxCheckmark></S.FilterCheckboxCheckmark>
+              Paid
             </S.FilterCheckboxLabel>
           </S.FilterOptionItem>
         </S.FilterOptionContainer>

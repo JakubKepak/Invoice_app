@@ -9,6 +9,7 @@ declare module 'styled-components' {
       mainBackground: string;
       menuBackground: string;
       invoiceDetailBackground: string;
+      optionCheckboxBackground: string;
       invoiceTotalBackground: string;
       invoiceItemBackground: string;
       userOptionBackground: string;
