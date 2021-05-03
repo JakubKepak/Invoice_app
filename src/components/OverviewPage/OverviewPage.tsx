@@ -7,8 +7,6 @@ import { INVOICES } from 'queries/queries';
 
 import PrimaryButtonAdd from 'components/UI/PrimaryButtonAdd';
 
-import arrowDown from 'assets/icon-arrow-down.svg';
-
 // components
 import InvoicePreview from 'components/InvoicePreview/InvoicePreview';
 import EditInvoice from 'components/EditInvoice/EditInvoice';
