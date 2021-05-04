@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import logo from 'assets/logo.svg';
 import themeIconLight from 'assets/icon-sun.svg';
 import profilePicture from 'assets/image-avatar.jpg';
 import * as S from './Styles';
 import useLogout from 'hooks/useLogout';
+import useOutsideClose from 'hooks/useOutsideClose';
 
 export default function Menu({ themeToggle }: any): React.ReactElement {
   const [userOptionActive, setUserOptionActive] = useState<boolean>(false);
   const { logout } = useLogout();
+  const wrappedRef = useRef(null);
+  useOutsideClose(wrappedRef, setUserOptionActive);
 
   const toggleUserOptionModal = () => {
     setUserOptionActive(!userOptionActive);
@@ -19,7 +22,7 @@ export default function Menu({ themeToggle }: any): React.ReactElement {
         <S.Logo src={logo} alt='logo' />
         <S.LogoContainerShadow />
       </S.LogoContainer>
-      <S.MenuSettingContainer>
+      <S.MenuSettingContainer ref={wrappedRef}>
         {userOptionActive && (
           <S.UserOptionContainer>
             <S.UserOptionItem onClick={logout}>Logout</S.UserOptionItem>

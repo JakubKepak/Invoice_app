@@ -39,21 +39,6 @@ export const OptionItemsContainer = styled.div`
   align-items: center;
 `;
 
-export const FilterContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: 1rem;
-  color: ${({ theme }) => theme.colors.mainFontColor};
-
-  & span {
-    font-weight: 700;
-  }
-`;
-
-export const ArrowImage = styled.img`
-  margin-left: 0.5rem;
-`;
-
 export const ContentContainer = styled.div`
   width: 100%;
   /* min-height: 100%; */
