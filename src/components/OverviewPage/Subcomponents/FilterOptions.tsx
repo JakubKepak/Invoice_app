@@ -1,8 +1,14 @@
+import { useContext } from 'react';
+import { InvoicesContext } from 'contexts/InvoicesContext';
 import * as S from './FilterOptionsStyles';
 
 export default function FilterOptions(): React.ReactElement {
+  const { addFilter, removeFilter } = useContext(InvoicesContext);
+
   const checkboxHandler = (e: any) => {
-    console.log(e.target.checked);
+    const payload = e.target.parentElement.innerText.toUpperCase();
+
+    e.target.checked ? addFilter(payload) : removeFilter(payload);
   };
 
   return (
@@ -21,7 +27,11 @@ export default function FilterOptions(): React.ReactElement {
 
       <S.FilterOptionItem>
         <S.FilterCheckboxLabel>
-          <S.FilterCheckbox type='checkbox' defaultChecked={true} />
+          <S.FilterCheckbox
+            type='checkbox'
+            defaultChecked={true}
+            onChange={(e) => checkboxHandler(e)}
+          />
           <S.FilterCheckboxCheckmark></S.FilterCheckboxCheckmark>
           Pending
         </S.FilterCheckboxLabel>
@@ -29,7 +39,11 @@ export default function FilterOptions(): React.ReactElement {
 
       <S.FilterOptionItem>
         <S.FilterCheckboxLabel>
-          <S.FilterCheckbox type='checkbox' defaultChecked={true} />
+          <S.FilterCheckbox
+            type='checkbox'
+            defaultChecked={true}
+            onChange={(e) => checkboxHandler(e)}
+          />
           <S.FilterCheckboxCheckmark></S.FilterCheckboxCheckmark>
           Paid
         </S.FilterCheckboxLabel>

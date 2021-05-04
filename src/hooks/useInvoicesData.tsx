@@ -7,6 +7,7 @@ export default function useInvoicesData(query: any): any {
 
   const initialState = {
     data: undefined,
+    originalData: undefined,
     filter: ['PAID', 'PENDING', 'DRAFT'],
   };
 
@@ -15,14 +16,21 @@ export default function useInvoicesData(query: any): any {
   useEffect(() => {
     console.log(state);
     dispatch({ type: 'refresh', payload: data });
-    dispatch({ type: 'filter' });
   }, [data]);
 
-  const filterPaid = () => {
+  const addFilter = (filter: 'PAID' | 'PENDING' | 'DRAFT') => {
     dispatch({
-      type: 'filter',
+      type: 'addFilter',
+      payload: filter,
     });
   };
 
-  return [state.data, error, loading, filterPaid];
+  const removeFilter = (filter: 'PAID' | 'PENDING' | 'DRAFT') => {
+    dispatch({
+      type: 'removeFilter',
+      payload: filter,
+    });
+  };
+
+  return [state.data, error, loading, addFilter, removeFilter];
 }

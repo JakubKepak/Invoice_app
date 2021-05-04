@@ -1,20 +1,64 @@
+/* eslint-disable no-case-declarations */
 type Action =
-  | { type: 'filter' }
+  | { type: 'addFilter'; payload: any }
+  | { type: 'removeFilter'; payload: any }
   | { type: 'error' }
   | { type: 'refresh'; payload: any };
 
 export const invoiceDataReducer = (state: any, action: Action) => {
   switch (action.type) {
     case 'refresh':
-      return { ...state, data: action.payload };
-    case 'filter':
-      // eslint-disable-next-line no-case-declarations
-      if (state.data) {
-        const filteredData = state.data.data.filter((invoice: any) =>
+      if (action.payload) {
+        const filteredData = action.payload.data.filter((invoice: any) =>
           state.filter.includes(invoice.status)
         );
 
-        return { ...state, data: { data: filteredData } };
+        return {
+          ...state,
+          originalData: action.payload,
+          data: { data: filteredData },
+        };
+      }
+
+      return state;
+    case 'addFilter':
+      state.filter.push(action.payload);
+
+      console.log(state.filter);
+
+      if (state.data) {
+        const filteredData = state.originalData.data.filter((invoice: any) =>
+          state.filter.includes(invoice.status)
+        );
+
+        console.log(filteredData);
+
+        return {
+          ...state,
+          filter: state.filter,
+          data: { data: filteredData },
+        };
+      }
+
+      return state;
+
+    case 'removeFilter':
+      state.filter.splice(state.filter.indexOf(action.payload), 1);
+
+      console.log(state.filter);
+
+      if (state.data) {
+        const filteredData = state.originalData.data.filter((invoice: any) =>
+          state.filter.includes(invoice.status)
+        );
+
+        console.log(filteredData);
+
+        return {
+          ...state,
+          filter: state.filter,
+          data: { data: filteredData },
+        };
       }
 
       return state;
