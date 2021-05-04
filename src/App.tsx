@@ -3,6 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { DefaultTheme } from 'styled-components';
 import useLocalStorage from 'hooks/useLocalStorage';
+import InvoicesProvider from 'contexts/InvoicesContext';
 import { GlobalStyle } from 'GlobalStyles';
 
 import { LightTheme, DarkTheme } from './themes';
@@ -39,25 +40,27 @@ function App(): ReactElement {
   return (
     <Router>
       <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Menu themeToggle={themeToggle} />
-        <ContentContainer data-test='component-app'>
-          <Switch>
-            <Route
-              exact
-              path='/login'
-              render={() => <LoginPage variant='LOGIN' />}
-            />
-            <Route
-              exact
-              path='/signup'
-              render={() => <LoginPage variant='SIGNUP' />}
-            />
-            <Route exact path='/' render={() => <OverviewPage />} />
-            <Route exact path='/:id' render={() => <InvoiceDetailPage />} />
-            <Route component={NotFound} />
-          </Switch>
-        </ContentContainer>
+        <InvoicesProvider>
+          <GlobalStyle />
+          <Menu themeToggle={themeToggle} />
+          <ContentContainer data-test='component-app'>
+            <Switch>
+              <Route
+                exact
+                path='/login'
+                render={() => <LoginPage variant='LOGIN' />}
+              />
+              <Route
+                exact
+                path='/signup'
+                render={() => <LoginPage variant='SIGNUP' />}
+              />
+              <Route exact path='/' render={() => <OverviewPage />} />
+              <Route exact path='/:id' render={() => <InvoiceDetailPage />} />
+              <Route component={NotFound} />
+            </Switch>
+          </ContentContainer>
+        </InvoicesProvider>
       </ThemeProvider>
     </Router>
   );
