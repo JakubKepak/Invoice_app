@@ -2,10 +2,10 @@ import { useState, useContext } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { InvoicesContext } from 'contexts/InvoicesContext';
 import * as S from './Styles';
-
-import PrimaryButtonAdd from 'components/UI/PrimaryButtonAdd';
+import { Invoice } from 'types/types';
 
 // components
+import PrimaryButtonAdd from 'components/UI/PrimaryButtonAdd';
 import InvoicePreview from 'components/InvoicePreview/InvoicePreview';
 import EditInvoice from 'components/EditInvoice/EditInvoice';
 import ErrorPage from 'components/UtilityPages/ErrorPage';
@@ -42,9 +42,8 @@ export default function OverviewPage(): React.ReactElement {
             </S.HeaderContainer>
 
             <S.ContentContainer>
-              {/* TODO: make more strict type for invoice */}
               {data.data.length > 0 ? (
-                data.data.map((invoice: any) => {
+                data.data.map((invoice: Invoice) => {
                   return (
                     <InvoicePreview
                       invoice={invoice}
