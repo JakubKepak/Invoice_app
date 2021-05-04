@@ -1,10 +1,7 @@
 import { useState, useContext } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import useInvoicesData from 'hooks/useInvoicesData';
 import { InvoicesContext } from 'contexts/InvoicesContext';
 import * as S from './Styles';
-
-import { INVOICES } from 'queries/queries';
 
 import PrimaryButtonAdd from 'components/UI/PrimaryButtonAdd';
 
@@ -15,13 +12,10 @@ import ErrorPage from 'components/UtilityPages/ErrorPage';
 import Loader from 'components/UI/Loader';
 import EmptyPage from 'components/UtilityPages/EmptyPage';
 import Filter from 'components/OverviewPage/Subcomponents/Filter';
-import FilterOptions from 'components/OverviewPage/Subcomponents/FilterOptions';
 
 export default function OverviewPage(): React.ReactElement {
   const [editActive, setEditActive] = useState<boolean>(false);
   const { data, error, loading } = useContext(InvoicesContext);
-
-  console.log(data);
 
   return (
     <>
