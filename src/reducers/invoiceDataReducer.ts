@@ -1,7 +1,9 @@
 /* eslint-disable no-case-declarations */
+import { FilterType, InvoiceType } from 'types/types';
+
 type Action =
-  | { type: 'addFilter'; payload: any }
-  | { type: 'removeFilter'; payload: any }
+  | { type: 'addFilter'; payload: FilterType }
+  | { type: 'removeFilter'; payload: FilterType }
   | { type: 'error' }
   | { type: 'refresh'; payload: any };
 
@@ -9,8 +11,8 @@ export const invoiceDataReducer = (state: any, action: Action): any => {
   switch (action.type) {
     case 'refresh':
       if (action.payload) {
-        const filteredData = action.payload.data.filter((invoice: any) =>
-          state.filter.includes(invoice.status)
+        const filteredData = action.payload.data.filter(
+          (invoice: InvoiceType) => state.filter.includes(invoice.status)
         );
 
         return {
@@ -27,8 +29,8 @@ export const invoiceDataReducer = (state: any, action: Action): any => {
       }
 
       if (state.data) {
-        const filteredData = state.originalData.data.filter((invoice: any) =>
-          state.filter.includes(invoice.status)
+        const filteredData = state.originalData.data.filter(
+          (invoice: InvoiceType) => state.filter.includes(invoice.status)
         );
 
         return {
@@ -46,8 +48,8 @@ export const invoiceDataReducer = (state: any, action: Action): any => {
       }
 
       if (state.data) {
-        const filteredData = state.originalData.data.filter((invoice: any) =>
-          state.filter.includes(invoice.status)
+        const filteredData = state.originalData.data.filter(
+          (invoice: InvoiceType) => state.filter.includes(invoice.status)
         );
 
         return {

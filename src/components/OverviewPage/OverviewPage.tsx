@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { InvoicesContext } from 'contexts/InvoicesContext';
 import * as S from './Styles';
-import { Invoice } from 'types/types';
+import { InvoiceType } from 'types/types';
 
 // components
 import PrimaryButtonAdd from 'components/UI/PrimaryButtonAdd';
@@ -43,7 +43,7 @@ export default function OverviewPage(): React.ReactElement {
 
             <S.ContentContainer>
               {data.data.length > 0 ? (
-                data.data.map((invoice: Invoice) => {
+                data.data.map((invoice: InvoiceType) => {
                   return (
                     <InvoicePreview
                       invoice={invoice}

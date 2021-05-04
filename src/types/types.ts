@@ -1,4 +1,4 @@
-export interface Invoice {
+export interface InvoiceType {
   createdAt: string;
   id: string;
   paymentDue: string;
@@ -29,3 +29,5 @@ export interface Invoice {
   ];
   total: number;
 }
+
+export type FilterType = 'DRAFT' | 'PENDING' | 'PAID';
