@@ -5,7 +5,7 @@ type Action =
   | { type: 'error' }
   | { type: 'refresh'; payload: any };
 
-export const invoiceDataReducer = (state: any, action: Action) => {
+export const invoiceDataReducer = (state: any, action: Action): any => {
   switch (action.type) {
     case 'refresh':
       if (action.payload) {
@@ -26,14 +26,10 @@ export const invoiceDataReducer = (state: any, action: Action) => {
         state.filter.push(action.payload);
       }
 
-      console.log(state.filter);
-
       if (state.data) {
         const filteredData = state.originalData.data.filter((invoice: any) =>
           state.filter.includes(invoice.status)
         );
-
-        console.log(filteredData);
 
         return {
           ...state,
@@ -49,14 +45,10 @@ export const invoiceDataReducer = (state: any, action: Action) => {
         state.filter.splice(state.filter.indexOf(action.payload), 1);
       }
 
-      console.log(state.filter);
-
       if (state.data) {
         const filteredData = state.originalData.data.filter((invoice: any) =>
           state.filter.includes(invoice.status)
         );
-
-        console.log(filteredData);
 
         return {
           ...state,
