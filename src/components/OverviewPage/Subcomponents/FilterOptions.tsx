@@ -1,14 +1,15 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { InvoicesContext } from 'contexts/InvoicesContext';
 import * as S from './FilterOptionsStyles';
 
 export default function FilterOptions(): React.ReactElement {
   const { addFilter, removeFilter } = useContext(InvoicesContext);
 
-  const checkboxHandler = (e: any) => {
-    const payload = e.target.parentElement.innerText.toUpperCase();
-
-    e.target.checked ? addFilter(payload) : removeFilter(payload);
+  const checkboxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.parentElement !== null) {
+      const payload = e.target.parentElement.innerText.toUpperCase();
+      e.target.checked ? addFilter(payload) : removeFilter(payload);
+    }
   };
 
   return (
