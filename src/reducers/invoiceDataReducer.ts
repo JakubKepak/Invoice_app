@@ -22,7 +22,9 @@ export const invoiceDataReducer = (state: any, action: Action) => {
 
       return state;
     case 'addFilter':
-      state.filter.push(action.payload);
+      if (!state.filter.includes(action.payload)) {
+        state.filter.push(action.payload);
+      }
 
       console.log(state.filter);
 
@@ -43,7 +45,9 @@ export const invoiceDataReducer = (state: any, action: Action) => {
       return state;
 
     case 'removeFilter':
-      state.filter.splice(state.filter.indexOf(action.payload), 1);
+      if (state.filter.includes(action.payload)) {
+        state.filter.splice(state.filter.indexOf(action.payload), 1);
+      }
 
       console.log(state.filter);
 
