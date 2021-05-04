@@ -46,7 +46,6 @@ export default function OverviewPage(): React.ReactElement {
                 data.data.map((invoice: InvoiceType) => {
                   return (
                     <InvoicePreview
-                      invoice={invoice}
                       key={invoice.id}
                       id={invoice.id}
                       paymentDue={invoice.paymentDue}

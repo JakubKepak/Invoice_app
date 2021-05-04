@@ -12,7 +12,6 @@ import { fromatDate, addCommaSeparator } from 'helpers/helpers';
 import iconRight from 'assets/icon-arrow-right.svg';
 
 interface Props {
-  invoice: any;
   id: string;
   paymentDue: string;
   clientName: string;
