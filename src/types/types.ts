@@ -30,4 +30,11 @@ export interface InvoiceType {
   total: number;
 }
 
+export interface InvoiceItemType {
+  name: string;
+  quantity: number;
+  price: number;
+  total: number;
+}
+
 export type FilterType = 'DRAFT' | 'PENDING' | 'PAID';
