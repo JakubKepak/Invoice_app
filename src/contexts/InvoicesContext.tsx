@@ -1,10 +1,10 @@
 import { createContext } from 'react';
-
 import useInvoiceData from 'hooks/useInvoicesData';
 import { INVOICES } from 'queries/queries';
+import { DataInvoices } from 'types/types';
 
 type InvoiceContextType = {
-  data: any;
+  data: DataInvoices | undefined;
   error: any;
   loading: any;
   addFilter: any;

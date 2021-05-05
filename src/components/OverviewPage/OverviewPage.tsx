@@ -1,27 +1,21 @@
 import { useState, useContext } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import useInvoicesData from 'hooks/useInvoicesData';
 import { InvoicesContext } from 'contexts/InvoicesContext';
 import * as S from './Styles';
-
-import { INVOICES } from 'queries/queries';
-
-import PrimaryButtonAdd from 'components/UI/PrimaryButtonAdd';
+import { InvoiceType } from 'types/types';
 
 // components
+import PrimaryButtonAdd from 'components/UI/PrimaryButtonAdd';
 import InvoicePreview from 'components/InvoicePreview/InvoicePreview';
 import EditInvoice from 'components/EditInvoice/EditInvoice';
 import ErrorPage from 'components/UtilityPages/ErrorPage';
 import Loader from 'components/UI/Loader';
 import EmptyPage from 'components/UtilityPages/EmptyPage';
 import Filter from 'components/OverviewPage/Subcomponents/Filter';
-import FilterOptions from 'components/OverviewPage/Subcomponents/FilterOptions';
 
 export default function OverviewPage(): React.ReactElement {
   const [editActive, setEditActive] = useState<boolean>(false);
   const { data, error, loading } = useContext(InvoicesContext);
-
-  console.log(data);
 
   return (
     <>
@@ -48,12 +42,10 @@ export default function OverviewPage(): React.ReactElement {
             </S.HeaderContainer>
 
             <S.ContentContainer>
-              {/* TODO: make more strict type for invoice */}
               {data.data.length > 0 ? (
-                data.data.map((invoice: any) => {
+                data.data.map((invoice: InvoiceType) => {
                   return (
                     <InvoicePreview
-                      invoice={invoice}
                       key={invoice.id}
                       id={invoice.id}
                       paymentDue={invoice.paymentDue}

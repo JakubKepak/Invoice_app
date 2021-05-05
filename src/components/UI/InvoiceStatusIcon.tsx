@@ -57,7 +57,10 @@ interface Props {
   children: string;
 }
 
-export default function InvoiceStatusIcon({ status, children }: Props) {
+export default function InvoiceStatusIcon({
+  status,
+  children,
+}: Props): React.ReactElement {
   return (
     <StatusContainer status={status}>
       <span></span>

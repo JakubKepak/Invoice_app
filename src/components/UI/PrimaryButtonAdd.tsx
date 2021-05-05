@@ -38,7 +38,15 @@ const AddContainer = styled.div`
   }
 `;
 
-export default function PrimaryButtonAdd({ children, setEditActive }: any) {
+interface Props {
+  setEditActive: any;
+  children: React.ReactElement | string;
+}
+
+export default function PrimaryButtonAdd({
+  children,
+  setEditActive,
+}: Props): React.ReactElement {
   return (
     <MainContainer
       onClick={() => {

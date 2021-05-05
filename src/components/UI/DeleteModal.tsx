@@ -39,12 +39,16 @@ const ButtonsContainer = styled.div`
 `;
 
 interface Props {
-  onClick?: any;
-  closeModal: any;
+  onClick?: () => void;
+  closeModal: () => void;
   children: any;
 }
 
-export default function DeleteModal({ onClick, closeModal, children }: Props) {
+export default function DeleteModal({
+  onClick,
+  closeModal,
+  children,
+}: Props): React.ReactElement {
   return (
     <MainContainer onClick={closeModal}>
       <ModalContainer
