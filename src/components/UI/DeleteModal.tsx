@@ -39,8 +39,8 @@ const ButtonsContainer = styled.div`
 `;
 
 interface Props {
-  onClick?: any;
-  closeModal: any;
+  onClick?: () => void;
+  closeModal: () => void;
   children: any;
 }
 

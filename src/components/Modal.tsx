@@ -1,7 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-export default function Modal({ children }: any) {
+interface Props {
+  children: React.ReactElement;
+}
+
+export default function Modal({ children }: Props): React.ReactElement {
   const elRef = useRef<any>(null);
   if (!elRef.current) {
     const div = document.createElement('div');
