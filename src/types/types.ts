@@ -19,15 +19,12 @@ export interface InvoiceType {
     postCode: string;
     country: string;
   };
-  items: [
-    {
-      name: string;
-      quantity: number;
-      price: number;
-      total: number;
-    }
-  ];
+  items: [InvoiceItemType];
   total: number;
+}
+
+export interface DataInvoices {
+  data: [InvoiceType];
 }
 
 export interface InvoiceItemType {
