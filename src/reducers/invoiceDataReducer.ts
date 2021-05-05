@@ -1,13 +1,19 @@
 /* eslint-disable no-case-declarations */
-import { FilterType, InvoiceType } from 'types/types';
+import { FilterType, InvoiceType, DataInvoices } from 'types/types';
 
 type Action =
   | { type: 'addFilter'; payload: FilterType }
   | { type: 'removeFilter'; payload: FilterType }
   | { type: 'error' }
-  | { type: 'refresh'; payload: any };
+  | { type: 'refresh'; payload: DataInvoices };
 
-export const invoiceDataReducer = (state: any, action: Action): any => {
+interface StateType {
+  data: DataInvoices;
+  originalData: DataInvoices;
+  filter: [FilterType];
+}
+
+export const invoiceDataReducer = (state: StateType, action: Action): any => {
   switch (action.type) {
     case 'refresh':
       if (action.payload) {
