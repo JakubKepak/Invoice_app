@@ -6,7 +6,7 @@ export interface InvoiceType {
   paymentTerms: number;
   clientName: string;
   clientEmail: string;
-  status: 'PAID' | 'PENDING' | 'DRAFT';
+  status: string;
   senderAddress: {
     street: string;
     city: string;
@@ -19,12 +19,12 @@ export interface InvoiceType {
     postCode: string;
     country: string;
   };
-  items: [InvoiceItemType];
+  items: InvoiceItemType[];
   total: number;
 }
 
 export interface DataInvoices {
-  data: [InvoiceType];
+  data: InvoiceType[];
 }
 
 export interface InvoiceItemType {
