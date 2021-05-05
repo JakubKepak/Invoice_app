@@ -13,6 +13,12 @@ interface StateType {
   filter: [FilterType];
 }
 
+export const initialState = {
+  data: undefined,
+  originalData: undefined,
+  filter: ['PAID', 'PENDING', 'DRAFT'],
+};
+
 export const invoiceDataReducer = (state: StateType, action: Action): any => {
   switch (action.type) {
     case 'refresh':
