@@ -5,12 +5,12 @@ type Action =
   | { type: 'addFilter'; payload: FilterType }
   | { type: 'removeFilter'; payload: FilterType }
   | { type: 'error' }
-  | { type: 'refresh'; payload: DataInvoices };
+  | { type: 'refresh'; payload: DataInvoices | undefined };
 
 interface StateType {
-  data: DataInvoices;
-  originalData: DataInvoices;
-  filter: [FilterType];
+  data: DataInvoices | undefined;
+  originalData: DataInvoices | undefined;
+  filter: string[];
 }
 
 export const initialState = {
@@ -40,7 +40,7 @@ export const invoiceDataReducer = (state: StateType, action: Action): any => {
         state.filter.push(action.payload);
       }
 
-      if (state.data) {
+      if (state.data && state.originalData) {
         const filteredData = state.originalData.data.filter(
           (invoice: InvoiceType) => state.filter.includes(invoice.status)
         );
@@ -59,7 +59,7 @@ export const invoiceDataReducer = (state: StateType, action: Action): any => {
         state.filter.splice(state.filter.indexOf(action.payload), 1);
       }
 
-      if (state.data) {
+      if (state.data && state.originalData) {
         const filteredData = state.originalData.data.filter(
           (invoice: InvoiceType) => state.filter.includes(invoice.status)
         );

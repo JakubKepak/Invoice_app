@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`invoiceDataReducer should return initial state 1`] = `
+Object {
+  "data": undefined,
+  "filter": Array [
+    "PAID",
+    "PENDING",
+    "DRAFT",
+  ],
+  "originalData": undefined,
+}
+`;
