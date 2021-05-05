@@ -1,7 +1,11 @@
 import { useField } from 'formik';
 import * as S from 'components/EditInvoice/Styles';
+import React from 'react';
 
-export const CustomTextField = ({ label, ...props }: any) => {
+export const CustomTextField = ({
+  label,
+  ...props
+}: any): React.ReactElement => {
   const [field, meta] = useField(props);
 
   return (
@@ -17,7 +21,10 @@ export const CustomTextField = ({ label, ...props }: any) => {
   );
 };
 
-export const CustomFropDownField = ({ label, ...props }: any) => {
+export const CustomFropDownField = ({
+  label,
+  ...props
+}: any): React.ReactElement => {
   const [field, meta] = useField(props);
 
   return (
@@ -36,7 +43,10 @@ export const CustomFropDownField = ({ label, ...props }: any) => {
   );
 };
 
-export const CustomDatePickerField = ({ label, ...props }: any) => {
+export const CustomDatePickerField = ({
+  label,
+  ...props
+}: any): React.ReactElement => {
   const [field, meta] = useField(props);
 
   return (
