@@ -1,0 +1,289 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`invoiceDataReducer should return all but paid invoices 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "clientAddress": Object {
+          "city": "Bradford",
+          "country": "United Kingdom",
+          "postCode": "BD1 9PB",
+          "street": "84 Church Way",
+        },
+        "clientEmail": "alexgrim@mail.com",
+        "clientName": "Alex Grim",
+        "createdAt": "2021-08-21",
+        "description": "Graphic Design",
+        "id": "XM9141",
+        "items": Array [
+          Object {
+            "name": "Banner Design",
+            "price": 156,
+            "quantity": 1,
+            "total": 156,
+          },
+          Object {
+            "name": "Email Design",
+            "price": 200,
+            "quantity": 2,
+            "total": 400,
+          },
+        ],
+        "paymentDue": "2021-09-20",
+        "paymentTerms": 30,
+        "senderAddress": Object {
+          "city": "London",
+          "country": "United Kingdom",
+          "postCode": "E1 3EZ",
+          "street": "19 Union Terrace",
+        },
+        "status": "PENDING",
+        "total": 556,
+      },
+    ],
+  },
+  "filter": Array [
+    "PENDING",
+    "DRAFT",
+  ],
+  "originalData": Object {
+    "data": Array [
+      Object {
+        "clientAddress": Object {
+          "city": "Sharrington",
+          "country": "United Kingdom",
+          "postCode": "NR24 5WQ",
+          "street": "106 Kendell Street",
+        },
+        "clientEmail": "jensenh@mail.com",
+        "clientName": "Jensen Huang",
+        "createdAt": "2021-08-18",
+        "description": "Re-branding",
+        "id": "RT3080",
+        "items": Array [
+          Object {
+            "name": "Brand Guidelines",
+            "price": 1800.9,
+            "quantity": 1,
+            "total": 1800.9,
+          },
+        ],
+        "paymentDue": "2021-08-19",
+        "paymentTerms": 1,
+        "senderAddress": Object {
+          "city": "London",
+          "country": "United Kingdom",
+          "postCode": "E1 3EZ",
+          "street": "19 Union Terrace",
+        },
+        "status": "PAID",
+        "total": 1800.9,
+      },
+      Object {
+        "clientAddress": Object {
+          "city": "Bradford",
+          "country": "United Kingdom",
+          "postCode": "BD1 9PB",
+          "street": "84 Church Way",
+        },
+        "clientEmail": "alexgrim@mail.com",
+        "clientName": "Alex Grim",
+        "createdAt": "2021-08-21",
+        "description": "Graphic Design",
+        "id": "XM9141",
+        "items": Array [
+          Object {
+            "name": "Banner Design",
+            "price": 156,
+            "quantity": 1,
+            "total": 156,
+          },
+          Object {
+            "name": "Email Design",
+            "price": 200,
+            "quantity": 2,
+            "total": 400,
+          },
+        ],
+        "paymentDue": "2021-09-20",
+        "paymentTerms": 30,
+        "senderAddress": Object {
+          "city": "London",
+          "country": "United Kingdom",
+          "postCode": "E1 3EZ",
+          "street": "19 Union Terrace",
+        },
+        "status": "PENDING",
+        "total": 556,
+      },
+    ],
+  },
+}
+`;
+
+exports[`invoiceDataReducer should return initial state 1`] = `
+Object {
+  "data": undefined,
+  "filter": Array [
+    "PAID",
+    "PENDING",
+    "DRAFT",
+  ],
+  "originalData": undefined,
+}
+`;
+
+exports[`invoiceDataReducer should return state after initial fetch 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "clientAddress": Object {
+          "city": "Sharrington",
+          "country": "United Kingdom",
+          "postCode": "NR24 5WQ",
+          "street": "106 Kendell Street",
+        },
+        "clientEmail": "jensenh@mail.com",
+        "clientName": "Jensen Huang",
+        "createdAt": "2021-08-18",
+        "description": "Re-branding",
+        "id": "RT3080",
+        "items": Array [
+          Object {
+            "name": "Brand Guidelines",
+            "price": 1800.9,
+            "quantity": 1,
+            "total": 1800.9,
+          },
+        ],
+        "paymentDue": "2021-08-19",
+        "paymentTerms": 1,
+        "senderAddress": Object {
+          "city": "London",
+          "country": "United Kingdom",
+          "postCode": "E1 3EZ",
+          "street": "19 Union Terrace",
+        },
+        "status": "PAID",
+        "total": 1800.9,
+      },
+      Object {
+        "clientAddress": Object {
+          "city": "Bradford",
+          "country": "United Kingdom",
+          "postCode": "BD1 9PB",
+          "street": "84 Church Way",
+        },
+        "clientEmail": "alexgrim@mail.com",
+        "clientName": "Alex Grim",
+        "createdAt": "2021-08-21",
+        "description": "Graphic Design",
+        "id": "XM9141",
+        "items": Array [
+          Object {
+            "name": "Banner Design",
+            "price": 156,
+            "quantity": 1,
+            "total": 156,
+          },
+          Object {
+            "name": "Email Design",
+            "price": 200,
+            "quantity": 2,
+            "total": 400,
+          },
+        ],
+        "paymentDue": "2021-09-20",
+        "paymentTerms": 30,
+        "senderAddress": Object {
+          "city": "London",
+          "country": "United Kingdom",
+          "postCode": "E1 3EZ",
+          "street": "19 Union Terrace",
+        },
+        "status": "PENDING",
+        "total": 556,
+      },
+    ],
+  },
+  "filter": Array [
+    "PAID",
+    "PENDING",
+    "DRAFT",
+  ],
+  "originalData": Object {
+    "data": Array [
+      Object {
+        "clientAddress": Object {
+          "city": "Sharrington",
+          "country": "United Kingdom",
+          "postCode": "NR24 5WQ",
+          "street": "106 Kendell Street",
+        },
+        "clientEmail": "jensenh@mail.com",
+        "clientName": "Jensen Huang",
+        "createdAt": "2021-08-18",
+        "description": "Re-branding",
+        "id": "RT3080",
+        "items": Array [
+          Object {
+            "name": "Brand Guidelines",
+            "price": 1800.9,
+            "quantity": 1,
+            "total": 1800.9,
+          },
+        ],
+        "paymentDue": "2021-08-19",
+        "paymentTerms": 1,
+        "senderAddress": Object {
+          "city": "London",
+          "country": "United Kingdom",
+          "postCode": "E1 3EZ",
+          "street": "19 Union Terrace",
+        },
+        "status": "PAID",
+        "total": 1800.9,
+      },
+      Object {
+        "clientAddress": Object {
+          "city": "Bradford",
+          "country": "United Kingdom",
+          "postCode": "BD1 9PB",
+          "street": "84 Church Way",
+        },
+        "clientEmail": "alexgrim@mail.com",
+        "clientName": "Alex Grim",
+        "createdAt": "2021-08-21",
+        "description": "Graphic Design",
+        "id": "XM9141",
+        "items": Array [
+          Object {
+            "name": "Banner Design",
+            "price": 156,
+            "quantity": 1,
+            "total": 156,
+          },
+          Object {
+            "name": "Email Design",
+            "price": 200,
+            "quantity": 2,
+            "total": 400,
+          },
+        ],
+        "paymentDue": "2021-09-20",
+        "paymentTerms": 30,
+        "senderAddress": Object {
+          "city": "London",
+          "country": "United Kingdom",
+          "postCode": "E1 3EZ",
+          "street": "19 Union Terrace",
+        },
+        "status": "PENDING",
+        "total": 556,
+      },
+    ],
+  },
+}
+`;
