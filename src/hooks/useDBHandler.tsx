@@ -7,7 +7,7 @@ import {
   INVOICES,
 } from 'queries/queries';
 
-export default function useDBHandler(invoice: any) {
+export default function useDBHandler(invoice: any): any {
   const [deleteInvoice] = useMutation(REMOVE_INVOICE);
   const [updateInvoice] = useMutation(UPDATE_INVOICE);
 
