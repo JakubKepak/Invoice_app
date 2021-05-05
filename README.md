@@ -8,6 +8,7 @@
 - [Formik](https://formik.org/) + [Yup](https://www.npmjs.com/package/yup)
 - [Apollo](https://www.apollographql.com/)
 - [Framer Motion](https://www.framer.com/motion/)
+- [Cypress.io](https://www.cypress.io/)
 
 ## Want to run the project locally?
 

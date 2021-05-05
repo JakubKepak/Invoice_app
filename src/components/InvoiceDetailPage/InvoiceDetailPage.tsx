@@ -2,17 +2,18 @@ import { useState } from 'react';
 import * as S from './Styles';
 import { Link, useParams } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { GET_INVOICE } from '../../queries/queries';
+import { GET_INVOICE } from 'queries/queries';
 import useFetch from 'hooks/useFetch';
 import useDBHandler from 'hooks/useDBHandler';
+import { InvoiceItemType } from 'types/types';
 
-import { fromatDate, addCommaSeparator } from '../../helpers/helpers';
+import { fromatDate, addCommaSeparator } from 'helpers/helpers';
 
-import EditInvoice from '../EditInvoice/EditInvoice';
-
+// components
+import EditInvoice from 'components/EditInvoice/EditInvoice';
 import InvoiceStatusIcon from 'components/UI/InvoiceStatusIcon';
 import Button from 'components/UI/Button';
-import Modal from '../Modal';
+import Modal from 'components/Modal';
 import DeleteModal from 'components/UI/DeleteModal';
 import ErrorPage from 'components/UtilityPages/ErrorPage';
 import Loader from 'components/UI/Loader';
@@ -20,7 +21,7 @@ import Loader from 'components/UI/Loader';
 import leftArrowIcon from 'assets/icon-arrow-left.svg';
 
 export default function InvoiceDetailPage(): React.ReactElement {
-  const { id } = useParams<any>();
+  const { id } = useParams<Record<string, string | undefined>>();
 
   const [editActive, setEditActive] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -108,17 +109,19 @@ export default function InvoiceDetailPage(): React.ReactElement {
                   <span>Price</span>
                   <span>Total</span>
                 </S.ItemContainerHeader>
-                {invoice.data.items.map((item: any, index: number) => {
-                  return (
-                    <S.ItemContainer key={index}>
-                      <span>{item.name}</span>
-                      <span>{item.quantity}</span>
-                      <span>x</span>
-                      <span>{`£ ${addCommaSeparator(item.price)}`}</span>
-                      <span>{`£ ${addCommaSeparator(item.total)}`}</span>
-                    </S.ItemContainer>
-                  );
-                })}
+                {invoice.data.items.map(
+                  (item: InvoiceItemType, index: number) => {
+                    return (
+                      <S.ItemContainer key={index}>
+                        <span>{item.name}</span>
+                        <span>{item.quantity}</span>
+                        <span>x</span>
+                        <span>{`£ ${addCommaSeparator(item.price)}`}</span>
+                        <span>{`£ ${addCommaSeparator(item.total)}`}</span>
+                      </S.ItemContainer>
+                    );
+                  }
+                )}
               </S.ItemsListContainer>
               <S.TotalAmountContainer>
                 <S.ItemLabel>Amount Due</S.ItemLabel>

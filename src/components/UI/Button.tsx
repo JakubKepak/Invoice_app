@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 const MainContainer = styled.button<{ variant?: string }>`
@@ -61,9 +62,9 @@ const MainContainer = styled.button<{ variant?: string }>`
 interface Props {
   variant: 'primary' | 'secondary' | 'warn' | 'dark';
   disabled?: boolean;
-  children?: any;
-  onClick?: any;
-  type?: any;
+  children?: React.ReactElement | string;
+  onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset' | undefined;
 }
 
 export default function Button({
@@ -72,7 +73,7 @@ export default function Button({
   children,
   onClick,
   type,
-}: Props) {
+}: Props): React.ReactElement {
   return (
     <MainContainer
       type={type}

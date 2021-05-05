@@ -21,7 +21,7 @@ const Spinner = styled.div`
   animation: ${SpinAnimation} 0.5s linear infinite;
 `;
 
-export default function Loader() {
+export default function Loader(): React.ReactElement {
   return (
     <MainContainer>
       <Spinner />
