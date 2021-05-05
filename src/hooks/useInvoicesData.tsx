@@ -1,15 +1,9 @@
 import { useReducer, useEffect } from 'react';
 import useFetch from 'hooks/useFetch';
-import { invoiceDataReducer } from 'reducers/invoiceDataReducer';
+import { invoiceDataReducer, initialState } from 'reducers/invoiceDataReducer';
 
 export default function useInvoicesData(query: any): any {
   const { data, error, loading } = useFetch(query);
-
-  const initialState = {
-    data: undefined,
-    originalData: undefined,
-    filter: ['PAID', 'PENDING', 'DRAFT'],
-  };
 
   const [state, dispatch] = useReducer(invoiceDataReducer, initialState);
 
