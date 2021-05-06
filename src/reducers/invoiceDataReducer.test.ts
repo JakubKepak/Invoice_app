@@ -1,6 +1,9 @@
 import { invoiceDataReducer, initialState } from 'reducers/invoiceDataReducer';
 import { mockData } from '__mock__/data';
-import { allFilterInvoiceStateMock } from '__mock__/invoiceDataStateMock';
+import {
+  allFilterInvoiceStateMock,
+  PendingDrafFilterInvoiceStateMock,
+} from '__mock__/invoiceDataStateMock';
 
 describe('invoiceDataReducer', () => {
   it('should return initial state', () => {
@@ -15,10 +18,19 @@ describe('invoiceDataReducer', () => {
     ).toMatchSnapshot();
   });
 
-  it('should return all but paid invoices', () => {
+  it('removeFilter - should return all but paid invoices', () => {
     expect(
       invoiceDataReducer(allFilterInvoiceStateMock, {
         type: 'removeFilter',
+        payload: 'PAID',
+      })
+    ).toMatchSnapshot();
+  });
+
+  it('addFilter - should return all invoices', () => {
+    expect(
+      invoiceDataReducer(PendingDrafFilterInvoiceStateMock, {
+        type: 'addFilter',
         payload: 'PAID',
       })
     ).toMatchSnapshot();
