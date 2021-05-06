@@ -2,6 +2,7 @@ import { Formik, Form } from 'formik';
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import client from 'client';
 import * as S from './Styles';
 import { SignupSchema, LoginSchema } from 'helpers/FormValidationSchemas';
 
@@ -45,6 +46,7 @@ export default function LoginPage({ variant }: Props): React.ReactElement {
                     },
                   });
                   localStorage.setItem('token', token.data?.data?.token);
+                  client.resetStore();
                   history.push('/');
                 } catch (err) {}
               })();
