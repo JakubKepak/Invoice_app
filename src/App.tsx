@@ -1,12 +1,12 @@
 import {FunctionComponent} from "react";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import {createMuiTheme, ThemeProvider} from "@material-ui/core";
+import {createTheme, ThemeProvider} from "@material-ui/core";
 
 import {Login, Overview, Inventory, Registration, User, Add} from "./screens";
 import {ADD_LINK, INVENTORY_LINK, OVERVIEW_LINK, REGISTRATION_LINK, USER_LINK} from "./constants";
 import {NotExist} from "./utils";
 
-const theme = createMuiTheme({
+const theme = createTheme({
     palette: {
         primary: {
             main: "#2222D3",
