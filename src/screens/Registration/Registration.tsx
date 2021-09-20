@@ -1,11 +1,14 @@
-import {FunctionComponent} from "react";
-import {Button, CssBaseline, TextField, Box, Typography, Container} from "@material-ui/core";
+import { FunctionComponent, useState } from "react";
+import { Button, CssBaseline, Box, Typography, Container } from "@material-ui/core";
 
-import {Copyright, RouterLink} from "../../components";
-import {useStyles} from "./utils";
+import { Copyright, RouterLink, Spacer, TextField } from "../../components";
+import { useStyles } from "./utils";
 
 export const Registration: FunctionComponent = () => {
     const classes = useStyles();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordAgain, setPasswordAgain] = useState("");
 
     return (
         <Container component="main" maxWidth="xs">
@@ -18,39 +21,37 @@ export const Registration: FunctionComponent = () => {
                     Základní údaje
                 </Typography>
                 <form className={classes.form} noValidate={true}>
+                    <Spacer size={2} direction="column" />
                     <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email"
-                        name="email"
+                        isRequired={true}
+                        isFullWidth={true}
+                        label="E-mail"
                         autoComplete="email"
-                        autoFocus
+                        isAutofocusActive={true}
+                        value={email}
+                        onChange={(value) => setEmail(value)}
                     />
+                    <Spacer size={3} direction="column" />
                     <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
+                        isRequired={true}
+                        isFullWidth={true}
                         label="Heslo"
                         type="password"
-                        id="password"
                         autoComplete="current-password"
+                        value={password}
+                        onChange={(value) => setPassword(value)}
                     />
+                    <Spacer size={3} direction="column" />
                     <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
+                        isRequired={true}
+                        isFullWidth={true}
                         label="Zopakovat heslo"
                         type="password"
-                        id="password"
                         autoComplete="current-password"
+                        value={passwordAgain}
+                        onChange={(value) => setPasswordAgain(value)}
                     />
+                    <Spacer size={1} direction="column" />
                     <RouterLink to="technika">
                         <Button
                             type="submit"

@@ -1,22 +1,22 @@
-import {makeStyles, Theme} from "@material-ui/core/styles";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
-import {ListItemProps} from "./ListItem";
+import { ListItemProps } from "./ListItemProps";
 
-export const useStyles = makeStyles<Theme, ListItemProps>(({spacing, palette}) => ({
+export const useStyles = makeStyles<Theme, ListItemProps>(({ spacing, palette }) => ({
     root: {
-        margin: spacing(1),
+        margin: spacing(1.5, 0),
         padding: spacing(1),
     },
-    icon: ({variant}) =>  ({
+    icon: ({ variant }) => ({
         display: "flex",
-        color: variant === "primary" ? palette.primary.main : variant === "success" ? palette.success.main :  palette.text.disabled,
+        color: variant === "primary" ? palette.primary.main : variant === "success" ? palette.success.main : palette.text.disabled,
         margin: spacing(0.5),
     }),
-    title: ({variant}) => ({
+    title: ({ variant }) => ({
         display: "flex",
         flex: 1,
         marginLeft: spacing(1),
-        color: variant === "primary" ? palette.primary.main : variant === "success" ? palette.success.main :  palette.text.disabled,
+        color: variant === "primary" ? palette.primary.main : variant === "success" ? palette.success.main : palette.text.disabled,
         fontWeight: "bold",
     }),
     chevron: {

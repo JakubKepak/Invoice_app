@@ -4,3 +4,6 @@ export * from "./Inventory";
 export * from "./Registration";
 export * from "./User";
 export * from "./Add";
+export * from "./AddDevice";
+export * from "./Detail";
+export * from "./Logout";

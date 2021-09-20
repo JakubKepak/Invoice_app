@@ -1,12 +1,11 @@
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles(({spacing, palette}) => ({
+export const useStyles = makeStyles(({ spacing, palette }) => ({
     root: {
         margin: spacing(1, 1, 1, 1),
     },
     button: {
         margin: spacing(1, 1, 2),
-        backgroundColor: palette.success.main,
     },
     icon: {
         margin: spacing(1),
@@ -21,6 +20,6 @@ export const useStyles = makeStyles(({spacing, palette}) => ({
         color: palette.grey[400],
     },
     progress: {
-         margin: spacing(0, 1),
+        margin: spacing(0, 1),
     },
 }));

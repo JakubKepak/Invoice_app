@@ -1,19 +1,24 @@
-import {FunctionComponent} from "react";
-import {Link} from "react-router-dom";
+import { FunctionComponent } from "react";
+import { Link } from "react-router-dom";
 
-import {useStyles} from "./utils";
+import { useStyles } from "./utils";
 
 export type RouterLinkProps = {
-    to: string;
-    className?: string
+    to: string,
+    className?: string,
+    replace?: boolean,
+    onClick?: () => void,
 }
 
-export const RouterLink: FunctionComponent<RouterLinkProps> = ({children, to, className}) => {
+export const RouterLink: FunctionComponent<RouterLinkProps> = ({ children, to, className, replace = false, onClick }) => {
     const classes = useStyles();
 
     return (
-        <Link to={to} className={`${classes.root} ${className}`}>
+        <Link
+            className={`${classes.root} ${className}`}
+            {...{ to, replace, onClick }}
+        >
             {children}
-        </Link>  
+        </Link>
     );
 };

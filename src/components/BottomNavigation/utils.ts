@@ -1,8 +1,10 @@
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles(() => ({
     root: {
-        top: "auto",
-        bottom: 0,
+        width: "100%",
+    },
+    navigation: {
+
     },
 }));

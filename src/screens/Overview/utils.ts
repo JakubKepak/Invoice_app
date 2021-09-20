@@ -1,7 +1,15 @@
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles(({spacing}) => ({
+export const useStyles = makeStyles(({ spacing }) => ({
     root: {
-        margin: spacing(2, 1),
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+    },
+    list: {
+        flex: 1,
+        flexDirection: "column",
+        overflowY: "auto",
+        padding: spacing(2, 3, 2, 3),
     },
 }));

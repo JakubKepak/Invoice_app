@@ -1,10 +1,14 @@
+html {
+    height: 100%;
+}
+
 body {
     margin: 0;
     font-family: "Roboto";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overscroll-behavior: none;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -12,4 +16,22 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    height: 100%;
+    overflow: hidden; // Řeší overscroll v Safari
+    touch-action: none; // Zakázání přibližování
+    -webkit-text-size-adjust: none; // Zakázání zvětšování textu
+}
+
+#root {
+    height: 100%;
+}
+
+::-moz-selection {
+    color: #FFFFFF;
+    background: #2222D3;
+}
+
+::selection {
+    color: #FFFFFF;
+    background: #2222D3;
 }

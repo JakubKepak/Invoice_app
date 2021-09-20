@@ -1,13 +1,14 @@
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles(({spacing}) => ({
+export const useStyles = makeStyles(({ spacing }) => ({
     root: {
-        margin: spacing(2, 1),
-    },
-    paper: {
-        margin: spacing(2),
+        height: "100%",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
+    },
+    content: {
+        flex: 1,
+        overflowY: "auto",
+        padding: spacing(3, 3, 2, 3),
     },
 }));

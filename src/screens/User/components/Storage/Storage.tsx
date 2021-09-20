@@ -1,38 +1,15 @@
-import {FunctionComponent} from "react";
-import {Box, Typography, Button, LinearProgress, Grid} from "@material-ui/core";
+import { FunctionComponent } from "react";
+import { useSelector } from "react-redux";
 
-import {Icon} from "../../../../components";
-import {useStyles} from "./utils";
+import { RootState } from "../../../../store";
+import { StorageComponent } from "../StorageComponent";
 
-export type StorageProps = {
-    actual: number;
-    overall: number;
-}
+export const Storage: FunctionComponent = () => {
+    const actual = useSelector<RootState, number | undefined>((state) => state.user.usedStorageMb);
 
-export const Storage: FunctionComponent<StorageProps> = ({actual, overall}) => {
-    const classes = useStyles();
+    const overall = useSelector<RootState, number | undefined>((state) => state.user.storageCapacityMb);
 
     return (
-        <Box className={classes.root}>
-            <Grid container={true} direction="row">
-                <Icon name="cloud" className={classes.icon} />
-                <Typography component="h4" className={classes.title}>
-                    Úložiště zdarma
-                </Typography>
-            </Grid>
-            <LinearProgress variant="determinate" className={classes.progress} value={100 * actual / overall} />
-            <Typography component="h3" className={classes.used}>
-                Využito {actual} MB ze {overall} MB
-            </Typography>
-            <Button
-                type="submit"
-                disableElevation={true}
-                variant="contained"
-                color="primary"
-                className={classes.button}
-            >
-                Koupit úložiště
-            </Button>
-        </Box>
+        <StorageComponent {...{ actual, overall }} />
     );
 };

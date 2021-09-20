@@ -1,16 +1,10 @@
-import {FunctionComponent, ReactElement} from "react"
-import {Grid, Typography, Card, Box} from "@material-ui/core";
+import { FunctionComponent } from "react"
+import { Grid, Typography, Card, Box } from "@material-ui/core";
 
-import {RouterLink} from "../RouterLink";
-import {Icon} from "../Icon";
-import {useStyles} from "./utils";
-
-export type ListItemProps = {
-    icon?: ReactElement;
-    title: string;
-    destination: string;
-    variant?: "primary" | "success" | "disabled",
-}
+import { RouterLink } from "../RouterLink";
+import { Icon } from "../Icon";
+import { useStyles } from "./utils";
+import { ListItemProps } from "./ListItemProps";
 
 export const ListItem: FunctionComponent<ListItemProps> = ({
     icon,
@@ -18,7 +12,7 @@ export const ListItem: FunctionComponent<ListItemProps> = ({
     destination,
     variant = "primary",
 }) => {
-    const classes = useStyles({icon, title, destination, variant});
+    const classes = useStyles({ icon, title, destination, variant });
 
     return (
         <Card className={classes.root} variant="outlined">
