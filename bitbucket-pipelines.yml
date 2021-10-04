@@ -1,0 +1,20 @@
+image: node:14.16.1
+
+pipelines:  
+  default: 
+    - step:
+        name: Archive code
+        script:
+          - git archive --format=tar.gz main -o frontend.tar.gz
+        artifacts:
+          - frontend.tar.gz
+    - step:
+        name: Deploy to production
+        deployment: production
+        script:
+          - pipe: atlassian/heroku-deploy:1.2.1
+            variables:
+                HEROKU_API_KEY: $HEROKU_API_KEY
+                HEROKU_APP_NAME: 'mechis-frontend'
+                ZIP_FILE: frontend.tar.gz 
+                WAIT: 'true'
