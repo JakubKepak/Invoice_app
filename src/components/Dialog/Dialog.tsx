@@ -15,6 +15,8 @@ export const Dialog: FunctionComponent<DialogProps> = ({ onClose, isOpened, chil
         <DialogComponent
             className={classes.root}
             open={isOpened}
+            disableBackdropClick={true}
+            disableEscapeKeyDown={true}
             fullWidth={true}
             {...{ onClose, children }}
         />

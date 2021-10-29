@@ -1,7 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
+
+import { ADD_DEVICE_LINK } from "../../constants";
 import { strings } from "../../strings";
 
-export const useStyles = makeStyles(({ spacing, palette }) => ({
+export const useStyles = makeStyles(({ palette }) => ({
     root: {
         height: "100%",
         display: "flex",
@@ -11,28 +13,23 @@ export const useStyles = makeStyles(({ spacing, palette }) => ({
         flex: 1,
         overflowY: "auto",
     },
-    header: {},
     label: {},
     select: {
         flex: 1,
         color: palette.primary.main,
         fontWeight: "bold",
     },
-    title: {
-        margin: spacing(2),
-        textAlign: "center",
-    },
 }));
 
-export type AddPageValue = "vin" | "basic" | "parameters" | "operation" | "initial" | "note";
+export type AddDevicePage = "vin" | "basic" | "parameters" | "operation" | "initial" | "note";
 
 export type Page = {
-    id: AddPageValue,
+    id: AddDevicePage,
     address: string,
     title: string,
 }
 
-export const pageMap: { [id in AddPageValue]: Page } = {
+export const pageMap: { [id in AddDevicePage]: Page } = {
     "vin": { id: "vin", address: "vin", title: strings.vin },
     "basic": { id: "basic", address: "zaklad", title: "Základ" },
     "parameters": { id: "parameters", address: "technicke-parametry", title: "Technické parametry" },
@@ -42,3 +39,5 @@ export const pageMap: { [id in AddPageValue]: Page } = {
 };
 
 export const pageList = Object.values(pageMap);
+
+export const createToLink = (addDevicePage: AddDevicePage) => `/${ADD_DEVICE_LINK}/${pageMap[addDevicePage].address}`;

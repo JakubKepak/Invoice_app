@@ -3,7 +3,7 @@ import { Box, List } from "@material-ui/core";
 import { Add as AddIcon } from "@material-ui/icons";
 
 import { BottomNavigation, ListItem, ListItemProps, Icon } from "../../components";
-import { ADD_DEVICE_LINK, INVENTORY_LINK } from "../../constants";
+import { ADD_DEVICE_LINK, ADD_REFUELING_LINK, ADD_ODOMETER_STATE_LINK, INVENTORY_LINK } from "../../constants";
 import { useStyles } from "./utils";
 
 export const Add: FunctionComponent = () => {
@@ -11,8 +11,8 @@ export const Add: FunctionComponent = () => {
 
     const addItemList: ListItemProps[] = [
         { icon: <AddIcon style={{ fontSize: 32 }} />, title: "Nová technika", destination: ADD_DEVICE_LINK, variant: "success" },
-        { icon: <Icon name="tachometer" />, title: "Stav tachometru", destination: "stav-tachometru" },
-        { icon: <Icon name="refueling" />, title: "Tankování", destination: "tankovani" },
+        { icon: <Icon name="tachometer" />, title: "Stav tachometru", destination: ADD_ODOMETER_STATE_LINK },
+        { icon: <Icon name="refueling" />, title: "Tankování", destination: ADD_REFUELING_LINK },
         { icon: <Icon name="expenses" />, title: "Výdaje", destination: "vydaje" },
         { icon: <Icon name="oil" />, title: "Údržba/Opravy", destination: "udrzba-opravy" },
         { icon: <Icon name="fault" />, title: "Závady", destination: "zavady" },

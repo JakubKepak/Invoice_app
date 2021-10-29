@@ -7,4 +7,5 @@ export type TextLineProps = {
     errorMessage?: string,
     onClick?: MouseEventHandler<HTMLElement>,
     visualVariant?: "clickable" | "disabled" | "normal",
+    isBottomDelimiterActive?: boolean,
 }

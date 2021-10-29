@@ -1,22 +1,22 @@
 import { FunctionComponent } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Box } from "@material-ui/core";
 
-import { NumberInputLine, DateLine } from "../../../../components";
-import { actions, ErrorDataState, RootState } from "../../../../store";
+import { NumberInputLine, DateLine, PageTitle, NavigationButtons } from "../../../../components";
+import { actions } from "../../../../store";
 import { formatFuelConsumption, formatKm, useNavigate, useRootSelector } from "../../../../utils";
 import { strings } from "../../../../strings";
-import { NavigationButtons, PageTitle } from "../../components";
 import { pageMap } from "../../utils";
+import { NewDeviceErrorDataState } from "../../../../types";
 
 export const Initial: FunctionComponent = () => {
     const dispatch = useDispatch();
-    const [navigate] = useNavigate();
+    const { navigate } = useNavigate();
 
-    const initialDate = useSelector<RootState, Date | undefined>((state) => state.newDevice.initalDate);
-    const initialOdometerState = useSelector<RootState, number | undefined>((state) => state.newDevice.initialOdometerState);
-    const initialConsumption = useSelector<RootState, number | undefined>((state) => state.newDevice.initialConsumption);
-    const errorData = useRootSelector<ErrorDataState>((state) => state.newDevice.errorData);
+    const initialDate = useRootSelector<Date | undefined>((state) => state.newDevice.initalDate);
+    const initialOdometerState = useRootSelector<number | undefined>((state) => state.newDevice.initialOdometerState);
+    const initialConsumption = useRootSelector<number | undefined>((state) => state.newDevice.initialConsumption);
+    const errorData = useRootSelector<NewDeviceErrorDataState>((state) => state.newDevice.errorData);
 
     const validate = () => {
         let isValid = true;
@@ -77,6 +77,8 @@ export const Initial: FunctionComponent = () => {
                 }}
             />
             <NavigationButtons
+                previousText={strings.previous}
+                nextText={strings.next}
                 onPreviousClick={() => navigate(`./${pageMap["operation"].address}`)}
                 onNextClick={() => validate()}
             />

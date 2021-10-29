@@ -1,36 +1,35 @@
 import { FunctionComponent } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Box } from "@material-ui/core";
 
-import { NumberInputLine, DateLine, Spacer } from "../../../../components";
-import { actions, RootState } from "../../../../store";
-import { formatKm, formatUnitFloat, useNavigate } from "../../../../utils";
-import { pageMap } from "../../utils";
-import { NavigationButtons, PageTitle } from "../../components";
+import { NumberInputLine, DateLine, Spacer, PageTitle, NavigationButtons } from "../../../../components";
+import { actions } from "../../../../store";
+import { formatKm, formatUnitFloat, useNavigate, useRootSelector } from "../../../../utils";
 import { strings } from "../../../../strings";
+import { pageMap } from "../../utils";
 
 export const Operation: FunctionComponent = () => {
     const dispatch = useDispatch();
-    const [navigate] = useNavigate();
+    const { navigate } = useNavigate();
 
-    const firstRegistrationDate = useSelector<RootState, Date | undefined>((state) => state.newDevice.firstRegistrationDate);
-    const acquisitionData = useSelector<RootState, Date | undefined>((state) => state.newDevice.acquisitionData);
-    const odometerValue = useSelector<RootState, number | undefined>((state) => state.newDevice.odometerValue);
-    const guaranteeDate = useSelector<RootState, Date | undefined>((state) => state.newDevice.guaranteeDate);
-    const guaranteeMonthCount = useSelector<RootState, number | undefined>((state) => state.newDevice.guaranteeMonthCount);
-    const guaranteeKm = useSelector<RootState, number | undefined>((state) => state.newDevice.guaranteeKm);
+    const firstRegistrationDate = useRootSelector<Date | undefined>((state) => state.newDevice.firstRegistrationDate);
+    const acquisitionDate = useRootSelector<Date | undefined>((state) => state.newDevice.acquisitionDate);
+    const odometerValue = useRootSelector<number | undefined>((state) => state.newDevice.odometerValue);
+    const guaranteeDate = useRootSelector<Date | undefined>((state) => state.newDevice.guaranteeDate);
+    const guaranteeMonthCount = useRootSelector<number | undefined>((state) => state.newDevice.guaranteeMonthCount);
+    const guaranteeKm = useRootSelector<number | undefined>((state) => state.newDevice.guaranteeKm);
 
     return (
         <Box>
             <PageTitle text="Provozní údaje" />
             <DateLine
                 defaultValue={firstRegistrationDate}
-                onConfirm={({ value }) => dispatch(actions.newDevice.setFirstRegistrationData(value))}
+                onConfirm={({ value }) => dispatch(actions.newDevice.setFirstRegistrationDate(value))}
                 title="První registrace"
                 description="Dle technického průkazu"
             />
             <DateLine
-                defaultValue={acquisitionData}
+                defaultValue={acquisitionDate}
                 title="Majitelem od"
                 description="Dle kupní smlouvy"
                 onConfirm={({ value }) => {
@@ -81,6 +80,8 @@ export const Operation: FunctionComponent = () => {
                 }}
             />
             <NavigationButtons
+                previousText={strings.previous}
+                nextText={strings.next}
                 onPreviousClick={() => navigate(`./${pageMap["parameters"].address}`)}
                 onNextClick={() => navigate(`./${pageMap["initial"].address}`)}
             />

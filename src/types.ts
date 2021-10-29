@@ -22,20 +22,20 @@ export enum TransmissionType {
 export type Device = {
     id: string,
     name?: string,
-    manufacturerId?: string,
+    manufacturerId: string,
     categoryId?: string,
     spz?: string,
     manufacturedYearMonthText?: string,
     imageUrl?: string,
-    modelId?: string,
-    vin?: string,
+    modelId: string,
+    vin: string,
     number?: string;
     motorization?: string,
     powerKw?: number,
     powerRPM?: number,
     fuelId?: string,
     firstRegistrationDate?: Date,
-    acquisitionData?: Date,
+    acquisitionDate?: Date,
     odometerValue?: number,
     guaranteeDate?: Date,
     guaranteeMonthCount?: number,
@@ -50,9 +50,9 @@ export type Device = {
     torqueRPM?: number,
     transmissionNumber?: number,
     transmissionType?: number,
-    mainFuelId?: string,
+    mainFuelId: string,
     secondaryFuelId?: string,
-    mainTankVolume?: number,
+    mainTankVolume: number,
     secondaryTankVolume?: number,
     coachbuilderId?: string,
     colorText?: string,
@@ -80,9 +80,71 @@ export type ManufacturerResponse = {
     "avg_price": number,
 }
 
-
-
 export type Unit = {
     id: string,
     abbreviation: string,
 };
+
+export type RecordType = "odometer" | "refueling" | "expense" | "fault" | "maintenance";
+
+export type RecordData = {
+    id: string,
+    type: RecordType,
+    date: Date,
+    odometerValue: number,
+    fuelAmountL?: number,
+    fuelAbbreviation?: string,
+    fuelPrice?: number,
+    variant: "note" | "warning",
+    sortValue: number,
+}
+
+export type Record = {
+    id: string,
+    type: RecordType,
+    title: string,
+    subtitle: string | undefined,
+    rightText: string | undefined,
+    rightDescription: string | undefined,
+    rightDescriptionVariant: "note" | "warning",
+}
+
+export type OdometerState = {
+    id: string,
+    deviceId: string,
+    date: Date,
+    value: number,
+    attachmentUrlList: string[],
+    note?: string,
+}
+
+export type NewDeviceErrorDataState = {
+    model?: string,
+    manufacturer?: string,
+    vin?: string,
+    fuel?: string,
+    mainTankVolume?: string,
+    secondaryTankVolume?: string,
+    initalDate?: string,
+    initialOdometerState?: string,
+    initialConsumption?: string,
+    coachbuilder?: string,
+}
+
+export type Refueling = {
+    id: string,
+    deviceId: string,
+    fuelId: string,
+    date: Date,
+    odometerValue: number,
+    attachmentUrlList: string[],
+    note?: string,
+    fuelAmountL: number,
+    fuelPrice: number,
+    fuelUnitPrice: number,
+    isTankFull: boolean,
+}
+
+export type AddRefuelingPageId = "odometer" | "fuels" | "main-fuel" | "secondary-fuel";
+
+export type IconName = "add" | "add-small" | "agendas" | "analytics" | "at" | "calendar" | "car" | "car-wide" | "cloud" | "expenses" | "fault" | "folder" | "chevron-right" | "list-wide" | "note" | "oil" | "parameters" | "password" | "plan" | "progress" | "project" | "refueling" | "servis" | "tachometer" | "user-wide";

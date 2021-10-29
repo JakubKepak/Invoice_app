@@ -10,3 +10,5 @@ export * from "./mock";
 export * from "./hooks";
 export * from "./debug";
 export * from "./platform";
+export * from "./math";
+export * from "./OnConfirmNumberDialog";

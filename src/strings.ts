@@ -1,6 +1,7 @@
 import { createPluralGetter } from "./utils";
 
 export const strings = {
+    back: "Zpět",
     give: "Zadat",
     select: "Vybrat",
     power: "Výkon",
@@ -15,6 +16,10 @@ export const strings = {
     cancelSelection: "Zrušit výběr",
     transmission: "Převodovka",
     emptyValueText: "–",
+    previous: "Předchozí",
+    next: "Další",
+    complete: "Dokončit",
+    cancel: "Zrušit",
     monthPlural: createPluralGetter({ one: "měsíc", few: "měsíce", other: "měsíců" }),
     literPlural: createPluralGetter({ one: "litr", few: "litry", other: "litrů" }),
 }

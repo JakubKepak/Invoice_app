@@ -1,12 +1,12 @@
 import { FunctionComponent, useEffect, useRef } from "react";
 import { Switch, useLocation, Redirect } from "react-router-dom";
-import { Box, Grid, Typography } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
 
-import { ADD_DEVICE_LINK, INVENTORY_LINK } from "../../constants";
-import { BottomNavigation, PrivateRoute } from "../../components";
+import { INVENTORY_LINK } from "../../constants";
+import { BottomNavigation, PrivateRoute, PageHeader } from "../../components";
 import { lastPathPart } from "../../utils";
 import { Vin, Basic, Parameters, Operation, Initial, Note } from "./screens";
-import { pageMap, pageList, useStyles } from "./utils";
+import { pageMap, pageList, useStyles, createToLink } from "./utils";
 
 export const AddDevice: FunctionComponent = () => {
     const classes = useStyles();
@@ -22,33 +22,31 @@ export const AddDevice: FunctionComponent = () => {
 
     return (
         <Box className={classes.root}>
-            <Box className={classes.header}>
-                <Typography component="div" variant="subtitle2" className={classes.title}>
-                    Nová technika • {index + 1}/{pageList.length}
-                </Typography>
-            </Box>
+            <PageHeader>
+                Nová technika • {index + 1}/{pageList.length}
+            </PageHeader>
             <Grid className={classes.page} ref={pageRef}>
                 <Switch>
-                    <PrivateRoute exact={true} path={`/${ADD_DEVICE_LINK}/${pageMap["vin"].address}`}>
+                    <PrivateRoute exact={true} path={createToLink("vin")}>
                         <Vin />
                     </PrivateRoute>
-                    <PrivateRoute exact={true} path={`/${ADD_DEVICE_LINK}/${pageMap["basic"].address}`}>
+                    <PrivateRoute exact={true} path={createToLink("basic")}>
                         <Basic />
                     </PrivateRoute>
-                    <PrivateRoute exact={true} path={`/${ADD_DEVICE_LINK}/${pageMap["parameters"].address}`}>
+                    <PrivateRoute exact={true} path={createToLink("parameters")}>
                         <Parameters />
                     </PrivateRoute>
-                    <PrivateRoute exact={true} path={`/${ADD_DEVICE_LINK}/${pageMap["operation"].address}`}>
+                    <PrivateRoute exact={true} path={createToLink("operation")}>
                         <Operation />
                     </PrivateRoute>
-                    <PrivateRoute exact={true} path={`/${ADD_DEVICE_LINK}/${pageMap["initial"].address}`}>
+                    <PrivateRoute exact={true} path={createToLink("initial")}>
                         <Initial />
                     </PrivateRoute>
-                    <PrivateRoute exact={true} path={`/${ADD_DEVICE_LINK}/${pageMap["note"].address}`}>
+                    <PrivateRoute exact={true} path={createToLink("note")}>
                         <Note />
                     </PrivateRoute>
                     <PrivateRoute>
-                        <Redirect to={`/${ADD_DEVICE_LINK}/vin`} />
+                        <Redirect to={createToLink("vin")} />
                     </PrivateRoute>
                 </Switch>
             </Grid>

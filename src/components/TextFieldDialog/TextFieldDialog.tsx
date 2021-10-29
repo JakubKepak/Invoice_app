@@ -2,6 +2,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { DialogActions, DialogContent, DialogTitle, Button } from "@material-ui/core";
 
 import { doNothing } from "../../utils";
+import { strings } from "../../strings";
 import { TextField } from "../TextField";
 import { Spacer } from "../Spacer";
 import { Dialog } from "../Dialog";
@@ -10,51 +11,62 @@ export type TextFieldDialogProps = {
     title?: string,
     isOpened?: boolean,
     errorMessage?: string,
-    value?: string,
+    defaultValue?: string,
     type?: "float" | "integer" | "text",
     label?: string,
     onConfirm: (text?: string) => void,
     onCancel?: (text?: string) => void,
 }
 
+/**
+ * Dialog pro zadávání textové hodnoty.
+ * Hodnota se před uložením ořízne o počáteční a koncové bílé znaky.
+ * V případě, že je výsledná hodnota prázdný řetězec, se hodnota při potvrzení považuje za _undefined_.
+ * Dialog může zobrazovat chybovou hlášku, která je po úpravě hodnoty skryta.
+ */
 export const TextFieldDialog: FunctionComponent<TextFieldDialogProps> = ({
     isOpened = true,
-    value,
+    defaultValue,
     onConfirm,
     onCancel,
     title,
     errorMessage,
-    type,
+    type = "text",
     label,
 }) => {
-    const [temporaryErrorMessage, setTemporaryErrorMessage] = useState<string | undefined>(undefined);
-    const [text, setText] = useState<string | undefined>(value);
+    const [isErrorMessageVisible, setIsErrorMessageVisible] = useState(false);
+    const [value, setValue] = useState<string | undefined>(defaultValue);
 
     useEffect(() => {
-        setTemporaryErrorMessage(errorMessage);
+        // Při aktualizaci chybové hlášky je hláška opět zobrazena, pokud není prázdná
+        setIsErrorMessageVisible(errorMessage !== undefined);
     }, [errorMessage]);
 
     const handleChange = (value: string) => {
-        setTemporaryErrorMessage(undefined);
-        setText(value);
+        // Skrytí chybové zprávy po úpravě hodnoty
+        setIsErrorMessageVisible(false);
+        setValue(value);
     }
 
     const handleCancel = () => {
-        onCancel ? onCancel(text) : doNothing();
+        onCancel ? onCancel(value) : doNothing();
     }
 
     const handleConfirm = () => {
-        const trimmedValue = text?.trim();
-        onConfirm(trimmedValue === "" ? undefined : text);
+        const trimmedValue = value?.trim();
+        onConfirm(trimmedValue === "" ? undefined : value);
+        setIsErrorMessageVisible(true);
     }
 
     return (
         <Dialog
-            onClose={() => onCancel ? onCancel(text) : {}}
-            isOpened={isOpened}
+            onClose={handleCancel}
+            {...{ isOpened }}
         >
             {title ? (
-                <DialogTitle>{title}</DialogTitle>
+                <DialogTitle>
+                    {title}
+                </DialogTitle>
             ) : null}
             <DialogContent>
                 <Spacer size={1} direction="column" />
@@ -62,21 +74,20 @@ export const TextFieldDialog: FunctionComponent<TextFieldDialogProps> = ({
                     isSelectAllOnFocusActive={true}
                     isAutofocusActive={true}
                     isFullWidth={true}
-                    value={text}
-                    onEnterPress={() => handleConfirm()}
+                    onEnterPress={handleConfirm}
                     onChange={handleChange}
-                    errorMessage={temporaryErrorMessage}
-                    {...{ type, label }}
+                    errorMessage={isErrorMessageVisible ? errorMessage : undefined}
+                    {...{ type, label, value }}
                 />
             </DialogContent>
             <DialogActions>
                 {onCancel ? (
                     <Button onClick={handleCancel} color="primary">
-                        Zrušit
+                        {strings.cancel}
                     </Button>
                 ) : null}
                 <Button onClick={handleConfirm} color="primary">
-                    Zadat
+                    {strings.give}
                 </Button>
             </DialogActions>
         </Dialog>

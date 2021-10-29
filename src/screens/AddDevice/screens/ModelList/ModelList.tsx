@@ -1,17 +1,17 @@
 import { FunctionComponent } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import { actions, RootState } from "../../../../store";
+import { Search } from "../../../../components";
+import { actions } from "../../../../store";
 import { strings } from "../../../../strings";
 import { Category, Model } from "../../../../types";
-import { useNavigate } from "../../../../utils";
-import { Search } from "../../components"
+import { useNavigate, useRootSelector } from "../../../../utils";
 
 export const ModelList: FunctionComponent = () => {
-    const list = useSelector<RootState, Model[]>((state) => state.model.list.filter((model) => model.manufacturerId === state.newDevice.manufacturerId));
+    const list = useRootSelector<Model[]>((state) => state.model.list.filter((model) => model.manufacturerId === state.newDevice.manufacturerId));
 
     const dispatch = useDispatch();
-    const [, goBack] = useNavigate();
+    const { goBack } = useNavigate();
 
     const onSelect = (item: Category | undefined) => {
         dispatch(actions.newDevice.setModelId(item?.id))

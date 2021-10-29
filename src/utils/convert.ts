@@ -1,4 +1,5 @@
 import { THIN_SPACE } from "../constants";
+import { IconName, RecordType } from "../types";
 
 export const parseIntOrUndefined = (text?: string): number | undefined => {
     if (text === undefined) {
@@ -36,4 +37,19 @@ export const convertBytesToMbsOrKbs = (filesize: number) => {
     }
 
     return sizeText;
+}
+
+export function listToIdMap<T extends { id: string }>(list: T[]) {
+    return list.reduce((acc, item) => ({ ...acc, [item.id]: item }), {});
+}
+
+export const recordTypeToIconId = (recordType: RecordType): IconName => {
+    switch (recordType) {
+        case "odometer": return "tachometer";
+        case "refueling": return "refueling";
+        case "expense": return "expenses";
+        case "fault": return "fault";
+        case "maintenance": return "servis";
+        default: return "note";
+    }
 }

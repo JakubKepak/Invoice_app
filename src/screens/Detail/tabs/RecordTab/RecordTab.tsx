@@ -2,15 +2,34 @@ import { FunctionComponent } from "react";
 import { Fab, List } from "@material-ui/core";
 import { Add as AddIcon } from "@material-ui/icons";
 
-import { Icon, RouterLink } from "../../../../components";
+import { Delimiter, Icon, PageHeader, RouterLink } from "../../../../components";
+import { recordTypeToIconId, useRootSelector } from "../../../../utils";
+import { getSelectedDeviceRecordList } from "../../../../store";
+import { Record } from "../../../../types";
 import { RecordLine } from "../../components";
 import { useStyles } from "./utils";
 
 export const RecordTab: FunctionComponent = () => {
     const classes = useStyles();
+    const recordList = useRootSelector<Record[]>(getSelectedDeviceRecordList);
 
     return (
         <List className={classes.root}>
+            {recordList.map((record) => (
+                <RecordLine
+                    key={record.id}
+                    icon={<Icon name={recordTypeToIconId(record.type)} />}
+                    title={record.title}
+                    subtitle={record.subtitle}
+                    rightText={record.rightText}
+                    rightDescription={record.rightDescription}
+                    rightDescriptionVariant={record.rightDescriptionVariant}
+                />
+            ))}
+            <PageHeader>
+                Další záznamy jsou pouze ukázkové
+            </PageHeader>
+            <Delimiter />
             <RecordLine
                 icon={<Icon name="tachometer" />}
                 title="Stav tachometru"
@@ -49,8 +68,8 @@ export const RecordTab: FunctionComponent = () => {
                 rightText="Úroveň 1"
                 rightDescription="Řešení: Vyměnit"
             />
-            <RouterLink to="/pridat-zaznam" className={classes.fabContainer}>
-                <Fab color="primary" className={classes.fab} aria-label="Přidat">
+            <RouterLink to="/pridat" className={classes.fabContainer}>
+                <Fab color="secondary" className={classes.fab} aria-label="Přidat">
                     <AddIcon fontSize="large" />
                 </Fab>
             </RouterLink>

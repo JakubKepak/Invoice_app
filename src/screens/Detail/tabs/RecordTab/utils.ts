@@ -10,7 +10,6 @@ export const useStyles = makeStyles(({ spacing, palette }) => ({
         right: spacing(2),
     },
     fab: {
-        backgroundColor: palette.success.main,
         display: "flex",
         alignItems: "center",
     },

@@ -1,43 +1,44 @@
 import { FunctionComponent, useMemo } from "react";
-import { useParams } from "react-router-dom";
 import { Box, Fab, List } from "@material-ui/core";
 import { Edit } from "@material-ui/icons";
 
 import { TextLine } from "../../../../components";
 import { Manufacturer, Device, Category } from "../../../../types";
 import { strings } from "../../../../strings";
-import { formatCcm, formatDate, formatYearMonthText, useRootSelector } from "../../../../utils";
 import {
-    getDevice,
+    formatCcm,
+    formatDate,
+    formatGuaranteeEndText,
+    formatPowerText,
+    formatTorqueText,
+    formatTransmissionText,
+    formatYearMonthText,
+    useRootSelector,
+} from "../../../../utils";
+import {
     getManufacturer,
     getModel,
     getFuelText,
-    getPowerText,
     getCategory,
-    getTorqueText,
     getCoachbuilderText,
-    getTransmissionText,
     getTankVolumeText,
-    getGuaranteeEndText,
+    getLastSelectedOrFirstDevice,
 } from "../../../../store";
-import { DetailParams } from "../../types";
 import { useStyles } from "./utils";
 
 export const DetailTab: FunctionComponent = () => {
     const classes = useStyles();
-    const { id } = useParams<DetailParams>();
-
-    const device = useRootSelector<Device | undefined>((state) => getDevice(state, id));
+    const device = useRootSelector<Device | undefined>(getLastSelectedOrFirstDevice);
     const manufacturer = useRootSelector<Manufacturer | undefined>((state) => getManufacturer(state, device?.manufacturerId));
     const model = useRootSelector<Manufacturer | undefined>((state) => getModel(state, device?.modelId));
     const fuelText = useRootSelector<string | undefined>((state) => getFuelText(state, device?.mainFuelId, device?.secondaryFuelId));
     const category = useRootSelector<Category | undefined>((state) => getCategory(state, device?.categoryId));
-    const powerText = useMemo(() => getPowerText(device?.powerKw, device?.powerRPM), [device]);
-    const torqueText = useMemo(() => getTorqueText(device?.torqueNm, device?.torqueRPM), [device]);
+    const powerText = useMemo(() => formatPowerText(device?.powerKw, device?.powerRPM), [device]);
+    const torqueText = useMemo(() => formatTorqueText(device?.torqueNm, device?.torqueRPM), [device]);
     const coachbuilderText = useRootSelector<string | undefined>((state) => getCoachbuilderText(state, device?.coachbuilderId));
-    const transmissionText = useMemo(() => getTransmissionText(device?.transmissionType, device?.transmissionNumber), [device])
+    const transmissionText = useMemo(() => formatTransmissionText(device?.transmissionType, device?.transmissionNumber), [device])
     const tankVolumeText = useRootSelector<string | undefined>((state) => getTankVolumeText(state, device));
-    const guaranteeEndText = useMemo(() => getGuaranteeEndText(device), [device]);
+    const guaranteeEndText = useMemo(() => formatGuaranteeEndText(device), [device]);
 
     return (
         <List className={classes.root} >
@@ -111,7 +112,7 @@ export const DetailTab: FunctionComponent = () => {
                 visualVariant="normal" />
             <TextLine
                 title="Majitelem od"
-                rightText={formatDate(device?.acquisitionData) ?? strings.emptyValueText}
+                rightText={formatDate(device?.acquisitionDate) ?? strings.emptyValueText}
                 visualVariant="normal" />
             {guaranteeEndText ? (
                 <TextLine
@@ -120,7 +121,7 @@ export const DetailTab: FunctionComponent = () => {
                     visualVariant="normal" />
             ) : null}
             <Box className={classes.fabContainer}>
-                <Fab color="primary" className={classes.fab} aria-label="Přidat">
+                <Fab color="secondary" className={classes.fab} aria-label="Přidat">
                     <Edit fontSize="large" />
                 </Fab>
             </Box>

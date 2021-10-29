@@ -1,11 +1,13 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 
 import { strings } from "../../strings";
 import { TextFieldDialog } from "../TextFieldDialog";
 import { TextLine } from "../TextLine";
 import { Unplugger } from "../Unplugger";
+import { BooleanState } from "../BooleanState";
+import { StringState } from "../StringState";
 
-type OnConfirm = {
+type OnConfirmDialog = {
     value?: string,
     closeDialog: () => void,
     setErrorMessage: (errorMessage: string) => void,
@@ -15,32 +17,33 @@ export type TextInputLineProps = {
     title: string,
     value?: string,
     errorMessage?: string,
-    onConfirm: ({ value, closeDialog, setErrorMessage }: OnConfirm) => void,
+    onConfirm: ({ value, closeDialog, setErrorMessage }: OnConfirmDialog) => void,
 }
 
-export const TextInputLine: FunctionComponent<TextInputLineProps> = ({ title, value, errorMessage, onConfirm }) => {
-    const [isDialogOpened, setIsDialogOpened] = useState(false);
-    const [dialogErrorMessage, setDialogErrorMessage] = useState<string | undefined>(undefined);
-
-    const closeDialog = () => setIsDialogOpened(false);
-
-    return (
-        <>
-            <TextLine
-                title={title}
-                rightText={value ?? strings.give}
-                onClick={() => setIsDialogOpened(true)}
-                errorMessage={errorMessage}
-            />
-            <Unplugger isPlugged={isDialogOpened}>
-                <TextFieldDialog
-                    errorMessage={dialogErrorMessage}
-                    onConfirm={(value) => onConfirm({ value, closeDialog, setErrorMessage: setDialogErrorMessage })}
-                    onCancel={closeDialog}
-                    label={title}
-                    {...{ value }}
+export const TextInputLine: FunctionComponent<TextInputLineProps> = ({ title, value, errorMessage, onConfirm }) => (
+    <BooleanState>
+        {({ isEnabled: isDialogOpened, enable: openDialog, disable: closeDialog }) => (
+            <>
+                <TextLine
+                    title={title}
+                    rightText={value ?? strings.give}
+                    onClick={openDialog}
+                    errorMessage={errorMessage}
                 />
-            </Unplugger>
-        </>
-    );
-};
+                <Unplugger isPlugged={isDialogOpened}>
+                    <StringState>
+                        {({ value: dialogErrorMessage, setValue: setDialogErrorMessage }) => (
+                            <TextFieldDialog
+                                errorMessage={dialogErrorMessage}
+                                onConfirm={(value) => onConfirm({ value, closeDialog, setErrorMessage: setDialogErrorMessage })}
+                                onCancel={closeDialog}
+                                label={title}
+                                {...{ defaultValue: value }}
+                            />
+                        )}
+                    </StringState>
+                </Unplugger>
+            </>
+        )}
+    </BooleanState>
+);

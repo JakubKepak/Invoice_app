@@ -1,9 +1,13 @@
 import { FunctionComponent } from "react";
-import { Box, Grid, Typography } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
 
 import { Line } from "../Line";
+import { LineTitle } from "../LineTitle";
+import { LineDescription } from "../LineDescription";
+import { ErrorMessage } from "../ErrorMessage";
 import { useStyles } from "./utils";
 import { TextLineProps } from "./TextLineProps";
+import { LineButton } from "../LineButton";
 
 export const TextLine: FunctionComponent<TextLineProps> = ({
     title,
@@ -12,33 +16,41 @@ export const TextLine: FunctionComponent<TextLineProps> = ({
     errorMessage,
     onClick,
     visualVariant = "clickable",
+    isBottomDelimiterActive = true,
 }) => {
     const classes = useStyles({ title, description, rightText, errorMessage, onClick, visualVariant });
 
     return (
-        <Line onClick={onClick}>
-            <Grid container={true} direction="column" justifyContent="center" >
+        <Line
+            onClick={onClick}
+            className={classes.root}
+            isBottomDelimiterActive={isBottomDelimiterActive}
+        >
+            <Grid
+                container={true}
+                direction="column"
+                justifyContent="center"
+            >
                 {title ? (
-                    <Typography component="div" variant="subtitle1" className={classes.title}>
-                        {title}
-                    </Typography>
+                    <LineTitle {...{ description, visualVariant, title }} />
                 ) : null}
                 {description ? (
-                    <Typography component="div" variant="subtitle2" className={classes.description}>
+                    <LineDescription>
                         {description}
-                    </Typography>
+                    </LineDescription>
                 ) : null}
             </Grid>
             <Box>
                 {rightText ? (
-                    <Typography component="div" variant="subtitle1" className={classes.rightText}>
-                        {rightText}
-                    </Typography>
+                    <LineButton
+                        text={rightText}
+                        visualVariant={visualVariant}
+                    />
                 ) : null}
                 {errorMessage ? (
-                    <Typography variant="subtitle1" className={classes.error}>
-                        {errorMessage}
-                    </Typography>
+                    <Box className={classes.error}>
+                        <ErrorMessage text={errorMessage} />
+                    </Box>
                 ) : null}
             </Box>
         </Line>

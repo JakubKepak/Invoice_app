@@ -8,6 +8,14 @@ export function useRootSelector<T>(selector: (state: RootState) => T) {
     return useSelector<RootState, T>(selector);
 };
 
+export function sortByDateAscending<T extends { date: Date }>(list: T[]): T[] {
+    return list.sort((a, b) => a.date.getTime() - b.date.getTime());
+}
+
+export function sortBySortValueAscending<T extends { sortValue: number }>(list: T[]): T[] {
+    return list.sort((a, b) => a.sortValue - b.sortValue);
+}
+
 export const createRange = (count: number) => Array.from(Array(count).keys());
 
 export const createPluralGetter = (

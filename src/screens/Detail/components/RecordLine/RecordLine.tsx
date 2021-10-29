@@ -17,9 +17,14 @@ export const RecordLine: FunctionComponent<RecordLineProps> = ({
 
     return (
         <Line>
-            <Grid container={true} direction="row" className={classes.root} alignItems="center">
+            <Grid
+                container={true}
+                direction="row"
+                className={classes.root}
+                alignItems="center"
+            >
                 {icon}
-                <Grid direction="column" className={classes.textContainer}>
+                <Grid className={classes.textContainer}>
                     <Grid container={true} direction="row" justifyContent="space-between" className={classes.leftContainer}>
                         <Typography component="div" variant="body1" className={classes.title}>
                             {title}

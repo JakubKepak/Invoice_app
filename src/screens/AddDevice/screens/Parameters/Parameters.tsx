@@ -2,14 +2,20 @@ import { FunctionComponent, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Box } from "@material-ui/core";
 
-import { NumberInputLine, RouterLink, TextInputLine, TextLine, Unplugger, DoubleNumberDialog, DoubleSelectDialog } from "../../../../components";
+import {
+    NumberInputLine,
+    RouterLink,
+    TextInputLine,
+    TextLine,
+    Unplugger,
+    DoubleNumberDialog,
+    DoubleSelectDialog,
+    PageTitle,
+    NavigationButtons,
+} from "../../../../components";
 import {
     actions,
-    ErrorDataState,
     getNewDeviceFuelText,
-    getPowerText,
-    getTorqueText,
-    getTransmissionText,
     getCoachbuilderText,
     transmissionTypeSelectItemList,
     transmissionNumberSelectItemList,
@@ -20,10 +26,9 @@ import {
     getMainUnit,
     getSecondaryUnit,
 } from "../../../../store";
-import { formatCcm, formatUnitFloat, useNavigate, useRootSelector } from "../../../../utils";
+import { formatCcm, formatPowerText, formatTorqueText, formatTransmissionText, formatUnitFloat, useNavigate, useRootSelector } from "../../../../utils";
 import { strings } from "../../../../strings";
-import { TransmissionType, Unit } from "../../../../types";
-import { NavigationButtons, PageTitle } from "../../components";
+import { NewDeviceErrorDataState, TransmissionType, Unit } from "../../../../types";
 import { pageMap } from "../../utils";
 
 export const Parameters: FunctionComponent = () => {
@@ -32,25 +37,25 @@ export const Parameters: FunctionComponent = () => {
     const [isTransmissionDialogVisible, setIsTransmissionDialogVisible] = useState(false);
 
     const dispatch = useDispatch();
-    const [navigate] = useNavigate();
+    const { navigate } = useNavigate();
 
     const motorization = useRootSelector<string | undefined>((state) => state.newDevice.motorization);
-    const powerText = useRootSelector<string | undefined>((state) => getPowerText(state.newDevice.powerKw, state.newDevice.powerRPM));
+    const powerText = useRootSelector<string | undefined>((state) => formatPowerText(state.newDevice.powerKw, state.newDevice.powerRPM));
     const powerKw = useRootSelector<number | undefined>((state) => state.newDevice.powerKw);
     const powerRPM = useRootSelector<number | undefined>((state) => state.newDevice.powerRPM);
     const fuelText = useRootSelector<string | undefined>((state) => getNewDeviceFuelText(state));
     const mainTankVomule = useRootSelector<number | undefined>((state) => state.newDevice.mainTankVolume);
     const secondaryTankVomule = useRootSelector<number | undefined>((state) => state.newDevice.secondaryTankVolume);
-    const errorData = useRootSelector<ErrorDataState>((state) => state.newDevice.errorData);
+    const errorData = useRootSelector<NewDeviceErrorDataState>((state) => state.newDevice.errorData);
     const torqueNm = useRootSelector<number | undefined>((state) => state.newDevice.torqueNm);
     const torqueRPM = useRootSelector<number | undefined>((state) => state.newDevice.torqueRPM);
-    const torqueText = useRootSelector<string | undefined>((state) => getTorqueText(state.newDevice.torqueNm, state.newDevice.torqueRPM))
+    const torqueText = useRootSelector<string | undefined>((state) => formatTorqueText(state.newDevice.torqueNm, state.newDevice.torqueRPM))
     const coachbuilderText = useRootSelector<string | undefined>((state) => getCoachbuilderText(state, state.newDevice.coachbuilderId));
     const colorText = useRootSelector<string | undefined>((state) => state.newDevice.colorText);
     const engineVolumeCcm = useRootSelector<number | undefined>((state) => state.newDevice.engineVolumeCcm);
     const transmissionType = useRootSelector<TransmissionType | undefined>((state) => state.newDevice.transmissionType);
     const transmissionNumber = useRootSelector<TransmissionType | undefined>((state) => state.newDevice.transmissionNumber);
-    const transmissionText = useMemo(() => getTransmissionText(transmissionType, transmissionNumber), [transmissionType, transmissionNumber])
+    const transmissionText = useMemo(() => formatTransmissionText(transmissionType, transmissionNumber), [transmissionType, transmissionNumber])
     const mainTankVolumeTitle = useRootSelector<string | undefined>((state) => getMainTankVolumeTitle(state));
     const secondaryTankVolumeTitle = useRootSelector<string | undefined>((state) => getSecondaryTankVolumeTitle(state));
     const mainFuelLabel = useRootSelector<string | undefined>((state) => getMainFuelLabel(state));
@@ -195,6 +200,8 @@ export const Parameters: FunctionComponent = () => {
                 }}
             />
             <NavigationButtons
+                previousText={strings.previous}
+                nextText={strings.next}
                 onPreviousClick={() => navigate(`./${pageMap["basic"].address}`)}
                 onNextClick={() => validate()}
             />

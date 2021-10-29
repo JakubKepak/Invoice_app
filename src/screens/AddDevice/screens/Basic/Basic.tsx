@@ -1,29 +1,28 @@
 import { FunctionComponent } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Box } from "@material-ui/core";
 
-import { RouterLink, TextLine, TextInputLine, DateLine } from "../../../../components";
-import { actions, RootState, ErrorDataState, getNewDeviceCategory } from "../../../../store";
-import { Category, Manufacturer, Model } from "../../../../types";
+import { RouterLink, TextLine, TextInputLine, DateLine, PageTitle, NavigationButtons } from "../../../../components";
+import { actions, getNewDeviceCategory } from "../../../../store";
+import { Category, Manufacturer, Model, NewDeviceErrorDataState } from "../../../../types";
 import { dateToYearMonthText, formatYearMonthDate, useNavigate, useRootSelector, yearMonthTextToDate } from "../../../../utils";
 import { strings } from "../../../../strings";
 import { VIN_REGEX } from "../../../../constants";
-import { NavigationButtons, PageTitle } from "../../components";
 import { pageMap } from "../../utils";
 
 export const Basic: FunctionComponent = () => {
     const dispatch = useDispatch();
-    const [navigate] = useNavigate();
+    const { navigate } = useNavigate();
 
-    const name = useSelector<RootState, string | undefined>((state) => state.newDevice.name);
-    const vin = useSelector<RootState, string | undefined>((state) => state.newDevice.vin);
-    const spz = useSelector<RootState, string | undefined>((state) => state.newDevice.spz);
-    const category = useSelector<RootState, Category | undefined>((state) => getNewDeviceCategory(state));
-    const model = useSelector<RootState, Model | undefined>((state) => state.model.list.find((category) => category.id === state.newDevice.modelId));
-    const manufacturer = useSelector<RootState, Manufacturer | undefined>((state) => state.manufacturer.list.find((manufacturer) => manufacturer.id === state.newDevice.manufacturerId));
-    const manufactureDate = useSelector<RootState, Date | undefined>((state) => yearMonthTextToDate(state.newDevice.manufacturedYearMonthText));
-    const number = useSelector<RootState, string | undefined>((state) => state.newDevice.number);
-    const errorData = useRootSelector<ErrorDataState>((state) => state.newDevice.errorData);
+    const name = useRootSelector<string | undefined>((state) => state.newDevice.name);
+    const vin = useRootSelector<string | undefined>((state) => state.newDevice.vin);
+    const spz = useRootSelector<string | undefined>((state) => state.newDevice.spz);
+    const category = useRootSelector<Category | undefined>((state) => getNewDeviceCategory(state));
+    const model = useRootSelector<Model | undefined>((state) => state.model.list.find((category) => category.id === state.newDevice.modelId));
+    const manufacturer = useRootSelector<Manufacturer | undefined>((state) => state.manufacturer.list.find((manufacturer) => manufacturer.id === state.newDevice.manufacturerId));
+    const manufactureDate = useRootSelector<Date | undefined>((state) => yearMonthTextToDate(state.newDevice.manufacturedYearMonthText));
+    const number = useRootSelector<string | undefined>((state) => state.newDevice.number);
+    const errorData = useRootSelector<NewDeviceErrorDataState>((state) => state.newDevice.errorData);
 
     const validate = () => {
         let isValid = true;
@@ -112,6 +111,8 @@ export const Basic: FunctionComponent = () => {
                 }}
             />
             <NavigationButtons
+                previousText={strings.previous}
+                nextText={strings.next}
                 onPreviousClick={() => navigate(`./${pageMap["vin"].address}`)}
                 onNextClick={() => validate()}
             />

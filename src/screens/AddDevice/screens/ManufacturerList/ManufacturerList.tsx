@@ -1,17 +1,17 @@
 import { FunctionComponent } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import { actions, RootState } from "../../../../store";
+import { Search } from "../../../../components";
+import { actions } from "../../../../store";
 import { strings } from "../../../../strings";
 import { Manufacturer } from "../../../../types";
-import { useNavigate } from "../../../../utils";
-import { Search } from "../../components"
+import { useNavigate, useRootSelector } from "../../../../utils";
 
 export const ManufacturerList: FunctionComponent = () => {
-    const list = useSelector<RootState, Manufacturer[]>((state) => state.manufacturer.list);
+    const list = useRootSelector<Manufacturer[]>((state) => state.manufacturer.list);
 
     const dispatch = useDispatch();
-    const [, goBack] = useNavigate();
+    const { goBack } = useNavigate();
 
     const onSelect = (item: Manufacturer | undefined) => {
         dispatch(actions.newDevice.setManufacturerId(item?.id))

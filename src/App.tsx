@@ -6,6 +6,8 @@ import { createTheme, makeStyles, ThemeProvider } from "@material-ui/core";
 import {
     ADD_DEVICE_LINK,
     ADD_LINK,
+    ADD_ODOMETER_STATE_LINK,
+    ADD_REFUELING_LINK,
     INVENTORY_LINK,
     LOGIN_LINK,
     LOGOUT_LINK,
@@ -33,10 +35,12 @@ import {
     ManufacturerList,
     ModelList,
     FuelList,
+    AddRefueling,
+    AddOdometerState,
 } from "./screens";
-import { useRootSelector } from "./utils";
+import { isDebug, useRootSelector } from "./utils";
 import { actions, store } from "./store";
-import { Loading, PrivateRoute } from "./components";
+import { Loading, PageHeader, PrivateRoute } from "./components";
 
 const theme = createTheme({
     palette: {
@@ -130,8 +134,20 @@ export const AppContent: FunctionComponent = () => {
                 <PrivateRoute exact={true} path={`/${INVENTORY_LINK}/:id`}>
                     <Detail />
                 </PrivateRoute>
+                <PrivateRoute path={`/${ADD_REFUELING_LINK}`}>
+                    <AddRefueling />
+                </PrivateRoute>
+                <PrivateRoute exact={true} path={`/${ADD_ODOMETER_STATE_LINK}`}>
+                    <AddOdometerState />
+                </PrivateRoute>
                 <Route path="*">
-                    <Redirect to={`/${INVENTORY_LINK}`} />
+                    {!isDebug ? (
+                        <Redirect to={`/${INVENTORY_LINK}`} />
+                    ) : (
+                        <PageHeader>
+                            Neznámá adresa
+                        </PageHeader>
+                    )}
                 </Route>
             </Switch>
         </div >

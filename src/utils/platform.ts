@@ -5,4 +5,4 @@ export const isIOsDevice = () => [
     "iPad",
     "iPhone",
     "iPod",
-];
+].includes(navigator.platform);

@@ -1,2 +1,2 @@
 export * from "./RecordLine";
-export * from "./DrawerDeviceItem";
+export * from "./EmptyTab";

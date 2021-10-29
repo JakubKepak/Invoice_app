@@ -1,10 +1,11 @@
-import {FunctionComponent} from "react";
+import { FunctionComponent } from "react";
 
-import {IconName, IconProps} from "./IconProps";
-import {useStyles} from "./utils";
+import { IconName } from "../../types";
+import { IconProps } from "./IconProps";
+import { useStyles } from "./utils";
 import "./styles.css";
 
-const icons: {[name in IconName]: string} = {
+const icons: { [name in IconName]: string } = {
     add: "904",
     "add-small": "904",
     agendas: "900",
@@ -32,13 +33,13 @@ const icons: {[name in IconName]: string} = {
     "user-wide": "91a",
 }
 
-export const Icon: FunctionComponent<IconProps> = ({name, size = "medium", variant = "primary", className}) => {
-    const classes = useStyles({name, size, variant});
+export const Icon: FunctionComponent<IconProps> = ({ name, size = "medium", variant = "primary", className }) => {
+    const classes = useStyles({ name, size, variant });
 
     return (
         <div
             className={classes.root + " " + className}
-            dangerouslySetInnerHTML={{__html: `&#xe${icons[name]};`}}
+            dangerouslySetInnerHTML={{ __html: `&#xe${icons[name]};` }}
         />
     );
 };

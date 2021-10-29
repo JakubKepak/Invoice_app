@@ -1,10 +1,10 @@
 import { FunctionComponent, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { Button, Grid, Box } from "@material-ui/core";
 
 import { Copyright, RouterLink, Logo, Icon, Spacer, TextField } from "../../components";
-import { RootState, actions, getIsUserLoggedIn } from "../../store";
+import { actions, getIsUserLoggedIn } from "../../store";
 import { useRootSelector } from "../../utils";
 import { useStyles } from "./utils";
 
@@ -13,8 +13,8 @@ export const Login: FunctionComponent = () => {
 
     const dispatch = useDispatch();
 
-    const email = useSelector<RootState, string | undefined>((state) => state.user.email);
-    const password = useSelector<RootState, string | undefined>((state) => state.user.password);
+    const email = useRootSelector<string | undefined>((state) => state.user.email);
+    const password = useRootSelector<string | undefined>((state) => state.user.password);
     const isUserLoggedIn = useRootSelector<boolean>((state) => getIsUserLoggedIn(state));
 
     const history = useHistory();
