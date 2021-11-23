@@ -5,6 +5,7 @@ import { userSaga } from "./user/saga";
 import { newDeviceSaga } from "./newDevice/saga";
 import { odometerSaga } from "./odometer/saga";
 import { refuelingSaga } from "./refueling/saga";
+import {expenseSaga} from "./expense/saga";
 
 export function* saga() {
     yield all([
@@ -13,5 +14,6 @@ export function* saga() {
         odometerSaga(),
         refuelingSaga(),
         userSaga(),
+        expenseSaga()
     ]);
 }

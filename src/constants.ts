@@ -17,6 +17,7 @@ export const LOGOUT_LINK = "odhlaseni";
 export const SELECT_COACHBUILDER_LINK = "vyber-karoserii";
 export const ADD_REFUELING_LINK = "tankovani";
 export const ADD_ODOMETER_STATE_LINK = "stav-tachometru";
+export const ADD_EXPENSE_LINK = "vydaj";
 
 export const THIN_SPACE = " ";
 export const VIN_REGEX = /^[0-9ABCDEFGHJKLMNPRSTUVWXYZabcdefghjklmnprstuvwxyz]*$/;

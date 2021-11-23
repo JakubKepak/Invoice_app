@@ -1,5 +1,6 @@
 import { RootState } from "../store";
 
+
 const getDeviceListState = (state: RootState) => state.deviceList;
 
 const getDeviceList = (state: RootState) => getDeviceListState(state).list;

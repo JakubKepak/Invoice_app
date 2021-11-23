@@ -9,3 +9,4 @@ export * from "./Detail";
 export * from "./Logout";
 export * from "./AddRefueling";
 export * from "./AddOdometerState";
+export * from "./AddExpense"

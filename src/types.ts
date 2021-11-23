@@ -95,6 +95,9 @@ export type RecordData = {
     fuelAmountL?: number,
     fuelAbbreviation?: string,
     fuelPrice?: number,
+    expenseCategory?: string,
+    expenseType?: string,
+    expensePrice?: number,
     variant: "note" | "warning",
     sortValue: number,
 }
@@ -145,6 +148,31 @@ export type Refueling = {
     isTankFull: boolean,
 }
 
+export type Expense = {
+    id: string,
+    deviceId: string,
+    expenseTypeId: string,
+    expenseCategoryId: string,
+    expensePrice: number,
+    date: Date,
+    odometerValue: number,
+    attachmentUrlList: string[],
+    note?: string,
+}
+
+export type ExpenseTypeList = {
+    id: string,
+    name: string
+}
+
+export type ExpenseCategoryList = {
+    id: string,
+    category: string,
+    type: ExpenseTypeList[]
+}
+
 export type AddRefuelingPageId = "odometer" | "fuels" | "main-fuel" | "secondary-fuel";
+
+export type AddExpensePageId = "category-selection" | "specification";
 
 export type IconName = "add" | "add-small" | "agendas" | "analytics" | "at" | "calendar" | "car" | "car-wide" | "cloud" | "expenses" | "fault" | "folder" | "chevron-right" | "list-wide" | "note" | "oil" | "parameters" | "password" | "plan" | "progress" | "project" | "refueling" | "servis" | "tachometer" | "user-wide";

@@ -15,6 +15,8 @@ import { unitSlice } from "./unit/slice";
 import { settingsSlice } from "./settings/slice";
 import { refuelingSlice } from "./refueling/slice";
 import { odometerStateSlice } from "./odometer/slice";
+import {expenseSlice} from "./expense/slice";
+import {expenseListSlice} from "./expenseList/expenseList";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -32,6 +34,8 @@ export const store = configureStore({
         settings: settingsSlice.reducer,
         refueling: refuelingSlice.reducer,
         odometerState: odometerStateSlice.reducer,
+        expense: expenseSlice.reducer,
+        expenseList: expenseListSlice.reducer
     },
     middleware: (getDefaultMiddleWare) => getDefaultMiddleWare({ thunk: false })
         .concat(sagaMiddleware)
