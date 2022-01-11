@@ -58,7 +58,7 @@ export const formatUnitFloat = (number: number | undefined, unitText: string | u
 
 export const formatKm = (number: number | undefined) => formatUnitFloat(number, "km");
 
-export const formatKc = (number: number | undefined) => formatUnitFloat(number, "Kč");
+export const formatCZK = (number: number | undefined) => formatUnitFloat(number, "Kč");
 
 export const formatL = (number: number | undefined) => formatUnitFloat(number, strings.literPlural(number));
 
@@ -200,19 +200,16 @@ export const formatOdometerValue = (previousOdometerValue: number | undefined, o
     }
 }
 
-
 export const formatExpenseTypeText = (expenseList: ExpenseTypeList | undefined): string | undefined => {
-    if (expenseList !== undefined) {
-        return `${looseCapitalize(expenseList.name)}`;
+    if (expenseList === undefined) {
+        return undefined;
     }
-
-    return undefined;
+    return looseCapitalize(expenseList.name);
 }
 
 export const formatExpenseCategoryText = (categoryName: string | undefined): string | undefined => {
-
-    if (categoryName !== undefined) {
-        return `${looseCapitalize(categoryName)}`;
+    if (categoryName === undefined) {
+        return undefined;
     }
-    return undefined;
+    return looseCapitalize(categoryName);
 }

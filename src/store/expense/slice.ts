@@ -6,7 +6,7 @@ import { addDays, doNothing, getToday } from "../../utils";
 type ErrorMessageData = {
     odometerState?: string,
     expensePrice?: string,
-}
+};
 
 type State = {
     date?: Date,
@@ -17,8 +17,8 @@ type State = {
     errorMessageData: ErrorMessageData,
     expenseTypeId: string,
     expenseCategoryId: string,
-    expensePrice?: number
-}
+    expensePrice?: number,
+};
 
 const initialState: State = {
     expenseTypeId: "1",
@@ -28,37 +28,41 @@ const initialState: State = {
     attachmentUrlList: [],
     note: undefined,
     expensePrice: undefined,
-    list: [{
-        id: "101010",
-        deviceId: "1",
-        expenseTypeId: "1",
-        expenseCategoryId: "1",
-        expensePrice: 4500,
-        date: addDays(getToday(), -7),
-        odometerValue: 28234,
-        attachmentUrlList: [],
-        note: undefined,
-    }, {
-        id: "12454",
-        deviceId: "1",
-        expenseTypeId: "8",
-        expenseCategoryId: "2",
-        expensePrice: 125,
-        date: addDays(getToday(), -5),
-        odometerValue: 33100,
-        attachmentUrlList: [],
-        note: undefined,
-    }, {
-        id: "141452",
-        deviceId: "1",
-        expenseTypeId: "2",
-        expenseCategoryId: "4",
-        expensePrice: 500,
-        date: addDays(getToday(), -2),
-        odometerValue: 47680,
-        attachmentUrlList: [],
-        note: undefined,
-    }],
+    list: [
+        {
+            id: "101010",
+            deviceId: "1",
+            expenseTypeId: "1",
+            expenseCategoryId: "1",
+            expensePrice: 4500,
+            date: addDays(getToday(), -7),
+            odometerValue: 28234,
+            attachmentUrlList: [],
+            note: undefined,
+        },
+        {
+            id: "12454",
+            deviceId: "1",
+            expenseTypeId: "8",
+            expenseCategoryId: "2",
+            expensePrice: 125,
+            date: addDays(getToday(), -5),
+            odometerValue: 33100,
+            attachmentUrlList: [],
+            note: undefined,
+        },
+        {
+            id: "141452",
+            deviceId: "1",
+            expenseTypeId: "2",
+            expenseCategoryId: "4",
+            expensePrice: 500,
+            date: addDays(getToday(), -2),
+            odometerValue: 47680,
+            attachmentUrlList: [],
+            note: undefined,
+        },
+    ],
     errorMessageData: {},
 };
 
@@ -86,7 +90,7 @@ export const expenseSlice = createSlice({
             state.attachmentUrlList = action.payload;
         },
         addAttachmentUrl: (state, action: PayloadAction<string>) => {
-            state.attachmentUrlList = [...state.attachmentUrlList ?? [], action.payload]
+            state.attachmentUrlList = [...(state.attachmentUrlList ?? []), action.payload];
         },
         removeAttachmentUrl: (state, action: PayloadAction<string>) => {
             state.attachmentUrlList = state.attachmentUrlList?.filter((attachmentUrl) => attachmentUrl !== action.payload);

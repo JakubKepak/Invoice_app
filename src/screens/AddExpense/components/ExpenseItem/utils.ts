@@ -1,9 +1,8 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-
-export const useStyles = makeStyles(({ spacing, palette }) => ({
+export const useStyles = makeStyles(({ spacing }) => ({
     root: {
-        padding: spacing(1,3),
+        padding: spacing(1, 3),
         borderStyle: "none",
     },
     name: {

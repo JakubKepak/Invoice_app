@@ -29,7 +29,7 @@ export type Device = {
     imageUrl?: string,
     modelId: string,
     vin: string,
-    number?: string;
+    number?: string,
     motorization?: string,
     powerKw?: number,
     powerRPM?: number,
@@ -71,19 +71,19 @@ export type Fuel = {
 }
 
 export type ManufacturerResponse = {
-    "num_models": number,
-    "img_url": string,
-    "max_car_id": number,
-    "id": number,
-    "name": string,
-    "avg_horsepower": number,
-    "avg_price": number,
+    num_models: number,
+    img_url: string,
+    max_car_id: number,
+    id: number,
+    name: string,
+    avg_horsepower: number,
+    avg_price: number,
 }
 
 export type Unit = {
     id: string,
     abbreviation: string,
-};
+}
 
 export type RecordType = "odometer" | "refueling" | "expense" | "fault" | "maintenance";
 
@@ -162,17 +162,42 @@ export type Expense = {
 
 export type ExpenseTypeList = {
     id: string,
-    name: string
+    name: string,
 }
 
 export type ExpenseCategoryList = {
     id: string,
     category: string,
-    type: ExpenseTypeList[]
+    type: ExpenseTypeList[],
 }
 
 export type AddRefuelingPageId = "odometer" | "fuels" | "main-fuel" | "secondary-fuel";
 
 export type AddExpensePageId = "category-selection" | "specification";
 
-export type IconName = "add" | "add-small" | "agendas" | "analytics" | "at" | "calendar" | "car" | "car-wide" | "cloud" | "expenses" | "fault" | "folder" | "chevron-right" | "list-wide" | "note" | "oil" | "parameters" | "password" | "plan" | "progress" | "project" | "refueling" | "servis" | "tachometer" | "user-wide";
+export type IconName =
+    | "add"
+    | "add-small"
+    | "agendas"
+    | "analytics"
+    | "at"
+    | "calendar"
+    | "car"
+    | "car-wide"
+    | "cloud"
+    | "expenses"
+    | "fault"
+    | "folder"
+    | "chevron-right"
+    | "list-wide"
+    | "note"
+    | "oil"
+    | "parameters"
+    | "password"
+    | "plan"
+    | "progress"
+    | "project"
+    | "refueling"
+    | "servis"
+    | "tachometer"
+    | "user-wide";

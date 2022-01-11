@@ -1,9 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
-import {ADD_EXPENSE_LINK} from "../../constants";
-import {AddExpensePageId} from "../../types";
-import {addExpensePageMap} from "../../navigation";
+import { ADD_EXPENSE_LINK } from "../../constants";
+import { AddExpensePageId } from "../../types";
+import { addExpensePageMap } from "../../navigation";
 
-export const useStyles = makeStyles(({ spacing, palette }) => ({
+export const useStyles = makeStyles(({ spacing }) => ({
     root: {
         height: "100%",
         display: "flex",
@@ -14,10 +14,10 @@ export const useStyles = makeStyles(({ spacing, palette }) => ({
         overflowY: "auto",
     },
     button: {
-      flexDirection: "row",
+        flexDirection: "row",
     },
     title: {
-        margin: spacing(0,2,1,2),
+        margin: spacing(0, 2, 1, 2),
     },
 }));
 

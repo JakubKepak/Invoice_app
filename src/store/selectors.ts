@@ -38,6 +38,7 @@ export * from "./settings/selectors";
 export * from "./unit/selectors";
 export * from "./user/selectors";
 export * from "./expense/selectors";
+export * from "./expenseList/selectors";
 
 export const getLastSelectedOrFirstDeviceId = (state: RootState): string | undefined => getLastSelectedDeviceId(state) ?? getFirstDevice(state);
 
@@ -120,7 +121,7 @@ export const getSelectedDeviceRecordList = (state: RootState): Record[] => sortB
             id: record.id,
             type: record.type,
             subtitle: formatRecordSubtitle(record.date, record.odometerValue),
-            title: `Výdaj - ${record.expenseCategory}`,
+            title: `Výdaj — ${record.expenseCategory}`,
             rightText: record.expenseType,
             rightDescription: formatUnitFloat(record.expensePrice, "Kč"),
             rightDescriptionVariant: record.variant,

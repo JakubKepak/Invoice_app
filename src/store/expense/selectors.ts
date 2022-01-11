@@ -26,21 +26,14 @@ export const getExpensePriceErrorMessage = (state: RootState) => getExpenseError
 
 export const getExpenseAttachmentUrlList = (state: RootState) => getState(state).attachmentUrlList;
 
-export const getExpenseList = (state: RootState) => getState(state).list;
+export const getList = (state: RootState) => getState(state).list;
 
-export const getDeviceExpenseList = (
-    state: RootState,
-    deviceId: string | undefined,
-) => getExpenseList(state).filter((expense) => expense.deviceId === deviceId);
+export const getDeviceExpenseList = (state: RootState, deviceId: string | undefined) => getList(state).filter((expense) => expense.deviceId === deviceId);
 
-export const getDeviceExpenseAscendingList = (
-    state: RootState,
-    deviceId: string | undefined,
-): Expense[] => sortByDateAscending(getDeviceExpenseList(state, deviceId));
+export const getDeviceExpenseAscendingList = (state: RootState, deviceId: string | undefined): Expense[] =>
+    sortByDateAscending(getDeviceExpenseList(state, deviceId));
 
-export const getLastDeviceExpense = (
-    state: RootState,
-    deviceId: string | undefined,
-): Expense | undefined => getDeviceExpenseAscendingList(state, deviceId).reverse()[0];
+export const getLastDeviceExpense = (state: RootState, deviceId: string | undefined): Expense | undefined =>
+    getDeviceExpenseAscendingList(state, deviceId).reverse()[0];
 
 export const getExpenseLastDeviceOdometerValue = (state: RootState, deviceId: string | undefined) => getLastDeviceExpense(state, deviceId)?.odometerValue;

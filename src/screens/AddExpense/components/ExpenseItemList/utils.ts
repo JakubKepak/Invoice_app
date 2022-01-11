@@ -1,14 +1,10 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles(({ palette, spacing }) => ({
-    root: {
-
-    },
+export const useStyles = makeStyles(({ palette }) => ({
     list: {
-        backgroundColor: "white",
+        backgroundColor: palette.background.paper,
         flex: 1,
         flexDirection: "column",
         overflowY: "auto",
-        padding: spacing(0),
     },
-}));
+}))

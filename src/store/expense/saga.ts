@@ -10,7 +10,7 @@ import {
     getExpenseAttachmentUrlList,
     getExpensePrice,
     getExpenseTypeId,
-    getExpenseCategoryId
+    getExpenseCategoryId,
 } from "./selectors";
 
 export function* expenseSaga() {
@@ -31,17 +31,19 @@ function* saveExpenseSaga() {
         return;
     }
 
-    yield put(actions.expense.addExpense({
-        id: getUUID(),
-        deviceId: lastSelectedOrFirstDeviceId,
-        expenseTypeId,
-        expenseCategoryId,
-        expensePrice,
-        date,
-        odometerValue: odometerState,
-        attachmentUrlList,
-        note,
-    }));
+    yield put(
+        actions.expense.addExpense({
+            id: getUUID(),
+            deviceId: lastSelectedOrFirstDeviceId,
+            expenseTypeId,
+            expenseCategoryId,
+            expensePrice,
+            date,
+            odometerValue: odometerState,
+            attachmentUrlList,
+            note,
+        }),
+    );
 
     yield put(actions.expense.reset());
 }

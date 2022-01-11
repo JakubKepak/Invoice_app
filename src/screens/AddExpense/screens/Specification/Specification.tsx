@@ -1,11 +1,11 @@
-import {Box, Grid, Typography} from "@material-ui/core";
+import { Box, Grid, Typography } from "@material-ui/core";
 import { FunctionComponent } from "react";
 import { useDispatch } from "react-redux";
 
 import { DateLine, Delimiter, FileLine, NavigationButtons, NumberInputLine, TextAreaLine } from "../../../../components";
 import { strings } from "../../../../strings";
-import {Device, Expense} from "../../../../types";
-import {formatKc, formatKm, useNavigate, useRootSelector} from "../../../../utils";
+import { Device } from "../../../../types";
+import { formatCZK, formatKm, useNavigate, useRootSelector } from "../../../../utils";
 import { useStyles } from "./utils";
 import {
     getExpenseNote,
@@ -19,13 +19,13 @@ import {
     getExpensePrice,
     actions as allActions,
     getExpensePriceErrorMessage,
-    getSelectedDeviceExpenseList,
-    getLastDeviceExpense,
-    getLastSelectedDeviceId, getExpenseCategoryId, getExpenseTypeId,
+    getExpenseCategoryId,
+    getExpenseTypeId,
+    getExpenseCategoryText,
+    getExpenseTypeText,
 } from "../../../../store";
-import {SelectedDeviceDisabledLine} from "../../../AddRefueling/components";
-import {INVENTORY_LINK} from "../../../../constants";
-import {getExpenseCategoryText, getExpenseType, getExpenseTypeText} from "../../../../store/expenseList/selectors";
+import { SelectedDeviceDisabledLine } from "../../../AddRefueling/components";
+import { INVENTORY_LINK } from "../../../../constants";
 
 export const Specification: FunctionComponent = () => {
     const classes = useStyles();
@@ -64,7 +64,7 @@ export const Specification: FunctionComponent = () => {
                     defaultValue={date}
                     title={strings.date}
                     onConfirm={({ value }) => {
-                        dispatch(actions.setDate(value))
+                        dispatch(actions.setDate(value));
                     }}
                 />
                 <NumberInputLine
@@ -85,7 +85,7 @@ export const Specification: FunctionComponent = () => {
                     label="Cena celkem v Kč"
                     type="float"
                     value={expensePrice}
-                    formatter={formatKc}
+                    formatter={formatCZK}
                     onConfirm={({ value, closeDialog }) => {
                         dispatch(actions.setPrice(value));
                         closeDialog();
@@ -102,11 +102,7 @@ export const Specification: FunctionComponent = () => {
                     onRemoveItem={(fileUrl) => dispatch(actions.removeAttachmentUrl(fileUrl))}
                 />
                 <Delimiter />
-                <TextAreaLine
-                    title="Poznámka"
-                    text={note}
-                    onChange={(value) => dispatch(actions.setNote(value))}
-                />
+                <TextAreaLine title="Poznámka" text={note} onChange={(value) => dispatch(actions.setNote(value))} />
                 <Delimiter />
             </Grid>
             <NavigationButtons
@@ -114,10 +110,10 @@ export const Specification: FunctionComponent = () => {
                 nextText={strings.complete}
                 onNextClick={() => {
                     if (odometerValue === undefined) {
-                        dispatch(actions.setOdometerStateError(strings.requiredValue))
+                        dispatch(actions.setOdometerStateError(strings.requiredValue));
                     }
                     if (expensePrice === undefined) {
-                        dispatch(actions.setExpensePriceError(strings.requiredValue))
+                        dispatch(actions.setExpensePriceError(strings.requiredValue));
                     }
                     if (expensePrice !== undefined) {
                         dispatch(actions.save());

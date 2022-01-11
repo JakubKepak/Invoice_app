@@ -1,18 +1,24 @@
-import { FunctionComponent } from "react";
-import { Typography } from "@material-ui/core";
+import { FunctionComponent } from "react"
+import { Typography } from "@material-ui/core"
 
-import { useStyles } from "./utils";
+import { useStyles } from "./utils"
 
 export type PageSubtitleProps = {
-    text: string,
+    text: string
 }
 
-export const PageSubtitle: FunctionComponent<PageSubtitleProps> = ({ text }) => {
-    const classes = useStyles();
+export const PageSubtitle: FunctionComponent<PageSubtitleProps> = ({
+    text,
+}) => {
+    const classes = useStyles()
 
     return (
-        <Typography component="h1" variant="subtitle1" className={classes.title}>
+        <Typography
+            component="h1"
+            variant="subtitle1"
+            className={classes.title}
+        >
             {text}
         </Typography>
-    );
+    )
 }

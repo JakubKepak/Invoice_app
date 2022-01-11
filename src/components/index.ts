@@ -35,3 +35,4 @@ export * from "./Amount";
 export * from "./AmountLine";
 export * from "./BooleanState";
 export * from "./StringState";
+export * from "./PageSubtitle";
