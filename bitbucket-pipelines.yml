@@ -27,3 +27,28 @@ pipelines:
                 HEROKU_APP_NAME: 'mechis-frontend'
                 ZIP_FILE: frontend.tar.gz 
                 WAIT: 'true'
+    heroku-deployment:
+      - step:
+          name: Build
+          caches:
+            - node
+          script:
+            - yarn install
+      - step:
+          name: Archive code
+          script:
+            - git archive --format=tar.gz heroku-deployment -o test-frontend.tar.gz
+          caches:
+            - node
+          artifacts:
+            - test-frontend.tar.gz
+      - step:
+          name: Deploy to test
+          deployment: test
+          script:
+            - pipe: atlassian/heroku-deploy:1.2.1
+              variables:
+                HEROKU_API_KEY: $HEROKU_API_KEY
+                HEROKU_APP_NAME: 'mechis-test-frontend'
+                ZIP_FILE: test-frontend.tar.gz 
+                WAIT: 'true'
