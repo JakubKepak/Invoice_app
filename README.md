@@ -15,3 +15,9 @@
 
 ## Grafické podklady
 * Obrázek s ukázkou VIN musí mít poměr stran 1:2
+
+## Ikony
+* Z vektorových podkladů pro ikony je ručně vytvořeno písmo díky nástroji [IcoMoon](https://icomoon.io/app/#/select)
+* V aplikaci se ikony používají skrze komponentu `Icon`
+* Při potřebě nové ikony je třeba do nástroje uvedeného výše importovat podklady stávajících ikon, správně je
+  pojmenovat dle aktuální mapy a přidat ikonu novou – kód této ikony následně přidat do `Icon.tsx/icons`
