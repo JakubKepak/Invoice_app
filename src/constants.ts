@@ -2,6 +2,7 @@ export const INVENTORY_LINK = "technika";
 export const REGISTRATION_LINK = "registrace";
 export const OVERVIEW_LINK = "prehled";
 export const USER_LINK = "uzivatel";
+export const USER_PROFILE = "profil-uzivatele";
 export const ADD_LINK = "pridat";
 export const ADD_DEVICE_LINK = "nova-technika";
 export const VIN_LINK = "vin";
@@ -17,6 +18,7 @@ export const LOGOUT_LINK = "odhlaseni";
 export const SELECT_COACHBUILDER_LINK = "vyber-karoserii";
 export const ADD_REFUELING_LINK = "tankovani";
 export const ADD_ODOMETER_STATE_LINK = "stav-tachometru";
+export const SETTINGS = "nastaveni";
 
 export const THIN_SPACE = " ";
 export const VIN_REGEX = /^[0-9ABCDEFGHJKLMNPRSTUVWXYZabcdefghjklmnprstuvwxyz]*$/;

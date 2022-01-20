@@ -19,6 +19,8 @@ import {
     SELECT_MANUFACTURER_LINK,
     SELECT_MODEL_LINK,
     USER_LINK,
+    USER_PROFILE,
+    SETTINGS,
 } from "./constants";
 import {
     Login,
@@ -37,6 +39,8 @@ import {
     FuelList,
     AddRefueling,
     AddOdometerState,
+    UserProfile,
+    Settings,
 } from "./screens";
 import { isDebug, useRootSelector } from "./utils";
 import { actions, store } from "./store";
@@ -109,6 +113,12 @@ export const AppContent: FunctionComponent = () => {
                 </Route>
                 <PrivateRoute exact={true} path={`/${USER_LINK}`}>
                     <User />
+                </PrivateRoute>
+                <PrivateRoute exact={true} path={`/${USER_PROFILE}`}>
+                    <UserProfile />
+                </PrivateRoute>
+                <PrivateRoute exact={true} path={`/${SETTINGS}`}>
+                    <Settings />
                 </PrivateRoute>
                 <PrivateRoute exact={true} path={`/${ADD_LINK}`}>
                     <Add />

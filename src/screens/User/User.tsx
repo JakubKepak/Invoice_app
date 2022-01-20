@@ -21,8 +21,8 @@ export const User: FunctionComponent = () => {
                     </Typography>
                 </Box>
                 <Spacer size={2} direction="column" />
-                <ListItem title="Můj účet" destination="muj-ucet" />
-                <ListItem title="Nastavení" destination="nasvateni" />
+                <ListItem title="Profil uživatele" destination="profil-uzivatele" />
+                <ListItem title="Nastavení" destination="nastaveni" />
                 <ListItem title="Prodat techniku" destination="prodat-techniku" />
                 <Spacer size={1} direction="column" />
                 <Storage />

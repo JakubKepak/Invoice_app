@@ -147,4 +147,30 @@ export type Refueling = {
 
 export type AddRefuelingPageId = "odometer" | "fuels" | "main-fuel" | "secondary-fuel";
 
-export type IconName = "add" | "add-small" | "agendas" | "analytics" | "at" | "calendar" | "car" | "car-wide" | "cloud" | "expenses" | "fault" | "folder" | "chevron-right" | "list-wide" | "note" | "oil" | "parameters" | "password" | "plan" | "progress" | "project" | "refueling" | "servis" | "tachometer" | "user-wide";
+export type IconName =
+  | "add"
+  | "add-small"
+  | "agendas"
+  | "analytics"
+  | "at"
+  | "calendar"
+  | "car"
+  | "car-wide"
+  | "cloud"
+  | "expenses"
+  | "fault"
+  | "folder"
+  | "chevron-right"
+  | "chevron-left"
+  | "list-wide"
+  | "note"
+  | "oil"
+  | "parameters"
+  | "password"
+  | "plan"
+  | "progress"
+  | "project"
+  | "refueling"
+  | "servis"
+  | "tachometer"
+  | "user-wide";
