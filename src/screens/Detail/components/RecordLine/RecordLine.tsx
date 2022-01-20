@@ -22,10 +22,11 @@ export const RecordLine: FunctionComponent<RecordLineProps> = ({
                 direction="row"
                 className={classes.root}
                 alignItems="center"
+                wrap="nowrap"
             >
                 {icon}
                 <Grid className={classes.textContainer}>
-                    <Grid container={true} direction="row" justifyContent="space-between" className={classes.leftContainer}>
+                    <Grid container={true} direction="row" justifyContent="space-between" className={classes.leftContainer} wrap="nowrap">
                         <Typography component="div" variant="body1" className={classes.title}>
                             {title}
                         </Typography>

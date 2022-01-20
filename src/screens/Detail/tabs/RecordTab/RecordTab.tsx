@@ -47,7 +47,7 @@ export const RecordTab: FunctionComponent = () => {
             />
             <RecordLine
                 icon={<Icon name="expenses" />}
-                title="Výdaje"
+                title="Výdaj"
                 subtitle="5. 5. 2021 • 240 125km"
                 rightText="Dálniční známka"
                 rightDescription="1 500 Kč"

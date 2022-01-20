@@ -10,6 +10,7 @@ import { refuelingSlice } from "./refueling/slice";
 import { settingsSlice } from "./settings/slice";
 import { unitSlice } from "./unit/slice";
 import { userSlice } from "./user/slice";
+import {expenseSlice} from "./expense/slice";
 
 export const actions = {
     user: userSlice.actions,
@@ -24,4 +25,5 @@ export const actions = {
     settings: settingsSlice.actions,
     refueling: refuelingSlice.actions,
     odometerState: odometerStateSlice.actions,
+    expense: expenseSlice.actions,
 }

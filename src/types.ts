@@ -29,7 +29,7 @@ export type Device = {
     imageUrl?: string,
     modelId: string,
     vin: string,
-    number?: string;
+    number?: string,
     motorization?: string,
     powerKw?: number,
     powerRPM?: number,
@@ -71,19 +71,19 @@ export type Fuel = {
 }
 
 export type ManufacturerResponse = {
-    "num_models": number,
-    "img_url": string,
-    "max_car_id": number,
-    "id": number,
-    "name": string,
-    "avg_horsepower": number,
-    "avg_price": number,
+    num_models: number,
+    img_url: string,
+    max_car_id: number,
+    id: number,
+    name: string,
+    avg_horsepower: number,
+    avg_price: number,
 }
 
 export type Unit = {
     id: string,
     abbreviation: string,
-};
+}
 
 export type RecordType = "odometer" | "refueling" | "expense" | "fault" | "maintenance";
 
@@ -95,6 +95,9 @@ export type RecordData = {
     fuelAmountL?: number,
     fuelAbbreviation?: string,
     fuelPrice?: number,
+    expenseCategory?: string,
+    expenseType?: string,
+    expensePrice?: number,
     variant: "note" | "warning",
     sortValue: number,
 }
@@ -145,7 +148,32 @@ export type Refueling = {
     isTankFull: boolean,
 }
 
+export type Expense = {
+    id: string,
+    deviceId: string,
+    expenseTypeId: string,
+    expenseCategoryId: string,
+    expensePrice: number,
+    date: Date,
+    odometerValue: number,
+    attachmentUrlList: string[],
+    note?: string,
+}
+
+export type ExpenseTypeList = {
+    id: string,
+    name: string,
+}
+
+export type ExpenseCategoryList = {
+    id: string,
+    category: string,
+    type: ExpenseTypeList[],
+}
+
 export type AddRefuelingPageId = "odometer" | "fuels" | "main-fuel" | "secondary-fuel";
+
+export type AddExpensePageId = "category-selection" | "specification";
 
 export type IconName =
   | "add"

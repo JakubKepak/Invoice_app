@@ -22,6 +22,8 @@ import { getCategory } from "./category/selectors";
 import { getLastSelectedDeviceId } from "./settings/selectors";
 import { getFuelLabel, getUnit, getUnitMap } from "./unit/selectors";
 import { getIsMainFuelSelected, getIsSecondaryFuelSelected, getDeviceRefuelingList, getRefuelingLastDeviceOdometerValue } from "./refueling/selectors";
+import {getDeviceExpenseList, getExpenseLastDeviceOdometerValue} from "./expense/selectors";
+import {getExpenseCategoryText, getExpenseTypeText} from "./expenseList/selectors";
 
 export * from "./category/selectors";
 export * from "./coachbuilder/selectors";
@@ -35,12 +37,16 @@ export * from "./refueling/selectors";
 export * from "./settings/selectors";
 export * from "./unit/selectors";
 export * from "./user/selectors";
+export * from "./expense/selectors";
+export * from "./expenseList/selectors";
 
 export const getLastSelectedOrFirstDeviceId = (state: RootState): string | undefined => getLastSelectedDeviceId(state) ?? getFirstDevice(state);
 
 export const getSelectedDeviceOdometerStateList = (state: RootState) => getDeviceOdometerStateList(state, getLastSelectedOrFirstDeviceId(state));
 
 export const getSelectedDeviceRefuelingList = (state: RootState) => getDeviceRefuelingList(state, getLastSelectedOrFirstDeviceId(state));
+
+export const getSelectedDeviceExpenseList = (state: RootState) => getDeviceExpenseList(state, getLastSelectedOrFirstDeviceId(state));
 
 const getSelectedDeviceOdometerRecordDataList = (state: RootState): RecordData[] => getSelectedDeviceOdometerStateList(state).map((odometerState) => ({
     id: odometerState.id,
@@ -70,9 +76,25 @@ const getSelectedDeviceRefuelingRecordDataList = (state: RootState): RecordData[
     }));
 };
 
+
+const getSelectedDeviceExpenseRecordDataList = (state: RootState): RecordData[] =>
+getSelectedDeviceExpenseList(state).map((expense) => ({
+    id: expense.id,
+    type: "expense",
+    date: expense.date,
+    odometerValue: expense.odometerValue,
+    expenseType:  getExpenseTypeText(state, expense.expenseCategoryId, expense.expenseTypeId),
+    expenseCategory: getExpenseCategoryText(state, expense.expenseCategoryId),
+    expensePrice: expense.expensePrice,
+    variant: "warning",
+    sortValue: expense.odometerValue,
+}));
+
+
 export const getSelectedDeviceRecordList = (state: RootState): Record[] => sortBySortValueAscending([
     ...getSelectedDeviceOdometerRecordDataList(state),
     ...getSelectedDeviceRefuelingRecordDataList(state),
+    ...getSelectedDeviceExpenseRecordDataList(state),
 ]).map((record, index, list) => {
     return [list[index - 1], record]
 }).map(([previousRecord, record]) => {
@@ -93,6 +115,15 @@ export const getSelectedDeviceRecordList = (state: RootState): Record[] => sortB
             title: "Tankování",
             rightText: formatUnitFloat(record.fuelAmountL, record.fuelAbbreviation),
             rightDescription: formatUnitFloat(record.fuelPrice, "Kč"),
+            rightDescriptionVariant: record.variant,
+        }
+        case "expense": return {
+            id: record.id,
+            type: record.type,
+            subtitle: formatRecordSubtitle(record.date, record.odometerValue),
+            title: `Výdaj — ${record.expenseCategory}`,
+            rightText: record.expenseType,
+            rightDescription: formatUnitFloat(record.expensePrice, "Kč"),
             rightDescriptionVariant: record.variant,
         }
         default: throw TypeError("Neznámý typ záznamu");
@@ -192,8 +223,9 @@ export const getLastSelectedDeviceLastOdometerValue = (state: RootState): number
         return undefined;
     }
 
-    return maxOrUndefined(
+
+    return maxOrUndefined(maxOrUndefined(
         getRefuelingLastDeviceOdometerValue(state, lastSelectedOrFirstDeviceId),
         getOdometerLastDeviceOdometerValue(state, lastSelectedOrFirstDeviceId),
-    );
+    ), getExpenseLastDeviceOdometerValue(state, lastSelectedOrFirstDeviceId));
 };

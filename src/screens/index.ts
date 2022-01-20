@@ -11,3 +11,4 @@ export * from "./Logout";
 export * from "./AddRefueling";
 export * from "./AddOdometerState";
 export * from "./Settings";
+export * from "./AddExpense"

@@ -10,6 +10,7 @@ export const LineButton: FunctionComponent<LineButtonProps> = ({
   visualVariant,
   className,
   startAdornment,
+  iconName,
   onClick,
 }) => {
   const classes = useStyles({ text, visualVariant });
@@ -21,9 +22,9 @@ export const LineButton: FunctionComponent<LineButtonProps> = ({
       className={`${classes.rightText} ${className}`}
       onClick={onClick}
     >
-      {startAdornment && (
+      {startAdornment && iconName &&(
         <Icon
-          name={startAdornment}
+          name={iconName}
           className={classes.chevron}
           variant="disabled"
           size="micro"

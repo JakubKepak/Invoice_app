@@ -15,7 +15,8 @@ export default function BackButton() {
       text={"zpět"}
       visualVariant="clickable"
       className={classes.backButtonWrapper}
-      startAdornment="chevron-left"
+      startAdornment={true}
+      iconName={"chevron-left"}
       onClick={goBackHandler}
     />
   );

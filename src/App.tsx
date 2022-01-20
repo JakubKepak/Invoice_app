@@ -8,6 +8,7 @@ import {
     ADD_LINK,
     ADD_ODOMETER_STATE_LINK,
     ADD_REFUELING_LINK,
+    ADD_EXPENSE_LINK,
     INVENTORY_LINK,
     LOGIN_LINK,
     LOGOUT_LINK,
@@ -41,6 +42,7 @@ import {
     AddOdometerState,
     UserProfile,
     Settings,
+    AddExpense,
 } from "./screens";
 import { isDebug, useRootSelector } from "./utils";
 import { actions, store } from "./store";
@@ -149,6 +151,9 @@ export const AppContent: FunctionComponent = () => {
                 </PrivateRoute>
                 <PrivateRoute exact={true} path={`/${ADD_ODOMETER_STATE_LINK}`}>
                     <AddOdometerState />
+                </PrivateRoute>
+                <PrivateRoute path={`/${ADD_EXPENSE_LINK}`}>
+                    <AddExpense />
                 </PrivateRoute>
                 <Route path="*">
                     {!isDebug ? (

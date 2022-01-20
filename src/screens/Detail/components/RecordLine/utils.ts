@@ -11,10 +11,10 @@ export const useStyles = makeStyles<Theme, RecordLineProps>(({ spacing, palette 
     subtitle: {
         paddingLeft: spacing(2),
         marginTop: -spacing(1),
-        color: palette.grey["500"],
+        color: palette.grey["500"]
     },
     leftContainer: {
-        flexGrow: 1,
+        flexGrow: 1
     },
     rightText: {
         fontWeight: "bold",
