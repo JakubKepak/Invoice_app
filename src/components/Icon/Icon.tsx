@@ -19,6 +19,7 @@ const icons: { [name in IconName]: string } = {
   fault: "91f",
   folder: "908",
   "chevron-right": "907",
+//   Need to update chevron-left icon code once icons will be sorted
   "chevron-left": "907",
   "list-wide": "90d",
   note: "910",
